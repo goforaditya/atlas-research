@@ -5,7 +5,9 @@ import TopBar from "./components/layout/TopBar";
 import TabBar, { TABS } from "./components/layout/TabBar";
 import PipelineStageTracker from "./components/explain/PipelineStageTracker";
 import EvidenceDrawer from "./components/explain/EvidenceDrawer";
-import GuidedTourOverlay, { tourCompleted } from "./components/explain/GuidedTourOverlay";
+import GuidedTourOverlay from "./components/explain/GuidedTourOverlay";
+import { STAGE_ORDER, type StageId } from "./types/atlas";
+import { stageStatusesAt } from "./utils/stateProjector";
 import SummaryTab from "./components/tabs/SummaryTab";
 import FinancialsTab from "./components/tabs/FinancialsTab";
 import NewsTab from "./components/tabs/NewsTab";
@@ -13,6 +15,8 @@ import SentimentTab from "./components/tabs/SentimentTab";
 import MarketTab from "./components/tabs/MarketTab";
 import InsightsTab from "./components/tabs/InsightsTab";
 import MethodTab from "./components/tabs/MethodTab";
+import AiTab from "./components/tabs/AiTab";
+import Landing from "./components/layout/Landing";
 
 const TAB_COMPONENTS: Record<TabId, ComponentType> = {
   sum: SummaryTab,
@@ -21,6 +25,7 @@ const TAB_COMPONENTS: Record<TabId, ComponentType> = {
   sen: SentimentTab,
   mkt: MarketTab,
   ins: InsightsTab,
+  ai: AiTab,
   met: MethodTab,
 };
 
@@ -51,6 +56,35 @@ function useThemeEffect() {
   }, [theme]);
 }
 
+const PLAIN_STAGE: Record<StageId, string> = {
+  s01_entity_resolution: "Identifying the company", s02_research_planning: "Planning the research",
+  s03_filing_retrieval: "Reading the filings", s04_statement_extraction: "Extracting the statements",
+  s05_metrics_engine: "Computing the metrics", s06_red_flag_engine: "Checking for red flags",
+  s07_news_intelligence: "Scanning the news", s08_sentiment_filter: "Reading sentiment",
+  s09_market_peers: "Comparing peers", s10_contradiction_resolver: "Resolving conflicting sources",
+  s11_synthesis: "Writing the report", s12_verification_gate: "Verifying every number",
+};
+
+/** Clean view: one thin progress line while a run streams, instead of the stage tracker and scrubber. */
+function QuietProgress() {
+  const events = useRunStore((s) => s.events);
+  const index = useRunStore((s) => s.scrubberIndex);
+  const phase = useRunStore((s) => s.phase);
+  if (phase !== "starting" && phase !== "streaming") return null;
+  const statuses = stageStatusesAt(events, index);
+  const done = STAGE_ORDER.filter((id) => ["completed", "warning", "failed"].includes(statuses[id]?.status)).length;
+  const current = STAGE_ORDER.find((id) => statuses[id]?.status === "running");
+  return (
+    <div className="mb-6" aria-live="polite">
+      <div className="mb-2 flex justify-between sm">
+        <span>{current ? `${PLAIN_STAGE[current]}…` : "Starting…"}</span>
+        <span className="mu">{done} of {STAGE_ORDER.length}</span>
+      </div>
+      <div className="bar"><i style={{ width: `${(done / STAGE_ORDER.length) * 100}%` }} /></div>
+    </div>
+  );
+}
+
 export default function App() {
   const s = useRunStore();
   const [liveAvailable, setLiveAvailable] = useState(false);
@@ -59,6 +93,10 @@ export default function App() {
 
   useEffect(() => {
     fetchReplays().then(useRunStore.getState().setReplays).catch(() => useRunStore.getState().failRun("Could not load replays from the server."));
+    // ?speed=instant (or 1, 2, 5) presets the replay speed, for scripted demos and the browser tests.
+    const sp = new URLSearchParams(window.location.search).get("speed");
+    if (sp === "instant") useRunStore.getState().setSpeed("instant");
+    else if (sp === "1" || sp === "2" || sp === "5") useRunStore.getState().setSpeed(Number(sp) as Speed);
     fetchHealth().then((h) => setLiveAvailable(h.llm_configured)).catch(() => setLiveAvailable(false));
     return () => closeStream.current?.();
   }, []);
@@ -94,14 +132,6 @@ export default function App() {
     }
   }, []);
 
-  // B.1: first visit opens the tour once replays are known.
-  const tourChecked = useRef(false);
-  useEffect(() => {
-    if (tourChecked.current || s.replays.length === 0) return;
-    tourChecked.current = true;
-    if (tourCompleted() === false) s.setTourStep(0);
-  }, [s.replays.length, s]);
-
   // The tour points at report sections, so a tour started before any run plays the selected replay instantly.
   useEffect(() => {
     if (s.tourStep !== null && s.phase === "idle" && s.mode === "replay" && s.selectedReplayId) void run("instant");
@@ -110,10 +140,14 @@ export default function App() {
   const Active = TAB_COMPONENTS[s.activeTab];
   const width = s.explainMode ? "max-w-explain" : "max-w-report";
 
+  if (s.phase === "idle" && s.events.length === 0 && s.tourStep === null) {
+    return <Landing onRun={() => void run()} liveAvailable={liveAvailable} />;
+  }
+
   return (
     <div className="min-h-screen">
       <TopBar onRun={() => void run()} liveAvailable={liveAvailable} />
-      <main className={`mx-auto px-4 py-3 md:px-6 ${width}`}>
+      <main className={`mx-auto px-4 pb-16 pt-6 md:px-8 md:pt-8 ${width}`}>
         {s.synthetic && (
           <div className="banner" role="note">
             Synthetic sample: {s.projectedState.company_query || "this company"} is made up to demonstrate the pipeline.
@@ -128,9 +162,10 @@ export default function App() {
         )}
         {s.phase === "error" && s.errorMessage && <div className="rf sm" role="alert">{s.errorMessage}</div>}
         {s.explainMode && <PipelineStageTracker />}
-        {s.events.length > 0 && (
+        {s.explainMode && s.events.length > 0 && (
           <div className="mb-1 sm mu" aria-live="polite">{s.events[Math.max(0, s.scrubberIndex)]?.log_line}</div>
         )}
+        {!s.explainMode && <QuietProgress />}
         <TabBar />
         {TABS.map((t) => (
           <div key={t.id} role="tabpanel" id={`panel-${t.id}`} aria-labelledby={`tab-${t.id}`} hidden={s.activeTab !== t.id}>

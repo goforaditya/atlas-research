@@ -3,7 +3,7 @@ import { immer } from "zustand/middleware/immer";
 import type { ReplayInfo, ResearchRunState, RunMode, StageEvent, StageId } from "../types/atlas";
 import { emptyState, projectStateAt, type RunBase } from "../utils/stateProjector";
 
-export type TabId = "sum" | "fin" | "news" | "sen" | "mkt" | "ins" | "met";
+export type TabId = "sum" | "fin" | "news" | "sen" | "mkt" | "ins" | "ai" | "met";
 export type Speed = 1 | 2 | 5 | "instant";
 export type Theme = "light" | "dark" | "system";
 export type RunPhase = "idle" | "starting" | "streaming" | "completed" | "error";
@@ -59,13 +59,13 @@ export interface RunStoreActions {
 const initial: RunStoreState = {
   runId: null,
   mode: "replay",
-  explainMode: true,
+  explainMode: false,
   activeTab: "sum",
   events: [],
   scrubberIndex: -1,
   isPlayingScrubber: false,
-  replaySpeed: 1,
-  theme: "system",
+  replaySpeed: 5,
+  theme: "dark",
   selectedStageId: null,
   activeEvidenceId: null,
   tourStep: null,

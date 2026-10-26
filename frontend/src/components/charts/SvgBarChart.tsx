@@ -60,7 +60,9 @@ export default function SvgBarChart({ title, data }: { title: string; data: BarD
             const down = b.n !== null && b.n < 0;
             return (
               <g key={b.label} opacity={hover === null || hover === i ? 1 : 0.55}>
-                <path d={barPath(b.x, b.y, b.w, b.h, down)} fill={down ? "var(--ng)" : "var(--c1)"} />
+                {/* The latest period carries the full accent; earlier ones are a quieter tint of it. */}
+                <path d={barPath(b.x, b.y, b.w, b.h, down)} fill={down ? "var(--ng)" : "var(--c1)"}
+                      fillOpacity={i === bars.length - 1 || down ? 1 : 0.38} />
                 <text x={b.cx} y={down ? b.y + b.h + 13 : b.y - 6} textAnchor="middle" fontSize={12} fill="var(--tx)">
                   {b.n === null ? "—" : b.formatted}
                 </text>
@@ -77,7 +79,7 @@ export default function SvgBarChart({ title, data }: { title: string; data: BarD
           })}
         </svg>
         {hover !== null && (
-          <div className="pointer-events-none absolute top-0 rounded border border-ln bg-sf-elev px-2 py-1 sm shadow"
+          <div className="pointer-events-none absolute top-0 rounded-xl border border-ln bg-sf-elev px-3 py-1.5 sm shadow-lg"
                style={{ left: `${(bars[hover].cx / W) * 100}%`, transform: "translateX(-50%)" }}>
             <b>{bars[hover].label}</b> {bars[hover].formatted}
             {bars[hover].token && <span className="mu"> · click for source</span>}

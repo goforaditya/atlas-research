@@ -21,22 +21,25 @@ function MetricChips({ ids }: { ids: string[] }) {
 /** B.8: fired rules as red banner cards, then the full rule matrix from default_red_flags.yaml. */
 export default function RedFlagRulesTable({ flags }: { flags: RedFlagResult[] }) {
   const fired = flags.filter((f) => f.fired);
+  const explain = useRunStore((s) => s.explainMode);
   return (
     <section data-tour-id="red-flags-panel" className="mb-3" aria-labelledby="rf-h">
-      <h2 id="rf-h">Red flags <span className="sm mu font-sans font-normal">evaluated in Python from YAML thresholds</span></h2>
+      <h2 id="rf-h">Red flags{explain && <span className="sm mu font-normal"> evaluated in Python from YAML thresholds</span>}</h2>
       {fired.length === 0 && <p className="sm mu">No rule fired.</p>}
       {fired.map((f) => (
         <div key={f.rule_id} className="rf">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <b>{f.rule_name}</b>
-            <span className={`pill ${f.severity === "high" ? "pill-ng" : f.severity === "medium" ? "pill-wn" : "pill-mu"}`}>{f.severity}</span>
+            <span className={`pill ${f.severity === "high" ? "pill-ng" : f.severity === "medium" ? "pill-wn" : "pill-mu"}`}>
+              {f.severity.charAt(0).toUpperCase() + f.severity.slice(1)}
+            </span>
           </div>
-          <div className="sm">{f.explanation}</div>
-          <div className="sm mu mt-1">Threshold: {f.threshold_desc}</div>
-          <div className="mt-1"><MetricChips ids={f.supporting_metric_ids} /></div>
+          <div className="sm mt-1">{f.explanation}</div>
+          {explain && <div className="sm mu mt-1">Threshold: {f.threshold_desc}</div>}
+          {explain && <div className="mt-2"><MetricChips ids={f.supporting_metric_ids} /></div>}
         </div>
       ))}
-      <details className="card mt-2">
+      <details className="card mt-4">
         <summary className="cursor-pointer font-medium">All {flags.length} rules evaluated</summary>
         <div className="scroll-x mt-2">
           <table>

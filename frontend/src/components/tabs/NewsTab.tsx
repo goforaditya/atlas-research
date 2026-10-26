@@ -12,9 +12,10 @@ const POLARITY: Record<Polarity, { dot: string; label: string }> = {
 
 function EventRow({ e }: { e: NewsEvent }) {
   const openEvidence = useRunStore((s) => s.openEvidence);
+  const explain = useRunStore((s) => s.explainMode);
   const p = POLARITY[e.polarity];
   return (
-    <li className="relative pb-4 pl-6">
+    <li className="relative pb-6 pl-6">
       <span aria-hidden="true" className={`absolute left-0 top-[7px] h-3 w-3 rounded-full ring-2 ring-[var(--sf)] ${p.dot}`} />
       <div className="flex flex-wrap items-center gap-2 sm">
         <span className="mu">{e.event_date}</span>
@@ -24,11 +25,12 @@ function EventRow({ e }: { e: NewsEvent }) {
           ? <span className="pill pill-ps">Corroborated by filing</span>
           : <span className="pill pill-wn">Press only</span>}
       </div>
-      <h3 className="mt-1 mb-0">{e.headline}</h3>
+      <h3 className="mt-2 mb-0">{e.headline}</h3>
       <p className="sm my-1"><Prose text={e.summary} /></p>
       <div className="sm mu">
-        {e.source_names.join(", ")} · highest tier {e.highest_tier} ({tierTitle(e.highest_tier)})
-        {e.article_count_merged > 1 ? ` · ${e.article_count_merged} articles merged` : ""}
+        {e.source_names.join(", ")}
+        {explain ? ` · highest tier ${e.highest_tier} (${tierTitle(e.highest_tier)})` : ""}
+        {explain && e.article_count_merged > 1 ? ` · ${e.article_count_merged} articles merged` : ""}
         {" · "}
         <button type="button" className="num-link" onClick={() => openEvidence(e.event_id)}>source</button>
       </div>
@@ -44,10 +46,10 @@ export default function NewsTab() {
   return (
     <WaitingFor stageId="s07_news_intelligence" stateKey="news_events" ready={events.length > 0}>
       <div className="kgrid">
-        <div className="kp"><span>Events after de-duplication</span><b>{events.length}</b></div>
-        <div className="kp"><span>Articles merged</span><b>{events.reduce((a, e) => a + e.article_count_merged, 0)}</b></div>
-        <div className="kp"><span>Corroborated by a filing</span><b>{events.filter((e) => e.corroborated_by_filing).length}</b></div>
-        <div className="kp"><span>Positive / neutral / negative</span><b>{counts.positive} / {counts.neutral} / {counts.negative}</b></div>
+        <div className="kp"><span>Material events</span><b>{events.length}</b></div>
+        <div className="kp"><span>Articles read</span><b>{events.reduce((a, e) => a + e.article_count_merged, 0)}</b></div>
+        <div className="kp"><span>Confirmed by a filing</span><b>{events.filter((e) => e.corroborated_by_filing).length}</b></div>
+        <div className="kp"><span>Positive · neutral · negative</span><b>{counts.positive} / {counts.neutral} / {counts.negative}</b></div>
       </div>
       <section className="card">
         <h2>Timeline</h2>

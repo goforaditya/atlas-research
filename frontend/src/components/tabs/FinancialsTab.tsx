@@ -75,7 +75,7 @@ function Charts({ state }: { state: ResearchRunState }) {
   });
   const cfoPat = state.fiscal_years.map((fy) => metric("cfo_to_pat", fy)).filter((m): m is MetricLedgerRow => !!m);
   return (
-    <div className="cgrid mb-3">
+    <div className="mb-4 grid gap-4 md:grid-cols-2">
       <div className="card !mb-0">
         <SvgBarChart title={`Revenue (${state.entity ? currencyLabel(state.entity.currency) : ""})`}
                      data={revenue.map((li) => ({ label: li.fiscal_period, value: li.value, formatted: li.formatted_value, token: li.item_id }))} />
@@ -104,6 +104,9 @@ export default function FinancialsTab() {
   const statements = useMemo(() => pivotLineItems(state.line_items), [state.line_items]);
   const quarters = useMemo(() => pivotLineItems(state.quarterly_items), [state.quarterly_items]);
   const ledger = useMemo(() => pivotMetrics(state.metrics_ledger, state.fiscal_years), [state.metrics_ledger, state.fiscal_years]);
+  const explain = useRunStore((s) => s.explainMode);
+  const passed = state.reconciliation_checks.filter((c) => c.status === "passed").length;
+  const failed = state.reconciliation_checks.filter((c) => c.status === "failed").length;
 
   return (
     <div>
@@ -115,7 +118,9 @@ export default function FinancialsTab() {
         <Charts state={state} />
         <section className="card" data-tour-id="calculation-ledger" aria-labelledby="ledger-h">
           <h2 id="ledger-h">Calculation ledger</h2>
-          <p className="sm mu mt-0">Every ratio is computed in Python Decimal from the cited line items. Hover a value for its formula; click it for the source.</p>
+          <p className="sm mu mt-0">{explain
+            ? "Every ratio is computed in Python Decimal from the cited line items. Hover a value for its formula; click it for the source."
+            : "Every ratio is computed from the filed statements. Tap a figure to see how."}</p>
           <div className="scroll-x">
             <table>
               <thead><tr><th>Metric</th>{ledger.cols.map((p) => <th key={p}>{p}</th>)}</tr></thead>
@@ -181,9 +186,12 @@ export default function FinancialsTab() {
           </section>
         )}
 
-        <section className="card" aria-labelledby="rc-h">
-          <h2 id="rc-h">Reconciliation checks</h2>
-          <div className="scroll-x">
+        <details className="card" aria-labelledby="rc-h" open={explain}>
+          <summary className="flex flex-wrap items-baseline gap-x-3">
+            <h2 id="rc-h" className="inline !mb-0">Reconciliation checks</h2>
+            <span className="sm mu">{passed} passed{failed ? `, ${failed} failed` : ""}</span>
+          </summary>
+          <div className="scroll-x mt-3">
             <table>
               <thead><tr><th>Check</th><th>Period</th><th>LHS</th><th>RHS</th><th>Gap</th><th>Status</th></tr></thead>
               <tbody>
@@ -203,7 +211,7 @@ export default function FinancialsTab() {
               </tbody>
             </table>
           </div>
-        </section>
+        </details>
       </WaitingFor>
     </div>
   );

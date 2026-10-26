@@ -23,8 +23,8 @@ export const TOUR_STEPS: TourStep[] = [
     body: "Hover any metric for the Show-the-Math popover, or click a figure to open the source page beside the extracted value." },
   { target: "signal-noise-view", title: "Signal vs. Noise Sentiment Filter", tab: "sen",
     body: "Posts are stripped of bots and duplicates in code, and only marked Signal when a filing or news event corroborates them." },
-  { target: "explain-clean-toggle", title: "Explain Mode vs. Clean Report Export",
-    body: "Switch to Clean Report for a distraction-free reading layout, then export it as PDF or Markdown with numbered source footnotes." },
+  { target: "explain-clean-toggle", title: "How it works, or just the report",
+    body: "Turn How it works off for a distraction-free reading layout, then export it as PDF or Markdown with numbered source footnotes." },
 ];
 
 const TOUR_KEY = "atlas_tour_completed";

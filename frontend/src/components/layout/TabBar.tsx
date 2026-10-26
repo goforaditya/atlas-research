@@ -8,6 +8,7 @@ export const TABS: { id: TabId; label: string }[] = [
   { id: "sen", label: "Sentiment" },
   { id: "mkt", label: "Market" },
   { id: "ins", label: "Insights" },
+  { id: "ai", label: "AI at work" },
   { id: "met", label: "Method" },
 ];
 
@@ -32,7 +33,7 @@ export default function TabBar() {
 
   return (
     <div role="tablist" aria-label="Report sections" onKeyDown={onKey}
-         className="flex gap-1 overflow-x-auto border-b border-ln my-3">
+         className="no-scrollbar -mx-4 mb-8 mt-2 flex gap-1 overflow-x-auto px-4 md:mx-0 md:px-0">
       {TABS.map((t, i) => (
         <button
           key={t.id}
@@ -43,8 +44,8 @@ export default function TabBar() {
           aria-controls={`panel-${t.id}`}
           tabIndex={active === t.id ? 0 : -1}
           onClick={() => setActive(t.id)}
-          className={`whitespace-nowrap px-3 py-2 -mb-px border-b-2 bg-transparent cursor-pointer ${
-            active === t.id ? "border-ac text-tx font-medium" : "border-transparent text-mu hover:text-tx"
+          className={`cursor-pointer whitespace-nowrap rounded-full border-0 px-4 py-2 text-[15px] font-medium transition-colors ${
+            active === t.id ? "bg-[var(--tab-on)] text-[var(--tab-on-tx)]" : "bg-transparent text-mu hover:bg-chip hover:text-tx"
           }`}
         >
           {t.label}

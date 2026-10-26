@@ -13,12 +13,17 @@ async function skipTour(page: Page) {
 }
 
 async function runReplay(page: Page, replayId = "sample_synthetic") {
-  await page.goto("/");
+  await page.goto("/?speed=instant");
   await page.waitForSelector('select[aria-label="Replay company"] option', { state: "attached" });
   await page.locator('select[aria-label="Replay company"]').selectOption(replayId);
-  await page.getByRole("button", { name: "Instant" }).click();
   await page.getByRole("button", { name: /Run research/ }).click();
-  await expect(page.getByText(/Event (\d+) of \1/)).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByRole("link", { name: "Export PDF" })).toBeVisible({ timeout: 20_000 });
+}
+
+/** The workings view (stage tracker and scrubber) is off by default. */
+async function showWorkings(page: Page) {
+  await page.getByRole("button", { name: "How it works" }).click();
+  await expect(page.getByText(/Event (\d+) of \1/)).toBeVisible();
 }
 
 test("health and replay list", async ({ request }) => {
@@ -29,9 +34,12 @@ test("health and replay list", async ({ request }) => {
   expect(replays.length).toBeGreaterThan(0);
 });
 
-test("first visit opens the guided tour and it can be finished", async ({ page }) => {
+test("the guided tour opens from the header and can be finished", async ({ page }) => {
   const errors = watchErrors(page);
   await page.goto("/");
+  await page.waitForTimeout(800);
+  await expect(page.locator("#tour-title")).toHaveCount(0);
+  await page.getByRole("button", { name: "Guided tour" }).click();
   await expect(page.locator("#tour-title")).toBeVisible({ timeout: 10_000 });
   for (let i = 0; i < 7; i++) await page.getByRole("button", { name: "Next" }).click();
   await page.getByRole("button", { name: "Finish" }).click();
@@ -49,7 +57,7 @@ test("a replay streams to completion and every tab renders", async ({ page }) =>
   await expect(page.locator("#verdict-h")).not.toBeEmpty();
   await expect(page.getByText(/^Synthetic sample:/)).toBeVisible();
   expect(await page.locator(".kp").count()).toBeGreaterThan(3);
-  for (const tab of ["Financials", "News", "Sentiment", "Market", "Insights", "Method", "Summary"]) {
+  for (const tab of ["Financials", "News", "Sentiment", "Market", "Insights", "AI at work", "Method", "Summary"]) {
     await page.getByRole("tab", { name: tab }).click();
     await expect(page.getByRole("tabpanel")).not.toBeEmpty();
   }
@@ -85,17 +93,31 @@ test("explain mode: show the math and open the evidence drawer", async ({ page }
 test("the timeline scrubber rewinds the report", async ({ page }) => {
   await skipTour(page);
   await runReplay(page);
+  await showWorkings(page);
   await page.locator('input[type="range"]').fill("3");
   await expect(page.getByText(/Event 4 of/)).toBeVisible();
   await expect(page.locator("#verdict-h")).toHaveCount(0);
 });
 
-test("clean mode exports markdown and pdf", async ({ page }) => {
+test("the first page is just a picker, and the AI view tells the GenAI story", async ({ page }) => {
+  const errors = watchErrors(page);
+  await skipTour(page);
+  await page.goto("/");
+  await expect(page.getByRole("tablist")).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /Run research/ })).toBeVisible();
+  await runReplay(page);
+  await page.getByRole("tab", { name: "AI at work" }).click();
+  await expect(page.getByRole("tabpanel")).toContainText("Proactive intelligence");
+  await expect(page.getByRole("tabpanel")).toContainText("red flags raised");
+  expect(errors).toEqual([]);
+});
+
+test("the clean report hides the workings and exports markdown and pdf", async ({ page }) => {
   await skipTour(page);
   await runReplay(page);
-  await page.getByRole("button", { name: /^Clean/ }).click();
+  await expect(page.locator('input[type="range"]')).toHaveCount(0);
   for (const [label, ext] of [["Export Markdown", ".md"], ["Export PDF", ".pdf"]] as const) {
-    const [dl] = await Promise.all([page.waitForEvent("download"), page.getByText(label).click()]);
+    const [dl] = await Promise.all([page.waitForEvent("download"), page.getByRole("link", { name: label }).click()]);
     expect(dl.suggestedFilename()).toMatch(new RegExp(`^atlas_.*\\${ext}$`));
   }
 });

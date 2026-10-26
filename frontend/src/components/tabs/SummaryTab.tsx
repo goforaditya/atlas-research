@@ -31,13 +31,32 @@ export function latestMetric(state: ResearchRunState, key: string): MetricLedger
     ?? [...state.metrics_ledger].reverse().find((m) => m.metric_key === key) ?? null;
 }
 
+/** One glowing ring for the headline trust signal: how many figures in the prose the gate matched to the ledger. */
+function VerifiedRing({ matched, total }: { matched: number; total: number }) {
+  const r = 52, c = 2 * Math.PI * r, frac = total ? matched / total : 0;
+  return (
+    <div className="relative mx-auto h-[150px] w-[150px] shrink-0" role="img" aria-label={`${matched} of ${total} figures verified`}>
+      <div aria-hidden="true" className="absolute inset-3 rounded-full bg-[radial-gradient(circle,color-mix(in_srgb,var(--ac)_18%,transparent),transparent_70%)] blur-md" />
+      <svg viewBox="0 0 130 130" className="relative h-full w-full -rotate-90">
+        <circle cx="65" cy="65" r={r} fill="none" stroke="var(--chip)" strokeWidth="5" />
+        <circle cx="65" cy="65" r={r} fill="none" stroke="var(--ac)" strokeWidth="5" strokeLinecap="round"
+                strokeDasharray={`${c * frac} ${c}`} style={{ filter: "drop-shadow(0 0 4px color-mix(in srgb, var(--ac) 70%, transparent))" }} />
+      </svg>
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+        <span className="text-[30px] font-light leading-none tracking-tight">{matched}/{total}</span>
+        <span className="label mt-1">verified</span>
+      </div>
+    </div>
+  );
+}
+
 function EntityHeader({ state }: { state: ResearchRunState }) {
   const e = state.entity;
   if (!e) return null;
   return (
-    <div className="mb-3">
+    <div className="mb-8">
       <h1>{e.legal_name}</h1>
-      <div className="sm mu">
+      <div className="mt-1 mu">
         {[e.ticker && e.exchange ? `${e.exchange}: ${e.ticker}` : e.ticker, e.sector, e.headquarters,
           `FY ends ${e.fy_end_month}`, currencyLabel(e.currency)].filter(Boolean).join(" · ")}
       </div>
@@ -97,18 +116,17 @@ export default function SummaryTab() {
 
       <WaitingFor stageId="s11_synthesis" stateKey="summary" ready={!!sum}>
         {sum && (
-          <section className="card" aria-labelledby="verdict-h">
-            <div className="flex flex-wrap items-start justify-between gap-2">
-              <div className="text-micro text-mu">Verdict</div>
-              <div className="flex flex-wrap gap-1" data-tour-id="verdict-badges" aria-label="Claim classification counts">
+          <section className="mb-10 flex flex-col gap-6 md:flex-row md:items-center md:gap-10" aria-labelledby="verdict-h">
+            <div className="min-w-0 flex-1">
+            <div className="label">Verdict</div>
+            <h2 id="verdict-h" className="mt-2 !text-[30px] !font-extrabold !leading-[1.1] text-[var(--hl)] md:!text-[38px]">{sum.verdict_headline}</h2>
+            <p className="mb-4 mt-3 max-w-[68ch] text-[17px] leading-relaxed"><Prose text={sum.verdict_prose} /></p>
+            <div className="flex flex-wrap gap-2 sm">
+              <span className="contents" data-tour-id="verdict-badges" aria-label="Claim classification counts">
                 <ClaimBadge kind="fact" count={sum.fact_count} />
                 <ClaimBadge kind="inference" count={sum.inference_count} />
                 <ClaimBadge kind="hypothesis" count={sum.hypothesis_count} />
-              </div>
-            </div>
-            <h2 id="verdict-h" className="mt-1">{sum.verdict_headline}</h2>
-            <p className="my-1"><Prose text={sum.verdict_prose} /></p>
-            <div className="mt-2 flex flex-wrap gap-2 sm">
+              </span>
               {fired.length > 0 && (
                 <button type="button" className="pill pill-ng cursor-pointer border-0" onClick={() => setTab("fin")}>
                   {fired.length} red flag{fired.length === 1 ? "" : "s"} fired
@@ -119,12 +137,14 @@ export default function SummaryTab() {
                   {state.contradictions.length} source conflict{state.contradictions.length === 1 ? "" : "s"} resolved
                 </button>
               )}
-              {v && (
-                <span className={`pill ${v.passed ? "pill-ps" : "pill-ng"}`}>
-                  Verification gate: {v.verified_against_ledger}/{v.total_numeric_tokens_scanned} figures matched the ledger
+              {v && !v.passed && (
+                <span className="pill pill-ng">
+                  {v.verified_against_ledger} of {v.total_numeric_tokens_scanned} figures verified
                 </span>
               )}
             </div>
+            </div>
+            {v && <VerifiedRing matched={v.verified_against_ledger} total={v.total_numeric_tokens_scanned} />}
           </section>
         )}
       </WaitingFor>
