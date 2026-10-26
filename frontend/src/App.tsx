@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useRef, useState, type ComponentType } from "react";
 import { ApiError, createRun, fetchHealth, fetchReplays, subscribe } from "./api/client";
-import { useRunStore, type TabId } from "./store/useRunStore";
+import { useRunStore, type Speed, type TabId } from "./store/useRunStore";
 import TopBar from "./components/layout/TopBar";
 import TabBar, { TABS } from "./components/layout/TabBar";
 import PipelineStageTracker from "./components/explain/PipelineStageTracker";
 import EvidenceDrawer from "./components/explain/EvidenceDrawer";
+import GuidedTourOverlay, { tourCompleted } from "./components/explain/GuidedTourOverlay";
 import SummaryTab from "./components/tabs/SummaryTab";
 import FinancialsTab from "./components/tabs/FinancialsTab";
 import NewsTab from "./components/tabs/NewsTab";
@@ -62,13 +63,13 @@ export default function App() {
     return () => closeStream.current?.();
   }, []);
 
-  const run = useCallback(async () => {
+  const run = useCallback(async (speedOverride?: Speed) => {
     const st = useRunStore.getState();
     closeStream.current?.();
     const replay = st.replays.find((r) => r.replay_id === st.selectedReplayId) ?? null;
     useRunStore.setState({ phase: "starting", errorMessage: null });
     try {
-      const speed = st.replaySpeed;
+      const speed = speedOverride ?? st.replaySpeed;
       const res = await createRun({
         company_query: st.mode === "replay" && replay ? replay.company_query : st.query.trim(),
         mode: st.mode,
@@ -93,12 +94,25 @@ export default function App() {
     }
   }, []);
 
+  // B.1: first visit opens the tour once replays are known.
+  const tourChecked = useRef(false);
+  useEffect(() => {
+    if (tourChecked.current || s.replays.length === 0) return;
+    tourChecked.current = true;
+    if (tourCompleted() === false) s.setTourStep(0);
+  }, [s.replays.length, s]);
+
+  // The tour points at report sections, so a tour started before any run plays the selected replay instantly.
+  useEffect(() => {
+    if (s.tourStep !== null && s.phase === "idle" && s.mode === "replay" && s.selectedReplayId) void run("instant");
+  }, [s.tourStep, s.phase, s.mode, s.selectedReplayId, run]);
+
   const Active = TAB_COMPONENTS[s.activeTab];
   const width = s.explainMode ? "max-w-explain" : "max-w-report";
 
   return (
     <div className="min-h-screen">
-      <TopBar onRun={run} liveAvailable={liveAvailable} />
+      <TopBar onRun={() => void run()} liveAvailable={liveAvailable} />
       <main className={`mx-auto px-4 py-3 md:px-6 ${width}`}>
         {s.synthetic && (
           <div className="banner" role="note">
@@ -119,6 +133,7 @@ export default function App() {
         ))}
       </main>
       <EvidenceDrawer />
+      <GuidedTourOverlay />
     </div>
   );
 }

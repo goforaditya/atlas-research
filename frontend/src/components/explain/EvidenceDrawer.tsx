@@ -55,11 +55,21 @@ export function resolveToken(state: ResearchRunState, token: string): ResolvedTo
       const column = token.slice(`peer_${peerSlug(row)}_`.length);
       const cell = row.formatted[column];
       const how = row.is_median_row ? "Median of the peer rows, computed in code." : "Computed by the same metrics engine as the target.";
-      return { ...base, title: `${row.company_name}${cell ? ` · ${cell}` : ""}`, evidence: reg[row.evidence_ids[0]] ?? null,
+      const evId = peerEvidenceId(row.evidence_ids, column);
+      return { ...base, title: `${row.company_name}${cell ? ` · ${cell}` : ""}`, evidence: evId ? reg[evId] ?? null : null,
                note: how, relatedTokens: row.evidence_ids };
     }
   }
   return null;
+}
+
+const PEER_COLUMN_FIELD: Record<string, string> = { rev_growth_pct: "revenue", ebitda_margin_pct: "revenue", roe_pct: "pat", pe_multiple: "pat" };
+
+/** Mirrors backend exporter.peer_evidence_id: latest evidence for the column's main input, else the first id. */
+export function peerEvidenceId(ids: string[], column: string): string | null {
+  const f = PEER_COLUMN_FIELD[column] ?? "";
+  const matches = ids.filter((e) => e.includes(`_${f}_`));
+  return matches[matches.length - 1] ?? ids[0] ?? null;
 }
 
 /** Mirrors backend verification_gate.peer_slug: "NSE: NXRA" -> "nxra", the median row -> "median". */

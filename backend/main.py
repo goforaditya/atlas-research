@@ -21,12 +21,14 @@ from ulid import ULID
 
 from backend.config import Settings, get_settings
 from backend.db import Database
+from backend.engine.exporter import build_markdown, export_filename, render_pdf
 from backend.replay.player import Fixture, load_fixture, parse_speed, play, project_final_state, rebind
 from backend.schemas import (
     CreateRunRequest,
     CreateRunResponse,
     HealthResponse,
     ReplayInfo,
+    ResearchRunState,
     ReplayListResponse,
     RunMode,
     StageEvent,
@@ -303,6 +305,24 @@ def create_app(settings: Optional[Settings] = None) -> FastAPI:
         if not path.is_file():
             raise ApiError(404, "EVIDENCE_NOT_FOUND", f"No page {filename}")
         return FileResponse(path)
+
+    # 7. export the clean report
+    @app.get(f"{API}/runs/{{run_id}}/export")
+    async def export(run_id: str, format: str = Query("md")) -> Response:
+        if format not in ("md", "pdf"):
+            raise ApiError(422, "VALIDATION_ERROR", "format must be md or pdf")
+        record = get_record(run_id)
+        if record.mode is RunMode.LIVE and not record.done:
+            raise ApiError(409, "RUN_NOT_COMPLETE", "The run is still in progress; export it once it completes.")
+        state = ResearchRunState.model_validate(run_state(app, record))
+        synthetic = bool(record.replay_id and app.state.fixtures[record.replay_id].header.get("synthetic"))
+        filename = export_filename(state, record.replay_id, format)
+        disposition = {"Content-Disposition": f'attachment; filename="{filename}"'}
+        if format == "md":
+            body = build_markdown(state, synthetic=synthetic)
+            return Response(body, media_type="text/markdown; charset=utf-8", headers=disposition)
+        pdf = await asyncio.to_thread(render_pdf, state, synthetic=synthetic)
+        return Response(pdf, media_type="application/pdf", headers=disposition)
 
     mount_spa(app, settings.atlas_frontend_dist)
     return app

@@ -51,6 +51,7 @@
   th:first-child, td:first-child { text-align: left; }
   th { color: var(--mu); font-weight: 500; }
   ul:not(.list-none) { list-style: disc; }
+  [data-tour-id] { scroll-margin-top: 140px; }
   code, pre { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: 12px; line-height: 1.55; }
 }
 

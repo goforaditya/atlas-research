@@ -327,3 +327,56 @@ def test_evidence_endpoint(tmp_path):
         assert any(i["item_id"] == "li_fy26_revenue" for i in body["linked_line_items"])
         assert all(c["fiscal_period"] == "FY26" for c in body["linked_reconciliation_checks"])
         assert client.get(f"/api/v1/runs/{run['run_id']}/evidence/ev_missing").json()["error_code"] == "EVIDENCE_NOT_FOUND"
+
+
+# ---------------------------------------------------------------- Task 11: export
+
+def _replay_run(client):
+    return client.post("/api/v1/runs", json={"company_query": "x", "mode": "replay", "replay_id": "sample_synthetic"}).json()
+
+
+def test_export_markdown(tmp_path):
+    import re
+
+    with _app(tmp_path) as client:
+        run = _replay_run(client)
+        state = client.get(run["state_url"]).json()
+        r = client.get(f"/api/v1/runs/{run['run_id']}/export?format=md")
+        assert r.status_code == 200
+        assert r.headers["content-type"].startswith("text/markdown")
+        assert re.fullmatch(r'attachment; filename="atlas_sample_synthetic_\d{8}\.md"', r.headers["content-disposition"])
+        md = r.text
+        assert "[[" not in md, "raw citation tokens must become footnotes"
+        assert md.startswith("# Nexora Payments Ltd")
+        assert "Synthetic sample" in md
+        for section in ("## Summary", "## Financials", "## News", "## Sentiment", "## Market", "## Insights", "## Method", "## Stated gaps"):
+            assert section in md
+        # Every footnote reference has a definition, numbered from 1 without gaps.
+        refs = {int(n) for n in re.findall(r"\[\^(\d+)\](?!:)", md)}
+        defs = [int(n) for n in re.findall(r"^\[\^(\d+)\]:", md, flags=re.M)]
+        assert refs and sorted(refs) == defs == list(range(1, len(defs) + 1))
+        # Figures are the backend's formatted strings, unchanged.
+        for m in state["metrics_ledger"]:
+            if m["metric_id"] == "met_dso_fy26":
+                assert m["formatted_value"] in md
+        assert "| Metric |" in md and "---:" in md
+        # Noise posts are left out of the clean report.
+        noise = [i["quote_text"] for i in state["sentiment"]["items"] if i["verdict"] == "noise"]
+        assert noise and not any(q in md for q in noise)
+
+
+def test_export_pdf(tmp_path):
+    with _app(tmp_path) as client:
+        run = _replay_run(client)
+        r = client.get(f"/api/v1/runs/{run['run_id']}/export?format=pdf")
+        assert r.status_code == 200
+        assert r.headers["content-type"] == "application/pdf"
+        assert r.content.startswith(b"%PDF-") and len(r.content) > 10_000
+        assert r.headers["content-disposition"].endswith('.pdf"')
+
+
+def test_export_errors(tmp_path):
+    with _app(tmp_path) as client:
+        run = _replay_run(client)
+        assert client.get(f"/api/v1/runs/{run['run_id']}/export?format=docx").json()["error_code"] == "VALIDATION_ERROR"
+        assert client.get("/api/v1/runs/run_missing/export?format=md").json()["error_code"] == "RUN_NOT_FOUND"
