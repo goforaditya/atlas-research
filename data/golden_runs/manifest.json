@@ -50,6 +50,32 @@
       "synthetic": false,
       "unconfirmed": true,
       "total_events": 24
+    },
+    {
+      "replay_id": "meridian_ledger_synthetic",
+      "file": "meridian_ledger_synthetic.jsonl.gz",
+      "company_query": "Meridian Ledger",
+      "company_name": "Meridian Ledger Inc. (synthetic sample)",
+      "ticker": "NASDAQ: MRDN",
+      "sector": "Fintech · Spend management (synthetic)",
+      "jurisdiction": "US",
+      "cached_at": "2026-10-26T00:00:00Z",
+      "synthetic": true,
+      "unconfirmed": false,
+      "total_events": 24
+    },
+    {
+      "replay_id": "lumen_straits_synthetic",
+      "file": "lumen_straits_synthetic.jsonl.gz",
+      "company_query": "Lumen Straits",
+      "company_name": "Lumen Straits Holdings Ltd (synthetic sample)",
+      "ticker": "NYSE: LMST",
+      "sector": "Fintech · Cross-border remittance (synthetic)",
+      "jurisdiction": "US",
+      "cached_at": "2026-10-26T00:00:00Z",
+      "synthetic": true,
+      "unconfirmed": false,
+      "total_events": 24
     }
   ]
 }

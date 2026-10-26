@@ -1,0 +1,1820 @@
+# Synthetic sample company for demos. Every company, person, number and source is fictional and generated;
+# it must never be presented as real. Identities (assets = liabilities + equity, PBT - tax = PAT) hold every year.
+replay_id: lumen_straits_synthetic
+synthetic: true
+company_query: Lumen Straits
+display:
+  company_name: Lumen Straits Holdings Ltd (synthetic sample)
+  ticker: 'NYSE: LMST'
+  sector: Fintech · Cross-border remittance (synthetic)
+  jurisdiction: US
+  cached_at: '2026-10-26T00:00:00Z'
+entity:
+  legal_name: Lumen Straits Holdings Ltd
+  ticker: LMST
+  exchange: NYSE
+  jurisdiction: US
+  is_listed: true
+  cik: null
+  listing_date: '2021-06-24'
+  sector: Fintech · Cross-border remittance
+  headquarters: Singapore
+  fy_end_month: June
+  currency: USD_M
+  rejected_candidates:
+  - 'Lumen Straits Pte. Ltd.: operating subsidiary, not the listed holding company'
+  - 'Lumen Strait Shipping: different company and sector'
+gaap: us_gaap
+sub_questions:
+- Why are settlement receivables growing faster than revenue?
+- How is the expansion funded, and at what cost?
+- Does operating profit cover interest, and what do the covenants require?
+- Why did the CFO and the auditor change?
+- What did the MAS register and Form 6-K filings disclose?
+- Is the short-seller allegation supported by any filing?
+- What do remittance customers say about payout times?
+- What do employees say about the finance function?
+- How do investors frame growth versus leverage?
+- Which listed remittance peers are comparable?
+- How do growth, margins and ROE compare with the peer median?
+- What is the refinancing timeline for the term loan?
+documents:
+  lmst_20f_fy26:
+    title: Form 20-F FY2026
+    source_url: synthetic://lumen-straits/20-f-fy2026.pdf
+    tier: T1
+    retrieved_at: '2026-10-20T09:00:00Z'
+  lmst_20f_fy24:
+    title: Form 20-F FY2024
+    source_url: synthetic://lumen-straits/20-f-fy2024.pdf
+    tier: T1
+    retrieved_at: '2026-10-20T09:00:00Z'
+  lmst_20f_fy22:
+    title: Form 20-F FY2022
+    source_url: synthetic://lumen-straits/20-f-fy2022.pdf
+    tier: T1
+    retrieved_at: '2026-10-20T09:00:00Z'
+  lmst_6k_q4:
+    title: Form 6-K Q4 FY2026 results
+    source_url: synthetic://lumen-straits/6-k-q4fy2026.pdf
+    tier: T1
+    retrieved_at: '2026-10-20T09:00:00Z'
+  lmst_6k:
+    title: Form 6-K filings
+    source_url: synthetic://sec/lumen-straits/6-k
+    tier: T2
+    retrieved_at: '2026-10-20T09:00:00Z'
+  mas_register:
+    title: MAS financial institutions directory
+    source_url: synthetic://mas/fid/lumen-straits
+    tier: T1
+    retrieved_at: '2026-10-20T09:00:00Z'
+  lmst_q4_call:
+    title: Q4 FY2026 earnings call
+    source_url: synthetic://lumen-straits/q4fy2026-call-transcript
+    tier: T2
+  straits_daily:
+    title: Straits Business Daily
+    source_url: synthetic://press/straits-business-daily
+    tier: T3
+  short_report:
+    title: Short-seller report
+    source_url: synthetic://research/short-report-lmst
+    tier: T4
+  sndw_20f:
+    title: Sendwell 10-K FY2026
+    source_url: synthetic://sendwell/10-k-fy2026.pdf
+    tier: T1
+    retrieved_at: '2026-10-20T09:00:00Z'
+  krmt_20f:
+    title: Kirana Remit 20-F FY2026
+    source_url: synthetic://kirana-remit/20-f-fy2026.pdf
+    tier: T1
+    retrieved_at: '2026-10-20T09:00:00Z'
+  orpy_20f:
+    title: Orchid Pay 20-F FY2026
+    source_url: synthetic://orchid-pay/20-f-fy2026.pdf
+    tier: T1
+    retrieved_at: '2026-10-20T09:00:00Z'
+  hlcn_10k:
+    title: Halcyon Money 10-K FY2026
+    source_url: synthetic://halcyon/10-k-fy2026.pdf
+    tier: T1
+    retrieved_at: '2026-10-20T09:00:00Z'
+line_items:
+- field_key: revenue
+  period: FY2022
+  label: Total revenue
+  value: '286'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: FY2022
+  label: Operating income (loss)
+  value: '-38'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: other_income
+  period: FY2022
+  label: Interest and other income
+  value: '3'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: finance_cost
+  period: FY2022
+  label: Interest expense
+  value: '11'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: FY2022
+  label: Depreciation and amortization
+  value: '19'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pbt
+  period: FY2022
+  label: Income (loss) before income taxes
+  value: '-46'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: tax_expense
+  period: FY2022
+  label: Provision for income taxes
+  value: '2'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat_before_nci
+  period: FY2022
+  label: Net income (loss)
+  value: '-48'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cfo
+  period: FY2022
+  label: Net cash provided by (used in) operating activities
+  value: '-21'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_ppe
+  period: FY2022
+  label: Purchases of property and equipment
+  value: '-24'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_intangibles
+  period: FY2022
+  label: Capitalized internal-use software
+  value: '-12'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_assets
+  period: FY2022
+  label: Total assets
+  value: '520'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_liabilities
+  period: FY2022
+  label: Total liabilities
+  value: '330'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_equity
+  period: FY2022
+  label: Total shareholders' equity
+  value: '190'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_current
+  period: FY2022
+  label: Short-term borrowings and current portion of term loans
+  value: '40'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_noncurrent
+  period: FY2022
+  label: Term loans, non-current
+  value: '120'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cash_and_equivalents
+  period: FY2022
+  label: Cash and cash equivalents
+  value: '150'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: trade_receivables
+  period: FY2022
+  label: Settlement and trade receivables, net
+  value: '41'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_assets
+  period: FY2022
+  label: Total current assets
+  value: '310'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_liabilities
+  period: FY2022
+  label: Total current liabilities
+  value: '230'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat
+  period: FY2022
+  label: Net income (loss) attributable to common stockholders
+  value: '-48'
+  unit: $ in millions
+  doc: lmst_20f_fy22
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: revenue
+  period: FY2023
+  label: Total revenue
+  value: '371'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: FY2023
+  label: Operating income (loss)
+  value: '-12'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: other_income
+  period: FY2023
+  label: Interest and other income
+  value: '4'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: finance_cost
+  period: FY2023
+  label: Interest expense
+  value: '17'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: FY2023
+  label: Depreciation and amortization
+  value: '26'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pbt
+  period: FY2023
+  label: Income (loss) before income taxes
+  value: '-25'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: tax_expense
+  period: FY2023
+  label: Provision for income taxes
+  value: '3'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat_before_nci
+  period: FY2023
+  label: Net income (loss)
+  value: '-28'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cfo
+  period: FY2023
+  label: Net cash provided by (used in) operating activities
+  value: '4'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_ppe
+  period: FY2023
+  label: Purchases of property and equipment
+  value: '-31'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_intangibles
+  period: FY2023
+  label: Capitalized internal-use software
+  value: '-16'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_assets
+  period: FY2023
+  label: Total assets
+  value: '640'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_liabilities
+  period: FY2023
+  label: Total liabilities
+  value: '470'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_equity
+  period: FY2023
+  label: Total shareholders' equity
+  value: '170'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_current
+  period: FY2023
+  label: Short-term borrowings and current portion of term loans
+  value: '62'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_noncurrent
+  period: FY2023
+  label: Term loans, non-current
+  value: '168'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cash_and_equivalents
+  period: FY2023
+  label: Cash and cash equivalents
+  value: '160'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: trade_receivables
+  period: FY2023
+  label: Settlement and trade receivables, net
+  value: '55'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_assets
+  period: FY2023
+  label: Total current assets
+  value: '380'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_liabilities
+  period: FY2023
+  label: Total current liabilities
+  value: '300'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat
+  period: FY2023
+  label: Net income (loss) attributable to common stockholders
+  value: '-28'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: revenue
+  period: FY2024
+  label: Total revenue
+  value: '489'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: FY2024
+  label: Operating income (loss)
+  value: '21'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: other_income
+  period: FY2024
+  label: Interest and other income
+  value: '6'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: finance_cost
+  period: FY2024
+  label: Interest expense
+  value: '26'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: FY2024
+  label: Depreciation and amortization
+  value: '35'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pbt
+  period: FY2024
+  label: Income (loss) before income taxes
+  value: '1'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: tax_expense
+  period: FY2024
+  label: Provision for income taxes
+  value: '4'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat_before_nci
+  period: FY2024
+  label: Net income (loss)
+  value: '-3'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cfo
+  period: FY2024
+  label: Net cash provided by (used in) operating activities
+  value: '38'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_ppe
+  period: FY2024
+  label: Purchases of property and equipment
+  value: '-44'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_intangibles
+  period: FY2024
+  label: Capitalized internal-use software
+  value: '-21'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_assets
+  period: FY2024
+  label: Total assets
+  value: '812'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_liabilities
+  period: FY2024
+  label: Total liabilities
+  value: '610'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_equity
+  period: FY2024
+  label: Total shareholders' equity
+  value: '202'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_current
+  period: FY2024
+  label: Short-term borrowings and current portion of term loans
+  value: '95'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_noncurrent
+  period: FY2024
+  label: Term loans, non-current
+  value: '230'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cash_and_equivalents
+  period: FY2024
+  label: Cash and cash equivalents
+  value: '175'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: trade_receivables
+  period: FY2024
+  label: Settlement and trade receivables, net
+  value: '76'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_assets
+  period: FY2024
+  label: Total current assets
+  value: '470'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_liabilities
+  period: FY2024
+  label: Total current liabilities
+  value: '405'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat
+  period: FY2024
+  label: Net income (loss) attributable to common stockholders
+  value: '-3'
+  unit: $ in millions
+  doc: lmst_20f_fy24
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: revenue
+  period: FY2025
+  label: Total revenue
+  value: '652'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: FY2025
+  label: Operating income (loss)
+  value: '44'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: other_income
+  period: FY2025
+  label: Interest and other income
+  value: '7'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: finance_cost
+  period: FY2025
+  label: Interest expense
+  value: '39'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: FY2025
+  label: Depreciation and amortization
+  value: '49'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pbt
+  period: FY2025
+  label: Income (loss) before income taxes
+  value: '12'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: tax_expense
+  period: FY2025
+  label: Provision for income taxes
+  value: '6'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat_before_nci
+  period: FY2025
+  label: Net income (loss)
+  value: '6'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cfo
+  period: FY2025
+  label: Net cash provided by (used in) operating activities
+  value: '41'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_ppe
+  period: FY2025
+  label: Purchases of property and equipment
+  value: '-63'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_intangibles
+  period: FY2025
+  label: Capitalized internal-use software
+  value: '-29'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_assets
+  period: FY2025
+  label: Total assets
+  value: 1,104
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_liabilities
+  period: FY2025
+  label: Total liabilities
+  value: '880'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_equity
+  period: FY2025
+  label: Total shareholders' equity
+  value: '224'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_current
+  period: FY2025
+  label: Short-term borrowings and current portion of term loans
+  value: '160'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_noncurrent
+  period: FY2025
+  label: Term loans, non-current
+  value: '340'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cash_and_equivalents
+  period: FY2025
+  label: Cash and cash equivalents
+  value: '210'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: trade_receivables
+  period: FY2025
+  label: Settlement and trade receivables, net
+  value: '118'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_assets
+  period: FY2025
+  label: Total current assets
+  value: '610'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_liabilities
+  period: FY2025
+  label: Total current liabilities
+  value: '560'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat
+  period: FY2025
+  label: Net income (loss) attributable to common stockholders
+  value: '6'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: revenue
+  period: FY2026
+  label: Total revenue
+  value: '841'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: FY2026
+  label: Operating income (loss)
+  value: '48'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: other_income
+  period: FY2026
+  label: Interest and other income
+  value: '9'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: finance_cost
+  period: FY2026
+  label: Interest expense
+  value: '58'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: FY2026
+  label: Depreciation and amortization
+  value: '68'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pbt
+  period: FY2026
+  label: Income (loss) before income taxes
+  value: '-1'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: tax_expense
+  period: FY2026
+  label: Provision for income taxes
+  value: '6'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat_before_nci
+  period: FY2026
+  label: Net income (loss)
+  value: '-7'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cfo
+  period: FY2026
+  label: Net cash provided by (used in) operating activities
+  value: '12'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_ppe
+  period: FY2026
+  label: Purchases of property and equipment
+  value: '-88'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_intangibles
+  period: FY2026
+  label: Capitalized internal-use software
+  value: '-37'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_assets
+  period: FY2026
+  label: Total assets
+  value: 1,486
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_liabilities
+  period: FY2026
+  label: Total liabilities
+  value: 1,290
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_equity
+  period: FY2026
+  label: Total shareholders' equity
+  value: '196'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_current
+  period: FY2026
+  label: Short-term borrowings and current portion of term loans
+  value: '290'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_noncurrent
+  period: FY2026
+  label: Term loans, non-current
+  value: '520'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cash_and_equivalents
+  period: FY2026
+  label: Cash and cash equivalents
+  value: '235'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: trade_receivables
+  period: FY2026
+  label: Settlement and trade receivables, net
+  value: '192'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_assets
+  period: FY2026
+  label: Total current assets
+  value: '760'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_liabilities
+  period: FY2026
+  label: Total current liabilities
+  value: '735'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat
+  period: FY2026
+  label: Net income (loss) attributable to common stockholders
+  value: '-7'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: segment_revenue
+  period: FY2026
+  label: Segment revenue - Cross-border remittance
+  segment: Cross-border remittance
+  value: '498'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 118
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: segment_revenue
+  period: FY2026
+  label: Segment revenue - Wallet and payments
+  segment: Wallet and payments
+  value: '214'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 118
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: segment_revenue
+  period: FY2026
+  label: Segment revenue - Merchant FX
+  segment: Merchant FX
+  value: '129'
+  unit: $ in millions
+  doc: lmst_20f_fy26
+  page: 118
+  verified_by: synthetic sample (fictional company; not a real filing)
+quarterly_items:
+- field_key: revenue
+  period: Q4FY2025
+  label: Total revenue
+  value: '178'
+  unit: $ in millions
+  doc: lmst_6k_q4
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: Q4FY2025
+  label: Operating income (loss)
+  value: '12'
+  unit: $ in millions
+  doc: lmst_6k_q4
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: Q4FY2025
+  label: Depreciation and amortization
+  value: '14'
+  unit: $ in millions
+  doc: lmst_6k_q4
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: revenue
+  period: Q1FY2026
+  label: Total revenue
+  value: '193'
+  unit: $ in millions
+  doc: lmst_6k_q4
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: Q1FY2026
+  label: Operating income (loss)
+  value: '14'
+  unit: $ in millions
+  doc: lmst_6k_q4
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: Q1FY2026
+  label: Depreciation and amortization
+  value: '15'
+  unit: $ in millions
+  doc: lmst_6k_q4
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: revenue
+  period: Q2FY2026
+  label: Total revenue
+  value: '204'
+  unit: $ in millions
+  doc: lmst_6k_q4
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: Q2FY2026
+  label: Operating income (loss)
+  value: '13'
+  unit: $ in millions
+  doc: lmst_6k_q4
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: Q2FY2026
+  label: Depreciation and amortization
+  value: '16'
+  unit: $ in millions
+  doc: lmst_6k_q4
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: revenue
+  period: Q3FY2026
+  label: Total revenue
+  value: '214'
+  unit: $ in millions
+  doc: lmst_6k_q4
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: Q3FY2026
+  label: Operating income (loss)
+  value: '11'
+  unit: $ in millions
+  doc: lmst_6k_q4
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: Q3FY2026
+  label: Depreciation and amortization
+  value: '18'
+  unit: $ in millions
+  doc: lmst_6k_q4
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: revenue
+  period: Q4FY2026
+  label: Total revenue
+  value: '230'
+  unit: $ in millions
+  doc: lmst_6k_q4
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: Q4FY2026
+  label: Operating income (loss)
+  value: '10'
+  unit: $ in millions
+  doc: lmst_6k_q4
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: Q4FY2026
+  label: Depreciation and amortization
+  value: '19'
+  unit: $ in millions
+  doc: lmst_6k_q4
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+evidence:
+- id: ev_lmst_business
+  doc: lmst_20f_fy26
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: Lumen Straits operates cross-border remittance corridors, a consumer wallet and merchant FX services across Singapore, Malaysia, Indonesia
+    and the Philippines.
+  page: 6
+- id: ev_lmst_kmp
+  doc: lmst_20f_fy26
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: 'Senior management: Tan Wei Ling, Group Chief Executive Officer; Arjun Mehta, Chief Financial Officer (from February 2026); Siti Rahman,
+    Chief Operating Officer.'
+  page: 44
+- id: ev_lmst_mas
+  doc: mas_register
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: Lumen Straits Pte. Ltd. is licensed as a Major Payment Institution for cross-border money transfer and e-money issuance.
+- id: ev_lmst_loan
+  doc: lmst_6k
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: The Company entered into a $300 million senior secured term loan at SOFR plus 4.75% maturing in 2029.
+- id: ev_lmst_dompet
+  doc: lmst_6k
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: The Company completed the acquisition of PT Dompet Cepat for $85 million, funded from the new term loan.
+- id: ev_lmst_cfo
+  doc: lmst_6k
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: Mr Daniel Koh has stepped down as Chief Financial Officer. Mr Arjun Mehta is appointed Chief Financial Officer effective February 2026.
+- id: ev_lmst_auditor
+  doc: lmst_6k
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: The Audit Committee approved the appointment of a new independent registered public accounting firm after the predecessor firm declined
+    to stand for re-appointment.
+- id: ev_lmst_manila
+  doc: lmst_6k
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: The Company signed a payout partnership with a Philippine rural bank network covering 1,200 branches.
+- id: ev_lmst_short
+  doc: short_report
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: We believe settlement receivables are inflated by round-tripping between corridor partners.
+- id: ev_lmst_press_rev
+  doc: straits_daily
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: Lumen Straits booked close to $890 million in revenue in its latest financial year.
+- id: ev_lmst_call_leverage
+  doc: lmst_q4_call
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: 'CEO: Our leverage is comfortable and we are well within our covenants.'
+- id: ev_lmst_covenant
+  doc: lmst_20f_fy26
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: The term loan requires a minimum interest coverage ratio, tested quarterly, and contains cross-default provisions.
+  page: 131
+management_roster:
+- name: Tan Wei Ling
+  role: Group Chief Executive Officer
+  evidence: ev_lmst_kmp
+  verified_by: synthetic sample (fictional company; not a real filing)
+- name: Arjun Mehta
+  role: Chief Financial Officer
+  since: Feb 2026
+  evidence: ev_lmst_kmp
+  verified_by: synthetic sample (fictional company; not a real filing)
+- name: Siti Rahman
+  role: Chief Operating Officer
+  evidence: ev_lmst_kmp
+  verified_by: synthetic sample (fictional company; not a real filing)
+news_events:
+- id: nw_lmst_mas
+  date: Oct 2025
+  category: Regulatory
+  headline: MAS licence confirmed for remittance and e-money
+  summary: The MAS register lists the Singapore subsidiary as a Major Payment Institution.
+  polarity: positive
+  source_names:
+  - MAS register
+  - Straits Business Daily
+  tier: T1
+  corroborated_by_filing: true
+  article_count_merged: 4
+  evidence: ev_lmst_mas
+  verified_by: synthetic sample (fictional company; not a real filing)
+- id: nw_lmst_loan
+  date: Dec 2025
+  category: Fundraise
+  headline: Raises a senior secured term loan to fund expansion
+  summary: A 6-K discloses a senior secured term loan priced over SOFR and maturing in 2029.
+  polarity: negative
+  source_names:
+  - 6-K filing
+  - Straits Business Daily
+  tier: T2
+  corroborated_by_filing: true
+  article_count_merged: 7
+  evidence: ev_lmst_loan
+  verified_by: synthetic sample (fictional company; not a real filing)
+- id: nw_lmst_dompet
+  date: Jan 2026
+  category: Acquisition
+  headline: Buys Indonesian e-wallet Dompet Cepat with debt
+  summary: Completed the acquisition, funded from the new term loan.
+  polarity: neutral
+  source_names:
+  - 6-K filing
+  - TechAsia
+  tier: T2
+  corroborated_by_filing: true
+  article_count_merged: 9
+  evidence: ev_lmst_dompet
+  verified_by: synthetic sample (fictional company; not a real filing)
+- id: nw_lmst_cfo
+  date: Feb 2026
+  category: Management
+  headline: CFO steps down; new CFO appointed same day
+  summary: The CFO stepped down and a successor was appointed immediately; no reason was given.
+  polarity: negative
+  source_names:
+  - 6-K filing
+  tier: T2
+  corroborated_by_filing: true
+  article_count_merged: 5
+  evidence: ev_lmst_cfo
+  verified_by: synthetic sample (fictional company; not a real filing)
+- id: nw_lmst_manila
+  date: Apr 2026
+  category: Partnership
+  headline: Payout partnership with Philippine rural bank network
+  summary: A 6-K confirms a payout network covering 1,200 [[ev_lmst_manila]] branches.
+  polarity: positive
+  source_names:
+  - 6-K filing
+  tier: T2
+  corroborated_by_filing: true
+  article_count_merged: 3
+  evidence: ev_lmst_manila
+  verified_by: synthetic sample (fictional company; not a real filing)
+- id: nw_lmst_auditor
+  date: Jul 2026
+  category: Management
+  headline: Auditor declines re-appointment; new firm appointed
+  summary: The predecessor audit firm declined to stand for re-appointment, and the Audit Committee appointed a new firm.
+  polarity: negative
+  source_names:
+  - 6-K filing
+  - Straits Business Daily
+  tier: T2
+  corroborated_by_filing: true
+  article_count_merged: 8
+  evidence: ev_lmst_auditor
+  verified_by: synthetic sample (fictional company; not a real filing)
+- id: nw_lmst_short
+  date: Sep 2026
+  category: Controversy
+  headline: Short-seller alleges inflated settlement receivables
+  summary: A short-seller report alleges round-tripping between corridor partners; the company denies it and no filing supports the claim.
+  polarity: negative
+  source_names:
+  - Short-seller report
+  - Reddit
+  tier: T3
+  corroborated_by_filing: false
+  article_count_merged: 14
+  evidence: ev_lmst_short
+  verified_by: synthetic sample (fictional company; not a real filing)
+sentiment:
+  removed_posts:
+  - &id001
+    reason: Near-duplicate of 3+ accounts (5-gram Jaccard >= 0.85)
+  - *id001
+  - *id001
+  - *id001
+  - &id002
+    reason: Reddit account < 30 days old
+  - *id002
+  - reason: Play Store review burst
+  audience_breakdown:
+  - audience: Customers
+    dominant_tone: negative
+    trend_description: Payout delays on the Indonesia and Philippines corridors since the spring
+  - audience: Employees
+    dominant_tone: negative
+    trend_description: Finance team turnover after the CFO change
+  - audience: Investors
+    dominant_tone: mixed
+    trend_description: Split between growth bulls and short-seller concerns
+  items:
+  - id: p_lmst_payout
+    platform: Reddit
+    audience: Customer
+    quote: Sent money home to Cebu on Friday, still not credited Tuesday. Support says partner bank delay.
+    polarity: negative
+    verdict: signal
+    reasons:
+    - Many independent posts describe the same corridor delays
+    - Consistent with settlement receivables rising faster than revenue
+    url: synthetic://reddit/r/singapore/lumen-payout
+    verified_by: synthetic sample (fictional company; not a real filing)
+    corroborating_ids:
+    - met_dso_fy2026
+  - id: p_lmst_play
+    platform: Play Store
+    audience: Customer
+    quote: Rates are good but transfers to Indonesia now take three days.
+    polarity: negative
+    verdict: signal
+    reasons:
+    - Rating drop follows the Dompet Cepat integration
+    url: synthetic://play/lumen-wallet/reviews
+    verified_by: synthetic sample (fictional company; not a real filing)
+    corroborating_ids:
+    - nw_lmst_dompet
+  - id: p_lmst_hn
+    platform: Hacker News
+    audience: Employee
+    quote: Half the finance team left within months of the CFO change.
+    polarity: negative
+    verdict: signal
+    reasons:
+    - Two independent accounts, consistent
+    - Matches the CFO and auditor change filings
+    url: synthetic://hn/item/lumen-finance
+    verified_by: synthetic sample (fictional company; not a real filing)
+    corroborating_ids:
+    - nw_lmst_cfo
+    - nw_lmst_auditor
+  - id: p_lmst_bull
+    platform: Broker note
+    audience: Investor
+    quote: 'BUY: corridor growth and MAS licence make this the regional winner.'
+    polarity: positive
+    verdict: signal
+    reasons:
+    - Credible source consistent with the licence filing
+    - Does not address leverage
+    url: synthetic://broker/lumen-initiation
+    verified_by: synthetic sample (fictional company; not a real filing)
+    corroborating_ids:
+    - nw_lmst_mas
+  - id: p_lmst_squeeze
+    platform: Reddit
+    audience: Investor
+    quote: Shorts are trapped, LMST squeeze next week guaranteed
+    polarity: positive
+    verdict: noise
+    reasons:
+    - Account 9 days old with near-identical posts
+    - No filing or news match
+    url: synthetic://reddit/r/wallstreetbets/lmst-squeeze
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - id: p_lmst_fraud
+    platform: Reddit
+    audience: Investor
+    quote: It's a total fraud, CEO will be arrested
+    polarity: negative
+    verdict: noise
+    reasons:
+    - Unverified allegation
+    - Goes beyond the short report itself
+    url: synthetic://reddit/r/stocks/lmst-fraud
+    verified_by: synthetic sample (fictional company; not a real filing)
+peers:
+- company_name: Sendwell Global Inc.
+  ticker: 'NYSE: SNDW'
+  close_price:
+    value: '21'
+    doc: sndw_20f
+    page: 1
+    verified_by: synthetic sample (fictional company; not a real filing)
+  diluted_eps:
+    value: '0.62'
+    doc: sndw_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  price_as_of: '2026-10-15'
+  line_items:
+  - field_key: revenue
+    period: FY2025
+    label: Total revenue
+    value: 1,180
+    unit: $ in millions
+    doc: sndw_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: revenue
+    period: FY2026
+    label: Total revenue
+    value: 1,290
+    unit: $ in millions
+    doc: sndw_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: operating_income
+    period: FY2026
+    label: Operating income (loss)
+    value: '118'
+    unit: $ in millions
+    doc: sndw_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: d_and_a
+    period: FY2026
+    label: Depreciation and amortization
+    value: '61'
+    unit: $ in millions
+    doc: sndw_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: finance_cost
+    period: FY2026
+    label: Interest expense
+    value: '22'
+    unit: $ in millions
+    doc: sndw_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: other_income
+    period: FY2026
+    label: Interest and other income
+    value: '8'
+    unit: $ in millions
+    doc: sndw_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: pbt
+    period: FY2026
+    label: Income (loss) before income taxes
+    value: '104'
+    unit: $ in millions
+    doc: sndw_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: pat
+    period: FY2026
+    label: Net income (loss) attributable to common stockholders
+    value: '78'
+    unit: $ in millions
+    doc: sndw_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: total_equity
+    period: FY2026
+    label: Total stockholders' equity
+    value: '920'
+    unit: $ in millions
+    doc: sndw_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+- company_name: Kirana Remit Ltd
+  ticker: 'NASDAQ: KRMT'
+  close_price:
+    value: '11'
+    doc: krmt_20f
+    page: 1
+    verified_by: synthetic sample (fictional company; not a real filing)
+  diluted_eps:
+    value: '0.31'
+    doc: krmt_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  price_as_of: '2026-10-15'
+  line_items:
+  - field_key: revenue
+    period: FY2025
+    label: Total revenue
+    value: '410'
+    unit: $ in millions
+    doc: krmt_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: revenue
+    period: FY2026
+    label: Total revenue
+    value: '497'
+    unit: $ in millions
+    doc: krmt_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: operating_income
+    period: FY2026
+    label: Operating income (loss)
+    value: '29'
+    unit: $ in millions
+    doc: krmt_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: d_and_a
+    period: FY2026
+    label: Depreciation and amortization
+    value: '21'
+    unit: $ in millions
+    doc: krmt_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: finance_cost
+    period: FY2026
+    label: Interest expense
+    value: '9'
+    unit: $ in millions
+    doc: krmt_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: other_income
+    period: FY2026
+    label: Interest and other income
+    value: '3'
+    unit: $ in millions
+    doc: krmt_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: pbt
+    period: FY2026
+    label: Income (loss) before income taxes
+    value: '23'
+    unit: $ in millions
+    doc: krmt_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: pat
+    period: FY2026
+    label: Net income (loss) attributable to common stockholders
+    value: '17'
+    unit: $ in millions
+    doc: krmt_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: total_equity
+    period: FY2026
+    label: Total stockholders' equity
+    value: '260'
+    unit: $ in millions
+    doc: krmt_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+- company_name: Orchid Pay Holdings
+  ticker: 'NYSE: ORPY'
+  close_price:
+    value: '14'
+    doc: orpy_20f
+    page: 1
+    verified_by: synthetic sample (fictional company; not a real filing)
+  diluted_eps:
+    value: '0.44'
+    doc: orpy_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  price_as_of: '2026-10-15'
+  line_items:
+  - field_key: revenue
+    period: FY2025
+    label: Total revenue
+    value: '610'
+    unit: $ in millions
+    doc: orpy_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: revenue
+    period: FY2026
+    label: Total revenue
+    value: '701'
+    unit: $ in millions
+    doc: orpy_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: operating_income
+    period: FY2026
+    label: Operating income (loss)
+    value: '55'
+    unit: $ in millions
+    doc: orpy_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: d_and_a
+    period: FY2026
+    label: Depreciation and amortization
+    value: '33'
+    unit: $ in millions
+    doc: orpy_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: finance_cost
+    period: FY2026
+    label: Interest expense
+    value: '14'
+    unit: $ in millions
+    doc: orpy_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: other_income
+    period: FY2026
+    label: Interest and other income
+    value: '5'
+    unit: $ in millions
+    doc: orpy_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: pbt
+    period: FY2026
+    label: Income (loss) before income taxes
+    value: '46'
+    unit: $ in millions
+    doc: orpy_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: pat
+    period: FY2026
+    label: Net income (loss) attributable to common stockholders
+    value: '35'
+    unit: $ in millions
+    doc: orpy_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: total_equity
+    period: FY2026
+    label: Total stockholders' equity
+    value: '480'
+    unit: $ in millions
+    doc: orpy_20f
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+- company_name: Halcyon Money Inc.
+  ticker: 'NASDAQ: HLCN'
+  close_price:
+    value: '26'
+    doc: hlcn_10k
+    page: 1
+    verified_by: synthetic sample (fictional company; not a real filing)
+  diluted_eps:
+    value: '0.95'
+    doc: hlcn_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  price_as_of: '2026-10-15'
+  line_items:
+  - field_key: revenue
+    period: FY2025
+    label: Total revenue
+    value: '890'
+    unit: $ in millions
+    doc: hlcn_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: revenue
+    period: FY2026
+    label: Total revenue
+    value: '948'
+    unit: $ in millions
+    doc: hlcn_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: operating_income
+    period: FY2026
+    label: Operating income (loss)
+    value: '86'
+    unit: $ in millions
+    doc: hlcn_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: d_and_a
+    period: FY2026
+    label: Depreciation and amortization
+    value: '42'
+    unit: $ in millions
+    doc: hlcn_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: finance_cost
+    period: FY2026
+    label: Interest expense
+    value: '12'
+    unit: $ in millions
+    doc: hlcn_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: other_income
+    period: FY2026
+    label: Interest and other income
+    value: '6'
+    unit: $ in millions
+    doc: hlcn_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: pbt
+    period: FY2026
+    label: Income (loss) before income taxes
+    value: '80'
+    unit: $ in millions
+    doc: hlcn_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: pat
+    period: FY2026
+    label: Net income (loss) attributable to common stockholders
+    value: '62'
+    unit: $ in millions
+    doc: hlcn_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: total_equity
+    period: FY2026
+    label: Total stockholders' equity
+    value: '710'
+    unit: $ in millions
+    doc: hlcn_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+contradictions:
+- id: ct_lmst_revenue
+  topic: FY2026 revenue
+  type: NUMERIC_DISCREPANCY
+  a_claim: Revenue close to $890 million (press)
+  a_evidence: ev_lmst_press_rev
+  b_claim: Revenue {{li_fy2026_revenue}} (audited 20-F)
+  b_evidence: ev_lmst_20f_fy26_p62_revenue_fy2026
+  note: The press figure appears to be gross corridor revenue before partner rebates.
+- id: ct_lmst_leverage
+  topic: Leverage and covenants
+  type: NARRATIVE_VS_METRIC
+  a_claim: 'CEO: leverage is comfortable, well within covenants (Q4 FY2026 call)'
+  a_evidence: ev_lmst_call_leverage
+  b_claim: Interest cover fell to {{met_interest_cover_fy2026}} while gross debt grew {{met_gross_debt_yoy_fy2026}}
+  b_evidence: ev_lmst_covenant
+prose:
+  insights:
+  - id: in_lmst_debt
+    title: Growth is being bought with borrowed money
+    classification: fact
+    polarity: negative
+    body: Gross debt grew {{met_gross_debt_yoy_fy2026}} to {{li_fy2026_gross_debt}} while revenue grew {{met_rev_yoy_fy2026}}. Interest cover
+      is {{met_interest_cover_fy2026}}, so operating profit no longer covers interest.
+    metrics:
+    - met_gross_debt_yoy_fy2026
+    - met_rev_yoy_fy2026
+    - met_interest_cover_fy2026
+    items:
+    - li_fy2026_gross_debt
+    red_flags:
+    - RF_04_DEBT_OUTGROWING_REV
+    - RF_05_WEAK_INTEREST_COVERAGE
+  - id: in_lmst_receivables
+    title: Settlement receivables are ballooning
+    classification: fact
+    polarity: negative
+    body: DSO rose from {{met_dso_fy2024}} to {{met_dso_fy2026}} and receivables grew {{met_receivables_yoy_fy2026}}. Operating cash flow fell
+      {{met_cfo_yoy_fy2026}} to {{li_fy2026_cfo}}.
+    metrics:
+    - met_dso_fy2024
+    - met_dso_fy2026
+    - met_receivables_yoy_fy2026
+    - met_cfo_yoy_fy2026
+    items:
+    - li_fy2026_cfo
+    red_flags:
+    - RF_01_RECEIVABLES_STRETCH
+    - RF_06_PROFIT_CASH_DIVERGENCE
+  - id: in_lmst_liquidity
+    title: Liquidity is thin heading into a covenant test
+    classification: inference
+    polarity: negative
+    body: Free cash flow was {{met_fcf_fy2026}} and the current ratio is {{met_current_ratio_fy2026}}. With a quarterly interest-cover covenant,
+      refinancing risk is the key watch item.
+    metrics:
+    - met_fcf_fy2026
+    - met_current_ratio_fy2026
+    red_flags:
+    - RF_03_NEGATIVE_FCF
+    - RF_07_LIQUIDITY_SQUEEZE
+    news:
+    - nw_lmst_loan
+  - id: in_lmst_customers
+    title: Customers feel the settlement strain
+    classification: inference
+    polarity: negative
+    body: Payout-delay complaints on the Indonesia and Philippines corridors line up with the rise in settlement receivables. Only corroborated
+      posts are counted.
+    metrics:
+    - met_dso_fy2026
+    news:
+    - nw_lmst_dompet
+    sentiment:
+    - p_lmst_payout
+    - p_lmst_play
+  - id: in_lmst_governance
+    title: Two finance-function changes in one year
+    classification: hypothesis
+    polarity: negative
+    body: The CFO changed in February and the auditor declined re-appointment in July. Filings give no reason for either, and the short-seller
+      claim is not supported by any filing.
+    news:
+    - nw_lmst_cfo
+    - nw_lmst_auditor
+    - nw_lmst_short
+  summary:
+    verdict_headline: 'Fast growth on borrowed money: cash and governance under strain'
+    verdict_prose: Revenue grew {{met_rev_yoy_fy2026}} to {{li_fy2026_revenue}}, but gross debt grew {{met_gross_debt_yoy_fy2026}} and free cash
+      flow was {{met_fcf_fy2026}}. A CFO change and an auditor exit add governance risk.
+    business_overview: Cross-border remittance corridors, a consumer wallet and merchant FX across Singapore, Malaysia, Indonesia and the Philippines.
+    revenue_mix_summary: 'FY2026 segment revenue: cross-border remittance {{li_fy2026_segment_revenue_cross_border_remittance}}, wallet and payments
+      {{li_fy2026_segment_revenue_wallet_and_payments}}, merchant FX {{li_fy2026_segment_revenue_merchant_fx}}.'
+    management_summary: Tan Wei Ling is Group CEO; Arjun Mehta became CFO in February 2026; Siti Rahman is COO.
+    governance_watch_note: The CFO changed in February and the predecessor auditor declined re-appointment in July, with no reason stated for
+      either.
+    opportunities:
+    - MAS licence and Philippine payout network widen the corridor moat
+    - Wallet cross-sell to remittance users
+    - Merchant FX attaches to the corridor base
+    risks:
+    - Interest cover below one with a quarterly covenant test
+    - Settlement receivables growing far faster than revenue
+    - 'Governance: CFO change and auditor exit within a year'
+    quarterly_direction_note: Q4 FY2026 revenue grew {{met_q_rev_yoy_q4fy2026}} YoY, but EBITDA margin slipped to {{met_q_ebitda_margin_q4fy2026}}
+      from {{met_q_ebitda_margin_q4fy2025}}.
+    analyst_follow_up_notes:
+    - Request the covenant compliance certificate for the last test date
+    - Ask the predecessor auditor's reasons via the Audit Committee
+    - Reconcile settlement receivables by corridor partner
+  market_advantages:
+  - Revenue growth of {{peer_lmst_rev_growth_pct}} against a peer median of {{peer_median_rev_growth_pct}}
+  - Licensed in Singapore with a wide Southeast Asian payout network
+  market_disadvantages:
+  - ROE of {{peer_lmst_roe_pct}} against a peer median of {{peer_median_roe_pct}}
+  - Sendwell runs at an EBITDA margin of {{peer_sndw_ebitda_margin_pct}}
+  market_positioning_prose: Lumen Straits grew {{peer_lmst_rev_growth_pct}} against a peer median of {{peer_median_rev_growth_pct}}, but its ROE
+    of {{peer_lmst_roe_pct}} trails the median of {{peer_median_roe_pct}}.
+stated_gaps:
+- Covenant test results are not disclosed in this sample
+- Lease liabilities are excluded from gross debt

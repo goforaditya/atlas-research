@@ -1,0 +1,1776 @@
+# Synthetic sample company for demos. Every company, person, number and source is fictional and generated;
+# it must never be presented as real. Identities (assets = liabilities + equity, PBT - tax = PAT) hold every year.
+replay_id: meridian_ledger_synthetic
+synthetic: true
+company_query: Meridian Ledger
+display:
+  company_name: Meridian Ledger Inc. (synthetic sample)
+  ticker: 'NASDAQ: MRDN'
+  sector: Fintech · Spend management (synthetic)
+  jurisdiction: US
+  cached_at: '2026-10-26T00:00:00Z'
+entity:
+  legal_name: Meridian Ledger Inc.
+  ticker: MRDN
+  exchange: NASDAQ
+  jurisdiction: US
+  is_listed: true
+  cik: null
+  listing_date: '2020-09-17'
+  sector: Fintech · Spend management
+  headquarters: Austin, Texas
+  fy_end_month: December
+  currency: USD_M
+  rejected_candidates:
+  - 'Meridian Ledger Trust: unrelated statutory trust'
+  - 'Meridian Lending Corp: different company and sector'
+gaap: us_gaap
+sub_questions:
+- Does operating cash flow cover reported profit, and why is it higher?
+- Are receivables growing slower than revenue?
+- How much of cash flow comes from stock-based compensation?
+- What are the terms of the convertible notes?
+- Which material events were disclosed on Form 8-K?
+- Is there any regulatory inquiry into card rewards?
+- What do finance teams say about the product?
+- What do employees say about leadership stability?
+- How do investors frame valuation and dilution?
+- Which listed peers compete in spend management?
+- How do growth, margins and ROE compare with the peer median?
+- How durable is card interchange revenue?
+documents:
+  mrdn_10k_fy25:
+    title: Form 10-K FY2025
+    source_url: synthetic://meridian/10-k-fy2025.pdf
+    tier: T1
+    retrieved_at: '2026-10-20T09:00:00Z'
+  mrdn_10k_fy23:
+    title: Form 10-K FY2023
+    source_url: synthetic://meridian/10-k-fy2023.pdf
+    tier: T1
+    retrieved_at: '2026-10-20T09:00:00Z'
+  mrdn_10k_fy21:
+    title: Form 10-K FY2021
+    source_url: synthetic://meridian/10-k-fy2021.pdf
+    tier: T1
+    retrieved_at: '2026-10-20T09:00:00Z'
+  mrdn_10q_q2fy26:
+    title: Form 10-Q Q2 FY2026
+    source_url: synthetic://meridian/10-q-q2fy2026.pdf
+    tier: T1
+    retrieved_at: '2026-10-20T09:00:00Z'
+  mrdn_8k:
+    title: Form 8-K filings
+    source_url: synthetic://sec/meridian/8-k
+    tier: T2
+    retrieved_at: '2026-10-20T09:00:00Z'
+  mrdn_q2_call:
+    title: Q2 FY2026 earnings call
+    source_url: synthetic://meridian/q2fy2026-call-transcript
+    tier: T2
+  harbor_journal:
+    title: Harbor Business Journal
+    source_url: synthetic://press/harbor-business-journal
+    tier: T3
+  broker_mrdn:
+    title: Broker note
+    source_url: synthetic://broker/meridian-initiation
+    tier: T4
+  tlly_10k:
+    title: Tallyway 10-K FY2025
+    source_url: synthetic://tallyway/10-k-fy2025.pdf
+    tier: T1
+    retrieved_at: '2026-10-20T09:00:00Z'
+  bspd_10k:
+    title: Brightspend 10-K FY2025
+    source_url: synthetic://brightspend/10-k-fy2025.pdf
+    tier: T1
+    retrieved_at: '2026-10-20T09:00:00Z'
+  cstr_10k:
+    title: Coinstrand 10-K FY2025
+    source_url: synthetic://coinstrand/10-k-fy2025.pdf
+    tier: T1
+    retrieved_at: '2026-10-20T09:00:00Z'
+  pxf_10k:
+    title: Paxfield 10-K FY2025
+    source_url: synthetic://paxfield/10-k-fy2025.pdf
+    tier: T1
+    retrieved_at: '2026-10-20T09:00:00Z'
+line_items:
+- field_key: revenue
+  period: FY2021
+  label: Total revenue
+  value: '412'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: FY2021
+  label: Operating income (loss)
+  value: '18'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: other_income
+  period: FY2021
+  label: Interest and other income
+  value: '2'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: finance_cost
+  period: FY2021
+  label: Interest expense
+  value: '9'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: FY2021
+  label: Depreciation and amortization
+  value: '22'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pbt
+  period: FY2021
+  label: Income (loss) before income taxes
+  value: '11'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: tax_expense
+  period: FY2021
+  label: Provision for income taxes
+  value: '3'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat_before_nci
+  period: FY2021
+  label: Net income (loss)
+  value: '8'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cfo
+  period: FY2021
+  label: Net cash provided by (used in) operating activities
+  value: '61'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_ppe
+  period: FY2021
+  label: Purchases of property and equipment
+  value: '-14'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_intangibles
+  period: FY2021
+  label: Capitalized internal-use software
+  value: '-18'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_assets
+  period: FY2021
+  label: Total assets
+  value: '980'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_liabilities
+  period: FY2021
+  label: Total liabilities
+  value: '512'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_equity
+  period: FY2021
+  label: Total stockholders' equity
+  value: '468'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_current
+  period: FY2021
+  label: Current portion of long-term debt
+  value: '0'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_noncurrent
+  period: FY2021
+  label: Long-term debt, net of current portion
+  value: '228'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cash_and_equivalents
+  period: FY2021
+  label: Cash and cash equivalents
+  value: '310'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: trade_receivables
+  period: FY2021
+  label: Accounts receivable, net
+  value: '52'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_assets
+  period: FY2021
+  label: Total current assets
+  value: '455'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_liabilities
+  period: FY2021
+  label: Total current liabilities
+  value: '210'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat
+  period: FY2021
+  label: Net income (loss) attributable to common stockholders
+  value: '8'
+  unit: $ in millions
+  doc: mrdn_10k_fy21
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: revenue
+  period: FY2022
+  label: Total revenue
+  value: '538'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: FY2022
+  label: Operating income (loss)
+  value: '47'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: other_income
+  period: FY2022
+  label: Interest and other income
+  value: '4'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: finance_cost
+  period: FY2022
+  label: Interest expense
+  value: '9'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: FY2022
+  label: Depreciation and amortization
+  value: '27'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pbt
+  period: FY2022
+  label: Income (loss) before income taxes
+  value: '42'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: tax_expense
+  period: FY2022
+  label: Provision for income taxes
+  value: '9'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat_before_nci
+  period: FY2022
+  label: Net income (loss)
+  value: '33'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cfo
+  period: FY2022
+  label: Net cash provided by (used in) operating activities
+  value: '104'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_ppe
+  period: FY2022
+  label: Purchases of property and equipment
+  value: '-17'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_intangibles
+  period: FY2022
+  label: Capitalized internal-use software
+  value: '-22'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_assets
+  period: FY2022
+  label: Total assets
+  value: 1,092
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_liabilities
+  period: FY2022
+  label: Total liabilities
+  value: '566'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_equity
+  period: FY2022
+  label: Total stockholders' equity
+  value: '526'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_current
+  period: FY2022
+  label: Current portion of long-term debt
+  value: '0'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_noncurrent
+  period: FY2022
+  label: Long-term debt, net of current portion
+  value: '229'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cash_and_equivalents
+  period: FY2022
+  label: Cash and cash equivalents
+  value: '352'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: trade_receivables
+  period: FY2022
+  label: Accounts receivable, net
+  value: '66'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_assets
+  period: FY2022
+  label: Total current assets
+  value: '520'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_liabilities
+  period: FY2022
+  label: Total current liabilities
+  value: '262'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat
+  period: FY2022
+  label: Net income (loss) attributable to common stockholders
+  value: '33'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: revenue
+  period: FY2023
+  label: Total revenue
+  value: '689'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: FY2023
+  label: Operating income (loss)
+  value: '86'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: other_income
+  period: FY2023
+  label: Interest and other income
+  value: '11'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: finance_cost
+  period: FY2023
+  label: Interest expense
+  value: '8'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: FY2023
+  label: Depreciation and amortization
+  value: '33'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pbt
+  period: FY2023
+  label: Income (loss) before income taxes
+  value: '89'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: tax_expense
+  period: FY2023
+  label: Provision for income taxes
+  value: '19'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat_before_nci
+  period: FY2023
+  label: Net income (loss)
+  value: '70'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cfo
+  period: FY2023
+  label: Net cash provided by (used in) operating activities
+  value: '158'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_ppe
+  period: FY2023
+  label: Purchases of property and equipment
+  value: '-21'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_intangibles
+  period: FY2023
+  label: Capitalized internal-use software
+  value: '-27'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_assets
+  period: FY2023
+  label: Total assets
+  value: 1,246
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_liabilities
+  period: FY2023
+  label: Total liabilities
+  value: '624'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_equity
+  period: FY2023
+  label: Total stockholders' equity
+  value: '622'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_current
+  period: FY2023
+  label: Current portion of long-term debt
+  value: '0'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_noncurrent
+  period: FY2023
+  label: Long-term debt, net of current portion
+  value: '230'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cash_and_equivalents
+  period: FY2023
+  label: Cash and cash equivalents
+  value: '431'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: trade_receivables
+  period: FY2023
+  label: Accounts receivable, net
+  value: '82'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_assets
+  period: FY2023
+  label: Total current assets
+  value: '625'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_liabilities
+  period: FY2023
+  label: Total current liabilities
+  value: '318'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat
+  period: FY2023
+  label: Net income (loss) attributable to common stockholders
+  value: '70'
+  unit: $ in millions
+  doc: mrdn_10k_fy23
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: revenue
+  period: FY2024
+  label: Total revenue
+  value: '861'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: FY2024
+  label: Operating income (loss)
+  value: '133'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: other_income
+  period: FY2024
+  label: Interest and other income
+  value: '17'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: finance_cost
+  period: FY2024
+  label: Interest expense
+  value: '7'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: FY2024
+  label: Depreciation and amortization
+  value: '39'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pbt
+  period: FY2024
+  label: Income (loss) before income taxes
+  value: '143'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: tax_expense
+  period: FY2024
+  label: Provision for income taxes
+  value: '31'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat_before_nci
+  period: FY2024
+  label: Net income (loss)
+  value: '112'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cfo
+  period: FY2024
+  label: Net cash provided by (used in) operating activities
+  value: '214'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_ppe
+  period: FY2024
+  label: Purchases of property and equipment
+  value: '-24'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_intangibles
+  period: FY2024
+  label: Capitalized internal-use software
+  value: '-31'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_assets
+  period: FY2024
+  label: Total assets
+  value: 1,452
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_liabilities
+  period: FY2024
+  label: Total liabilities
+  value: '679'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_equity
+  period: FY2024
+  label: Total stockholders' equity
+  value: '773'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_current
+  period: FY2024
+  label: Current portion of long-term debt
+  value: '0'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_noncurrent
+  period: FY2024
+  label: Long-term debt, net of current portion
+  value: '231'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cash_and_equivalents
+  period: FY2024
+  label: Cash and cash equivalents
+  value: '560'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: trade_receivables
+  period: FY2024
+  label: Accounts receivable, net
+  value: '99'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_assets
+  period: FY2024
+  label: Total current assets
+  value: '780'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_liabilities
+  period: FY2024
+  label: Total current liabilities
+  value: '380'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat
+  period: FY2024
+  label: Net income (loss) attributable to common stockholders
+  value: '112'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: revenue
+  period: FY2025
+  label: Total revenue
+  value: 1,058
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: FY2025
+  label: Operating income (loss)
+  value: '182'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: other_income
+  period: FY2025
+  label: Interest and other income
+  value: '21'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: finance_cost
+  period: FY2025
+  label: Interest expense
+  value: '7'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: FY2025
+  label: Depreciation and amortization
+  value: '46'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pbt
+  period: FY2025
+  label: Income (loss) before income taxes
+  value: '196'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: tax_expense
+  period: FY2025
+  label: Provision for income taxes
+  value: '43'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat_before_nci
+  period: FY2025
+  label: Net income (loss)
+  value: '153'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cfo
+  period: FY2025
+  label: Net cash provided by (used in) operating activities
+  value: '271'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_ppe
+  period: FY2025
+  label: Purchases of property and equipment
+  value: '-29'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: purchase_of_intangibles
+  period: FY2025
+  label: Capitalized internal-use software
+  value: '-36'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 66
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_assets
+  period: FY2025
+  label: Total assets
+  value: 1,701
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_liabilities
+  period: FY2025
+  label: Total liabilities
+  value: '742'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: total_equity
+  period: FY2025
+  label: Total stockholders' equity
+  value: '959'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_current
+  period: FY2025
+  label: Current portion of long-term debt
+  value: '0'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: borrowings_noncurrent
+  period: FY2025
+  label: Long-term debt, net of current portion
+  value: '232'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: cash_and_equivalents
+  period: FY2025
+  label: Cash and cash equivalents
+  value: '702'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: trade_receivables
+  period: FY2025
+  label: Accounts receivable, net
+  value: '118'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_assets
+  period: FY2025
+  label: Total current assets
+  value: '960'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: current_liabilities
+  period: FY2025
+  label: Total current liabilities
+  value: '451'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 60
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: pat
+  period: FY2025
+  label: Net income (loss) attributable to common stockholders
+  value: '153'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 62
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: segment_revenue
+  period: FY2025
+  label: Segment revenue - AP automation
+  segment: AP automation
+  value: '498'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 94
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: segment_revenue
+  period: FY2025
+  label: Segment revenue - Corporate cards
+  segment: Corporate cards
+  value: '341'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 94
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: segment_revenue
+  period: FY2025
+  label: Segment revenue - Treasury and FX
+  segment: Treasury and FX
+  value: '147'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 94
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: segment_revenue
+  period: FY2025
+  label: Segment revenue - Platform and other
+  segment: Platform and other
+  value: '72'
+  unit: $ in millions
+  doc: mrdn_10k_fy25
+  page: 94
+  verified_by: synthetic sample (fictional company; not a real filing)
+quarterly_items:
+- field_key: revenue
+  period: Q1FY2025
+  label: Total revenue
+  value: '241'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: Q1FY2025
+  label: Operating income (loss)
+  value: '39'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: Q1FY2025
+  label: Depreciation and amortization
+  value: '11'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: revenue
+  period: Q2FY2025
+  label: Total revenue
+  value: '256'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: Q2FY2025
+  label: Operating income (loss)
+  value: '44'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: Q2FY2025
+  label: Depreciation and amortization
+  value: '11'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: revenue
+  period: Q3FY2025
+  label: Total revenue
+  value: '270'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: Q3FY2025
+  label: Operating income (loss)
+  value: '47'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: Q3FY2025
+  label: Depreciation and amortization
+  value: '12'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: revenue
+  period: Q4FY2025
+  label: Total revenue
+  value: '291'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: Q4FY2025
+  label: Operating income (loss)
+  value: '52'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: Q4FY2025
+  label: Depreciation and amortization
+  value: '12'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: revenue
+  period: Q1FY2026
+  label: Total revenue
+  value: '298'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: Q1FY2026
+  label: Operating income (loss)
+  value: '55'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: Q1FY2026
+  label: Depreciation and amortization
+  value: '13'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: revenue
+  period: Q2FY2026
+  label: Total revenue
+  value: '316'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: operating_income
+  period: Q2FY2026
+  label: Operating income (loss)
+  value: '61'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+- field_key: d_and_a
+  period: Q2FY2026
+  label: Depreciation and amortization
+  value: '13'
+  unit: $ in millions
+  doc: mrdn_10q_q2fy26
+  page: 4
+  verified_by: synthetic sample (fictional company; not a real filing)
+evidence:
+- id: ev_mrdn_business
+  doc: mrdn_10k_fy25
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: Meridian Ledger provides accounts-payable automation, corporate cards, treasury and FX tools to about 41,000 mid-market businesses
+    in the United States and Canada.
+  page: 4
+- id: ev_mrdn_kmp
+  doc: mrdn_10k_fy25
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: 'Executive officers: Dana Whitfield, Chief Executive Officer; Marcus Oyelaran, Chief Financial Officer; Priya Raman, Chief Technology
+    Officer.'
+  page: 31
+- id: ev_mrdn_buyback
+  doc: mrdn_8k
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: The Board authorized a share repurchase program of up to $150 million.
+- id: ev_mrdn_ledgerly
+  doc: mrdn_8k
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: Meridian completed the acquisition of Ledgerly, Inc. for total consideration of $64 million in cash.
+- id: ev_mrdn_harborline
+  doc: mrdn_8k
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: Meridian entered into a five-year card-issuing agreement with Harborline Bank, N.A.
+- id: ev_mrdn_agent
+  doc: mrdn_8k
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: Meridian announced general availability of Autopay Agent, which drafts payment runs for customer approval.
+- id: ev_mrdn_notes
+  doc: mrdn_10k_fy25
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: The 0.75% convertible senior notes due 2028 had a carrying amount of $232 million.
+  page: 88
+- id: ev_mrdn_ftc
+  doc: harbor_journal
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: People familiar with the matter said regulators had asked several card issuers, including Meridian, about rewards marketing.
+- id: ev_mrdn_press_rev
+  doc: harbor_journal
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: Meridian crossed $1.1 billion in revenue last year, according to the company's results.
+- id: ev_mrdn_call_margin
+  doc: mrdn_q2_call
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: 'CFO: We expect operating margin to keep expanding as card volume scales.'
+- id: ev_mrdn_sbc
+  doc: mrdn_10k_fy25
+  verified_by: synthetic sample (fictional company; not a real filing)
+  snippet: Stock-based compensation expense was a significant non-cash add-back in operating cash flows.
+  page: 66
+management_roster:
+- name: Dana Whitfield
+  role: Chief Executive Officer
+  evidence: ev_mrdn_kmp
+  verified_by: synthetic sample (fictional company; not a real filing)
+- name: Marcus Oyelaran
+  role: Chief Financial Officer
+  evidence: ev_mrdn_kmp
+  verified_by: synthetic sample (fictional company; not a real filing)
+- name: Priya Raman
+  role: Chief Technology Officer
+  evidence: ev_mrdn_kmp
+  verified_by: synthetic sample (fictional company; not a real filing)
+news_events:
+- id: nw_ledgerly
+  date: Dec 2025
+  category: Acquisition
+  headline: Acquires Ledgerly for vendor-onboarding automation
+  summary: Completed an all-cash acquisition of Ledgerly, disclosed on Form 8-K.
+  polarity: neutral
+  source_names:
+  - 8-K filing
+  - TechWire
+  tier: T2
+  corroborated_by_filing: true
+  article_count_merged: 5
+  evidence: ev_mrdn_ledgerly
+  verified_by: synthetic sample (fictional company; not a real filing)
+- id: nw_harborline
+  date: Feb 2026
+  category: Partnership
+  headline: Five-year card-issuing deal with Harborline Bank
+  summary: An 8-K confirms a multi-year card-issuing agreement that secures the corporate card programme.
+  polarity: positive
+  source_names:
+  - 8-K filing
+  tier: T2
+  corroborated_by_filing: true
+  article_count_merged: 4
+  evidence: ev_mrdn_harborline
+  verified_by: synthetic sample (fictional company; not a real filing)
+- id: nw_buyback
+  date: Mar 2026
+  category: Fundraise
+  headline: Board authorizes share repurchase
+  summary: The Board authorized a share repurchase programme, funded from operating cash.
+  polarity: positive
+  source_names:
+  - 8-K filing
+  - Harbor Business Journal
+  tier: T2
+  corroborated_by_filing: true
+  article_count_merged: 6
+  evidence: ev_mrdn_buyback
+  verified_by: synthetic sample (fictional company; not a real filing)
+- id: nw_agent
+  date: May 2026
+  category: Product
+  headline: Launches Autopay Agent for AP teams
+  summary: General availability of an agent that drafts payment runs for human approval.
+  polarity: positive
+  source_names:
+  - Company release
+  - TechWire
+  tier: T2
+  corroborated_by_filing: true
+  article_count_merged: 9
+  evidence: ev_mrdn_agent
+  verified_by: synthetic sample (fictional company; not a real filing)
+- id: nw_ftc
+  date: Aug 2026
+  category: Regulatory
+  headline: Report of regulator questions on card rewards marketing
+  summary: A press report says regulators asked several issuers about rewards marketing; no filing mentions an inquiry.
+  polarity: negative
+  source_names:
+  - Harbor Business Journal
+  tier: T3
+  corroborated_by_filing: false
+  article_count_merged: 3
+  evidence: ev_mrdn_ftc
+  verified_by: synthetic sample (fictional company; not a real filing)
+sentiment:
+  removed_posts:
+  - &id001
+    reason: Near-duplicate of 3+ accounts (5-gram Jaccard >= 0.85)
+  - *id001
+  - reason: Reddit account < 30 days old
+  audience_breakdown:
+  - audience: Customers
+    dominant_tone: positive
+    trend_description: Finance teams praise approval workflows and card controls
+  - audience: Employees
+    dominant_tone: positive
+    trend_description: Stable leadership; engineering hiring steady
+  - audience: Investors
+    dominant_tone: mixed
+    trend_description: Debate over valuation and stock-based compensation
+  items:
+  - id: p_mrdn_ap
+    platform: Reddit
+    audience: Customer
+    quote: Cut our month-end close by three days, approvals finally live in one place.
+    polarity: positive
+    verdict: signal
+    reasons:
+    - Several independent finance-team posts say the same
+    - Consistent with AP automation growth in the 10-K
+    url: synthetic://reddit/r/Accounting/meridian-close
+    verified_by: synthetic sample (fictional company; not a real filing)
+    corroborating_ids:
+    - li_fy2025_segment_revenue_ap_automation
+  - id: p_mrdn_support
+    platform: Play Store
+    audience: Customer
+    quote: Card app is solid, but receipt matching still needs manual fixes.
+    polarity: neutral
+    verdict: signal
+    reasons:
+    - Recurring feature request across reviews
+    url: synthetic://play/meridian-cards/reviews
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - id: p_mrdn_hn
+    platform: Hacker News
+    audience: Employee
+    quote: Leadership has been the same for four years; roadmap is sane.
+    polarity: positive
+    verdict: signal
+    reasons:
+    - Matches the unchanged executive roster in the 10-K
+    url: synthetic://hn/item/meridian-eng
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - id: p_mrdn_moon
+    platform: Reddit
+    audience: Investor
+    quote: MRDN 10x by Christmas, AI agent changes everything!!
+    polarity: positive
+    verdict: noise
+    reasons:
+    - Account 12 days old
+    - Price hype with no filing grounding
+    url: synthetic://reddit/r/wallstreetbets/mrdn
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - id: p_mrdn_sbc
+    platform: Column
+    audience: Investor
+    quote: Free cash flow looks great until you count stock comp.
+    polarity: negative
+    verdict: signal
+    reasons:
+    - Consistent with the SBC add-back disclosed in the cash-flow statement
+    url: synthetic://press/column-mrdn-sbc
+    verified_by: synthetic sample (fictional company; not a real filing)
+    corroborating_ids:
+    - met_cfo_to_pat_fy2025
+peers:
+- company_name: Tallyway Inc.
+  ticker: 'NYSE: TLLY'
+  close_price:
+    value: '64'
+    doc: tlly_10k
+    page: 1
+    verified_by: synthetic sample (fictional company; not a real filing)
+  diluted_eps:
+    value: '1.71'
+    doc: tlly_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  price_as_of: '2026-10-15'
+  line_items:
+  - field_key: revenue
+    period: FY2024
+    label: Total revenue
+    value: '740'
+    unit: $ in millions
+    doc: tlly_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: revenue
+    period: FY2025
+    label: Total revenue
+    value: '866'
+    unit: $ in millions
+    doc: tlly_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: operating_income
+    period: FY2025
+    label: Operating income (loss)
+    value: '104'
+    unit: $ in millions
+    doc: tlly_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: d_and_a
+    period: FY2025
+    label: Depreciation and amortization
+    value: '31'
+    unit: $ in millions
+    doc: tlly_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: finance_cost
+    period: FY2025
+    label: Interest expense
+    value: '6'
+    unit: $ in millions
+    doc: tlly_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: other_income
+    period: FY2025
+    label: Interest and other income
+    value: '9'
+    unit: $ in millions
+    doc: tlly_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: pbt
+    period: FY2025
+    label: Income (loss) before income taxes
+    value: '107'
+    unit: $ in millions
+    doc: tlly_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: pat
+    period: FY2025
+    label: Net income (loss) attributable to common stockholders
+    value: '82'
+    unit: $ in millions
+    doc: tlly_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: total_equity
+    period: FY2025
+    label: Total stockholders' equity
+    value: '690'
+    unit: $ in millions
+    doc: tlly_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+- company_name: Brightspend Corp.
+  ticker: 'NASDAQ: BSPD'
+  close_price:
+    value: '38'
+    doc: bspd_10k
+    page: 1
+    verified_by: synthetic sample (fictional company; not a real filing)
+  diluted_eps:
+    value: '0.92'
+    doc: bspd_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  price_as_of: '2026-10-15'
+  line_items:
+  - field_key: revenue
+    period: FY2024
+    label: Total revenue
+    value: 1,210
+    unit: $ in millions
+    doc: bspd_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: revenue
+    period: FY2025
+    label: Total revenue
+    value: 1,355
+    unit: $ in millions
+    doc: bspd_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: operating_income
+    period: FY2025
+    label: Operating income (loss)
+    value: '95'
+    unit: $ in millions
+    doc: bspd_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: d_and_a
+    period: FY2025
+    label: Depreciation and amortization
+    value: '52'
+    unit: $ in millions
+    doc: bspd_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: finance_cost
+    period: FY2025
+    label: Interest expense
+    value: '21'
+    unit: $ in millions
+    doc: bspd_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: other_income
+    period: FY2025
+    label: Interest and other income
+    value: '14'
+    unit: $ in millions
+    doc: bspd_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: pbt
+    period: FY2025
+    label: Income (loss) before income taxes
+    value: '88'
+    unit: $ in millions
+    doc: bspd_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: pat
+    period: FY2025
+    label: Net income (loss) attributable to common stockholders
+    value: '69'
+    unit: $ in millions
+    doc: bspd_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: total_equity
+    period: FY2025
+    label: Total stockholders' equity
+    value: 1,140
+    unit: $ in millions
+    doc: bspd_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+- company_name: Coinstrand Inc.
+  ticker: 'NASDAQ: CSTR'
+  close_price:
+    value: '17'
+    doc: cstr_10k
+    page: 1
+    verified_by: synthetic sample (fictional company; not a real filing)
+  diluted_eps:
+    value: '-0.58'
+    doc: cstr_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  price_as_of: '2026-10-15'
+  line_items:
+  - field_key: revenue
+    period: FY2024
+    label: Total revenue
+    value: '520'
+    unit: $ in millions
+    doc: cstr_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: revenue
+    period: FY2025
+    label: Total revenue
+    value: '662'
+    unit: $ in millions
+    doc: cstr_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: operating_income
+    period: FY2025
+    label: Operating income (loss)
+    value: '-31'
+    unit: $ in millions
+    doc: cstr_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: d_and_a
+    period: FY2025
+    label: Depreciation and amortization
+    value: '24'
+    unit: $ in millions
+    doc: cstr_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: finance_cost
+    period: FY2025
+    label: Interest expense
+    value: '11'
+    unit: $ in millions
+    doc: cstr_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: other_income
+    period: FY2025
+    label: Interest and other income
+    value: '6'
+    unit: $ in millions
+    doc: cstr_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: pbt
+    period: FY2025
+    label: Income (loss) before income taxes
+    value: '-36'
+    unit: $ in millions
+    doc: cstr_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: pat
+    period: FY2025
+    label: Net income (loss) attributable to common stockholders
+    value: '-41'
+    unit: $ in millions
+    doc: cstr_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: total_equity
+    period: FY2025
+    label: Total stockholders' equity
+    value: '410'
+    unit: $ in millions
+    doc: cstr_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+- company_name: Paxfield Holdings
+  ticker: 'NYSE: PXF'
+  close_price:
+    value: '51'
+    doc: pxf_10k
+    page: 1
+    verified_by: synthetic sample (fictional company; not a real filing)
+  diluted_eps:
+    value: '2.21'
+    doc: pxf_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  price_as_of: '2026-10-15'
+  line_items:
+  - field_key: revenue
+    period: FY2024
+    label: Total revenue
+    value: '930'
+    unit: $ in millions
+    doc: pxf_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: revenue
+    period: FY2025
+    label: Total revenue
+    value: 1,004
+    unit: $ in millions
+    doc: pxf_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: operating_income
+    period: FY2025
+    label: Operating income (loss)
+    value: '149'
+    unit: $ in millions
+    doc: pxf_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: d_and_a
+    period: FY2025
+    label: Depreciation and amortization
+    value: '40'
+    unit: $ in millions
+    doc: pxf_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: finance_cost
+    period: FY2025
+    label: Interest expense
+    value: '18'
+    unit: $ in millions
+    doc: pxf_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: other_income
+    period: FY2025
+    label: Interest and other income
+    value: '7'
+    unit: $ in millions
+    doc: pxf_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: pbt
+    period: FY2025
+    label: Income (loss) before income taxes
+    value: '138'
+    unit: $ in millions
+    doc: pxf_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: pat
+    period: FY2025
+    label: Net income (loss) attributable to common stockholders
+    value: '104'
+    unit: $ in millions
+    doc: pxf_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+  - field_key: total_equity
+    period: FY2025
+    label: Total stockholders' equity
+    value: '880'
+    unit: $ in millions
+    doc: pxf_10k
+    page: 62
+    verified_by: synthetic sample (fictional company; not a real filing)
+contradictions:
+- id: ct_mrdn_revenue
+  topic: FY2025 revenue
+  type: NUMERIC_DISCREPANCY
+  a_claim: Revenue above $1.1 billion (press)
+  a_evidence: ev_mrdn_press_rev
+  b_claim: Revenue {{li_fy2025_revenue}} (audited 10-K)
+  b_evidence: ev_mrdn_10k_fy25_p62_revenue_fy2025
+  note: The press figure appears to add interest income earned on customer funds.
+- id: ct_mrdn_margin
+  topic: Margin trajectory
+  type: NARRATIVE_VS_METRIC
+  a_claim: 'CFO: operating margin will keep expanding (Q2 FY2026 call)'
+  a_evidence: ev_mrdn_call_margin
+  b_claim: EBITDA margin moved from {{met_ebitda_margin_fy2024}} to {{met_ebitda_margin_fy2025}}
+  b_evidence: ev_mrdn_10k_fy25_p62_operating_income_fy2025
+prose:
+  insights:
+  - id: in_mrdn_cash
+    title: Cash generation runs well ahead of reported profit
+    classification: fact
+    polarity: positive
+    body: Operating cash flow was {{li_fy2025_cfo}} against net income of {{li_fy2025_pat}}, a CFO/PAT ratio of {{met_cfo_to_pat_fy2025}}. Free
+      cash flow reached {{met_fcf_fy2025}}, a margin of {{met_fcf_margin_fy2025}}.
+    metrics:
+    - met_cfo_to_pat_fy2025
+    - met_fcf_fy2025
+    - met_fcf_margin_fy2025
+    items:
+    - li_fy2025_cfo
+    - li_fy2025_pat
+  - id: in_mrdn_collections
+    title: Collections are getting faster as the business scales
+    classification: fact
+    polarity: positive
+    body: DSO improved from {{met_dso_fy2023}} to {{met_dso_fy2025}} while revenue grew {{met_rev_yoy_fy2025}}. Receivables grew {{met_receivables_yoy_fy2025}},
+      slower than sales.
+    metrics:
+    - met_dso_fy2023
+    - met_dso_fy2025
+    - met_rev_yoy_fy2025
+    - met_receivables_yoy_fy2025
+  - id: in_mrdn_balance
+    title: Net cash balance sheet with fixed-rate convertible debt
+    classification: fact
+    polarity: positive
+    body: Cash of {{li_fy2025_cash_and_equivalents}} exceeds gross debt of {{li_fy2025_gross_debt}}, and interest cover is {{met_interest_cover_fy2025}}.
+      The current ratio is {{met_current_ratio_fy2025}}.
+    metrics:
+    - met_interest_cover_fy2025
+    - met_current_ratio_fy2025
+    items:
+    - li_fy2025_cash_and_equivalents
+    - li_fy2025_gross_debt
+  - id: in_mrdn_sbc
+    title: Stock-based pay flatters cash conversion
+    classification: hypothesis
+    polarity: negative
+    body: The 10-K calls stock-based compensation a significant add-back, but the replay does not record the amount. Part of the cash-over-profit
+      gap may be dilution rather than efficiency.
+    sentiment:
+    - p_mrdn_sbc
+  - id: in_mrdn_regulatory
+    title: Rewards-marketing questions are unconfirmed
+    classification: hypothesis
+    polarity: negative
+    body: A single press report mentions regulator questions about card rewards marketing. No filing confirms an inquiry, so it stays a watch
+      item.
+    news:
+    - nw_ftc
+  summary:
+    verdict_headline: 'High-quality compounder: profit is backed by cash'
+    verdict_prose: Revenue grew {{met_rev_yoy_fy2025}} to {{li_fy2025_revenue}} with operating cash flow of {{li_fy2025_cfo}}, well above net
+      income. No forensic rule fired, and the balance sheet holds net cash.
+    business_overview: Accounts-payable automation, corporate cards, treasury and FX tools for mid-market businesses in the United States and
+      Canada.
+    revenue_mix_summary: 'FY2025 segment revenue: AP automation {{li_fy2025_segment_revenue_ap_automation}}, corporate cards {{li_fy2025_segment_revenue_corporate_cards}},
+      treasury and FX {{li_fy2025_segment_revenue_treasury_and_fx}}, platform and other {{li_fy2025_segment_revenue_platform_and_other}}.'
+    management_summary: Dana Whitfield is CEO, Marcus Oyelaran is CFO and Priya Raman is CTO; the team has been unchanged for four years.
+    governance_watch_note: null
+    opportunities:
+    - Card interchange scales with customer spend
+    - Autopay Agent deepens AP workflow lock-in
+    - Buyback funded from free cash flow
+    risks:
+    - Stock-based compensation dilutes the cash story
+    - Unconfirmed regulator questions on rewards marketing
+    - Convertible notes due 2028 need refinancing or settlement
+    quarterly_direction_note: Q2 FY2026 revenue grew {{met_q_rev_yoy_q2fy2026}} YoY with EBITDA margin at {{met_q_ebitda_margin_q2fy2026}}, up
+      from {{met_q_ebitda_margin_q2fy2025}} a year earlier.
+    analyst_follow_up_notes:
+    - Ask for the stock-based compensation trend as a share of revenue
+    - Confirm whether any regulator inquiry exists
+    - Check the settlement plan for the 2028 convertible notes
+  market_advantages:
+  - ROE of {{peer_mrdn_roe_pct}} against a peer median of {{peer_median_roe_pct}}
+  - Revenue growth of {{peer_mrdn_rev_growth_pct}} leads the profitable peers
+  market_disadvantages:
+  - Coinstrand grows {{peer_cstr_rev_growth_pct}}, faster but loss-making
+  - Smaller card book than Brightspend
+  market_positioning_prose: Meridian grew {{peer_mrdn_rev_growth_pct}} against a peer median of {{peer_median_rev_growth_pct}}, with ROE of {{peer_mrdn_roe_pct}}
+    versus {{peer_median_roe_pct}}.
+stated_gaps:
+- Stock-based compensation amount is not recorded in this sample
+- Lease liabilities are excluded from gross debt
