@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 from decimal import Decimal
 
 import pytest
@@ -202,3 +203,127 @@ def test_schema_roundtrip_full_state():
     assert again == state
     # unused imports kept honest
     assert ToolCallTrace and CodeVsLlmAction and MetricInputRef and ActorBadge
+
+
+# ---------------------------------------------------------------- Task 5: REST + SSE contracts
+
+def _app(tmp_path):
+    from fastapi.testclient import TestClient
+
+    from backend.config import Settings
+    from backend.main import create_app
+
+    settings = Settings(atlas_db_path=tmp_path / "atlas_state.db", gemini_api_key="")
+    return TestClient(create_app(settings))
+
+
+def _sse(text: str) -> list[dict]:
+    """Parse an SSE body into [{event, id, data, retry}] messages (comments dropped)."""
+    out, cur = [], {}
+    for line in text.splitlines():
+        if not line.strip():
+            if cur:
+                out.append(cur)
+            cur = {}
+            continue
+        if line.startswith(":"):
+            continue
+        key, _, val = line.partition(":")
+        val = val[1:] if val.startswith(" ") else val
+        cur[key] = cur.get(key, "") + ("\n" if key in cur else "") + val
+    if cur:
+        out.append(cur)
+    return out
+
+
+def test_health_and_replays(tmp_path):
+    with _app(tmp_path) as client:
+        h = client.get("/api/v1/health").json()
+        assert h["status"] == "ok" and h["sqlite_wal"] is True and h["llm_configured"] is False
+        assert "sample_synthetic" in h["golden_runs_loaded"]
+        replays = client.get("/api/v1/replays").json()["replays"]
+        sample = next(r for r in replays if r["replay_id"] == "sample_synthetic")
+        assert sample["synthetic"] is True and sample["total_events"] == 24
+        assert sample["headline_verdict"] == "Growth is real, cash quality is deteriorating"
+
+
+def test_replay_run_streams_every_event_instantly(tmp_path):
+    from backend.replay.player import load_fixture
+
+    total = load_fixture("data/golden_runs/sample_synthetic.jsonl.gz").header["total_events"]
+    with _app(tmp_path) as client:
+        r = client.post("/api/v1/runs", json={"company_query": "Nexora Payments", "mode": "replay",
+                                              "replay_id": "sample_synthetic", "replay_speed": 1.0})
+        assert r.status_code == 201
+        body = r.json()
+        assert re.fullmatch(r"run_[0-9A-HJKMNP-TV-Z]{26}", body["run_id"])
+        assert body["stream_url"].startswith(f"/api/v1/runs/{body['run_id']}/stream")
+        with client.stream("GET", f"/api/v1/runs/{body['run_id']}/stream?speed=instant") as resp:
+            assert resp.status_code == 200
+            assert resp.headers["content-type"].startswith("text/event-stream")
+            assert resp.headers["cache-control"] == "no-cache"
+            assert resp.headers["x-accel-buffering"] == "no"
+            msgs = _sse(resp.read().decode())
+        assert msgs[0]["event"] == "run_started" and msgs[0]["retry"] == "3000"
+        stage = [m for m in msgs if m.get("event") == "stage_event"]
+        assert len(stage) == total
+        events = [StageEvent.model_validate_json(m["data"]) for m in stage]
+        assert [e.event_seq for e in events] == list(range(1, total + 1))
+        assert [m["id"] for m in stage] == [str(i) for i in range(1, total + 1)]
+        assert all(e.run_id == body["run_id"] for e in events)
+        done = msgs[-1]
+        assert done["event"] == "run_completed"
+        assert json.loads(done["data"])["metrics_count"] > 0
+        snap = client.get(body["state_url"]).json()
+        state = ResearchRunState.model_validate(snap)
+        assert state.status == "completed" and len(state.events) == total
+
+
+def test_reconnect_resumes_after_last_event_id(tmp_path):
+    with _app(tmp_path) as client:
+        run = client.post("/api/v1/runs", json={"company_query": "x", "mode": "replay", "replay_id": "sample_synthetic"}).json()
+        with client.stream("GET", f"/api/v1/runs/{run['run_id']}/stream?speed=instant",
+                           headers={"Last-Event-ID": "20"}) as resp:
+            msgs = _sse(resp.read().decode())
+        assert not any(m.get("event") == "run_started" for m in msgs)
+        assert [m["id"] for m in msgs if m.get("event") == "stage_event"] == ["21", "22", "23", "24"]
+
+
+def test_stateless_replay_restart_with_unknown_run_id(tmp_path):
+    with _app(tmp_path) as client:
+        with client.stream("GET", "/api/v1/runs/run_01J9Z8K4M2P6X8R0000000000/stream?speed=instant&replay_id=sample_synthetic") as resp:
+            msgs = _sse(resp.read().decode())
+        assert msgs[0]["event"] == "run_started"
+        assert msgs[-1]["event"] == "run_completed"
+
+
+def test_error_envelopes(tmp_path):
+    with _app(tmp_path) as client:
+        r = client.get("/api/v1/runs/run_nope")
+        assert r.status_code == 404 and r.json()["error_code"] == "RUN_NOT_FOUND"
+        r = client.post("/api/v1/runs", json={"company_query": "x", "mode": "replay", "replay_id": "nope"})
+        assert r.status_code == 404 and r.json()["error_code"] == "REPLAY_NOT_FOUND"
+        r = client.post("/api/v1/runs", json={"mode": "replay"})
+        assert r.status_code == 422 and r.json()["error_code"] == "VALIDATION_ERROR"
+        r = client.post("/api/v1/runs", json={"company_query": "Block", "mode": "live"})
+        assert r.status_code == 503 and r.json()["error_code"] == "LLM_NOT_CONFIGURED"
+        assert "sample_synthetic" in r.json()["details"]["suggest_replay_ids"]
+        r = client.get("/api/v1/fixtures/pages/..%2Fsecret.png")
+        assert r.status_code == 404
+        r = client.get("/api/v1/nope")
+        assert r.status_code == 404 and r.json()["error_code"] in ("NOT_FOUND", "RUN_NOT_FOUND")
+
+
+def test_evidence_endpoint(tmp_path):
+    with _app(tmp_path) as client:
+        run = client.post("/api/v1/runs", json={"company_query": "x", "mode": "replay", "replay_id": "sample_synthetic"}).json()
+        state = client.get(run["state_url"]).json()
+        li = next(i for i in state["line_items"] if i["item_id"] == "li_fy26_revenue")
+        ev_id = li["evidence"]["evidence_id"]
+        r = client.get(f"/api/v1/runs/{run['run_id']}/evidence/{ev_id}")
+        assert r.status_code == 200
+        body = r.json()
+        assert body["evidence"]["evidence_id"] == ev_id
+        assert any(i["item_id"] == "li_fy26_revenue" for i in body["linked_line_items"])
+        assert all(c["fiscal_period"] == "FY26" for c in body["linked_reconciliation_checks"])
+        assert client.get(f"/api/v1/runs/{run['run_id']}/evidence/ev_missing").json()["error_code"] == "EVIDENCE_NOT_FOUND"
