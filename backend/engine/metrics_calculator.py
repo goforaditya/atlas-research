@@ -306,3 +306,47 @@ def compute_all_metrics(line_items: list[LineItem]) -> list[MetricLedgerRow]:
         refs, outcome, currency, _primary_ref(end_li),
     ))
     return ledger
+
+
+def compute_quarterly_metrics(quarterly_items: list[LineItem]) -> list[MetricLedgerRow]:
+    """QoQ / YoY revenue growth and EBITDA margin for the latest quarter (unaudited; never mixed with annual)."""
+    items = [li for li in quarterly_items if li.field_key != "segment_revenue"]
+    if not items:
+        return []
+    currency = items[0].unit
+    lookup = {(li.fiscal_period, li.field_key): li for li in items}
+    quarters = annual_periods(items)
+    latest = quarters[-1]
+    rows: list[MetricLedgerRow] = []
+
+    def ref(symbol: str, p: str, key: str) -> MetricInputRef:
+        li = lookup.get((p, key))
+        return MetricInputRef(symbol=f"{symbol}_{p}", line_item_id=li.item_id if li else item_id_for(p, key),
+                              fiscal_period=p, value=li.value if li else None,
+                              evidence_id=li.evidence.evidence_id if li else "")
+
+    def v(p: str, key: str) -> D:
+        li = lookup.get((p, key))
+        return li.value if li else None
+
+    comparisons = []
+    if len(quarters) >= 2:
+        comparisons.append(("q_rev_qoq", "Revenue QoQ", quarters[-2]))
+    if len(quarters) >= 5:
+        comparisons.append(("q_rev_yoy", "Revenue YoY", quarters[-5]))
+    for key, label, prior in comparisons:
+        out = calc_rev_yoy(v(latest, "revenue"), v(prior, "revenue"))
+        template = "(Revenue_q - Revenue_prior) / Revenue_prior"
+        sub = (f"({format_plain_number(v(latest, 'revenue'))} - {format_plain_number(v(prior, 'revenue'))}) / "
+               f"{format_plain_number(v(prior, 'revenue'))}")
+        rows.append(_row(key, f"{label} {latest}", "pct", latest, template, sub,
+                         [ref("Revenue", latest, "revenue"), ref("Revenue", prior, "revenue")], out, currency,
+                         _primary_ref(lookup.get((latest, "revenue")))))
+    margin_periods = [latest] + ([quarters[-5]] if len(quarters) >= 5 else [])
+    for p in margin_periods:
+        out = calc_ebitda_margin(v(p, "ebitda"), v(p, "revenue"))
+        sub = f"{format_plain_number(v(p, 'ebitda'))} / {format_plain_number(v(p, 'revenue'))}"
+        rows.append(_row("q_ebitda_margin", f"EBITDA Margin {p}", "pct", p, "EBITDA_q / Revenue_q", sub,
+                         [ref("EBITDA", p, "ebitda"), ref("Revenue", p, "revenue")], out, currency,
+                         _primary_ref(lookup.get((p, "revenue")))))
+    return rows

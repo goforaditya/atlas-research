@@ -1,0 +1,16 @@
+{
+  "replays": [
+    {
+      "replay_id": "sample_synthetic",
+      "file": "sample_synthetic.jsonl.gz",
+      "company_query": "Nexora Payments",
+      "company_name": "Nexora Payments Ltd (synthetic sample)",
+      "ticker": "NSE: NXRA",
+      "sector": "Fintech · Payments (synthetic)",
+      "jurisdiction": "IN",
+      "cached_at": "2026-10-26T00:00:00Z",
+      "synthetic": true,
+      "total_events": 24
+    }
+  ]
+}

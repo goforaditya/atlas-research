@@ -38,6 +38,11 @@ def item_id_for(period: str, field_key: str) -> str:
     return f"li_{period.lower()}_{field_key}"
 
 
+# Inputs that may be absent from a filing altogether (not printed at all, as opposed to printed blank).
+# An absent optional input is left out of the sum and the derivation label says so.
+OPTIONAL_INPUTS: set[tuple[str, str]] = {("capex", "purchase_of_intangibles")}
+
+
 def _recipes(gaap: Gaap) -> list[tuple[str, list[tuple[str, int]]]]:
     """(derived key, [(input key, sign)]) in dependency order."""
     ebit = [("operating_income", 1)] if gaap == "us_gaap" else [("pbt", 1), ("finance_cost", 1), ("other_income", -1)]
@@ -77,7 +82,10 @@ def compute_derived_fields(
     for period in periods:
         unit = next(li.unit for li in annual if li.fiscal_period == period)
         use_gaap: Gaap = gaap or ("us_gaap" if unit is CurrencyUnit.USD_M else "ind_as")
-        for key, parts in _recipes(use_gaap):
+        for key, all_parts in _recipes(use_gaap):
+            parts = [(k, sign) for k, sign in all_parts
+                     if (key, k) not in OPTIONAL_INPUTS or (period, k) in by_key]
+            omitted = [k for k, _ in all_parts if (k, _) not in parts]
             inputs = [by_key.get((period, k)) for k, _ in parts]
             present = [li for li in inputs if li is not None]
             if not present:
@@ -99,7 +107,8 @@ def compute_derived_fields(
                 item_id=item_id_for(period, key),
                 fiscal_period=period,
                 field_key=key,
-                reported_label=_label(parts),
+                reported_label=_label(parts) + (
+                    f" (no separate {', '.join(FIELD_LABELS.get(k, k).lower() for k in omitted)} line)" if omitted else ""),
                 value=value,
                 formatted_value=format_currency(value, unit),
                 unit=unit,

@@ -47,6 +47,14 @@ def test_us_gaap_ebit_is_operating_income(item_factory):
     assert d[("FY2024", "ebitda")].formatted_value == "$1,497 M"
 
 
+def test_capex_without_intangibles_line(item_factory):
+    d = _by_key(compute_derived_fields([item_factory("purchase_of_ppe", "FY2024", -162, CurrencyUnit.USD_M)])[0])
+    assert d[("FY2024", "capex")].value == D(162)
+    assert d[("FY2024", "capex")].reported_label == "Purchase of PP&E (no separate purchase of intangibles line)"
+    blank = [item_factory("purchase_of_ppe", "FY26", -10), item_factory("purchase_of_intangibles", "FY26", None)]
+    assert _by_key(compute_derived_fields(blank)[0])[("FY26", "capex")].value is None
+
+
 def test_none_propagates_with_gap(item_factory):
     raw = [
         item_factory("pbt", "FY25", 100), item_factory("finance_cost", "FY25", 10),

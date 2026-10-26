@@ -1,0 +1,835 @@
+# HOW TO FILL THIS FILE
+#   * Copy each `value` exactly as printed in the filing (e.g. "17,695.5" or "(1,234)"), with the table's
+#     unit header in `unit` (e.g. "₹ in million", "In thousands"). Code converts units; never convert by hand.
+#   * Set `page` to the PDF page number and `verified_by` to your name. Every number needs all three.
+#   * `python -m scripts.build_golden_fixture` refuses to build while any TODO remains.
+#   * If a line is not printed in the filing (e.g. Total liabilities), delete that entry; the check is skipped
+#     with a stated reason. Never back-solve a figure.
+#   * Peers are optional: delete the `peers` list to ship without a peer table (a stated gap is shown).
+#   * News, sentiment and prose: dates, headlines and quotes are also copied from sources; prose numbers are
+#     written as {{metric_id}} placeholders that the builder expands, so nobody types a number into prose.
+# Seed figures from spec Section 11.2 (NOT verified; confirm each against the filing page before entering):
+#   FY2023 Total net revenue  $21,916 M (reviewer memory; confirm in 10-K FY2024)
+#   FY2024 Total net revenue  $24,121 M (reviewer memory; confirm in 10-K FY2024)
+#   FY2024 CFO / capex        $1,724 M / $162 M (v1 spec, unverified; confirm in the FY2024 cash-flow statement)
+#   FY2025                    all figures to fill from the 10-K FY2025 Item 8 (URL below)
+replay_id: block_nyse
+synthetic: false
+company_query: Block, Inc.
+display:
+  company_name: Block, Inc. (formerly Square)
+  ticker: 'NYSE: XYZ'
+  sector: Fintech · Seller Ecosystem & Cash App
+  jurisdiction: US
+  cached_at: TODO
+entity:
+  legal_name: Block, Inc.
+  ticker: XYZ
+  exchange: NYSE
+  jurisdiction: US
+  is_listed: true
+  cik: '0001512673'
+  bse_scrip_code: null
+  listing_date: null
+  sector: Fintech · Seller Ecosystem & Cash App
+  headquarters: Oakland, California
+  fy_end_month: December
+  currency: USD_M
+  rejected_candidates: []
+gaap: us_gaap
+sub_questions: []
+documents:
+  block_10k_fy2025:
+    title: 10-K FY2025
+    source_url: https://www.sec.gov/Archives/edgar/data/1512673/000162828026012254/xyz-20251231.htm
+    tier: T1
+  block_10k_fy2024:
+    title: 10-K FY2024
+    source_url: 'TODO: sec.gov link to the FY2024 10-K'
+    tier: T1
+line_items:
+- field_key: revenue
+  period: FY2023
+  label: Total net revenue
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: operating_income
+  period: FY2023
+  label: Operating income (loss)
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: finance_cost
+  period: FY2023
+  label: Interest expense, net
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: d_and_a
+  period: FY2023
+  label: Depreciation and amortization
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: pbt
+  period: FY2023
+  label: Income (loss) before income tax
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: tax_expense
+  period: FY2023
+  label: Provision for (benefit from) income taxes
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: pat_before_nci
+  period: FY2023
+  label: Net income (loss)
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: pat
+  period: FY2023
+  label: Net income (loss) attributable to common stockholders
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: cfo
+  period: FY2023
+  label: Net cash provided by operating activities
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: purchase_of_ppe
+  period: FY2023
+  label: Purchase of property and equipment
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: purchase_of_intangibles
+  period: FY2023
+  label: Capitalized software / intangibles (if printed separately)
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: total_assets
+  period: FY2023
+  label: Total assets
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: total_liabilities
+  period: FY2023
+  label: Total liabilities
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: total_equity
+  period: FY2023
+  label: Total stockholders' equity
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: non_controlling_interest
+  period: FY2023
+  label: Noncontrolling interests
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: borrowings_current
+  period: FY2023
+  label: Current portion of long-term debt
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: borrowings_noncurrent
+  period: FY2023
+  label: Long-term debt
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: cash_and_equivalents
+  period: FY2023
+  label: Cash and cash equivalents
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: trade_receivables
+  period: FY2023
+  label: Accounts receivable, net
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: current_assets
+  period: FY2023
+  label: Total current assets
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: current_liabilities
+  period: FY2023
+  label: Total current liabilities
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2024
+  page: TODO
+  verified_by: TODO
+- field_key: revenue
+  period: FY2024
+  label: Total net revenue
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: operating_income
+  period: FY2024
+  label: Operating income (loss)
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: finance_cost
+  period: FY2024
+  label: Interest expense, net
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: d_and_a
+  period: FY2024
+  label: Depreciation and amortization
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: pbt
+  period: FY2024
+  label: Income (loss) before income tax
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: tax_expense
+  period: FY2024
+  label: Provision for (benefit from) income taxes
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: pat_before_nci
+  period: FY2024
+  label: Net income (loss)
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: pat
+  period: FY2024
+  label: Net income (loss) attributable to common stockholders
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: cfo
+  period: FY2024
+  label: Net cash provided by operating activities
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: purchase_of_ppe
+  period: FY2024
+  label: Purchase of property and equipment
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: purchase_of_intangibles
+  period: FY2024
+  label: Capitalized software / intangibles (if printed separately)
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: total_assets
+  period: FY2024
+  label: Total assets
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: total_liabilities
+  period: FY2024
+  label: Total liabilities
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: total_equity
+  period: FY2024
+  label: Total stockholders' equity
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: non_controlling_interest
+  period: FY2024
+  label: Noncontrolling interests
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: borrowings_current
+  period: FY2024
+  label: Current portion of long-term debt
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: borrowings_noncurrent
+  period: FY2024
+  label: Long-term debt
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: cash_and_equivalents
+  period: FY2024
+  label: Cash and cash equivalents
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: trade_receivables
+  period: FY2024
+  label: Accounts receivable, net
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: current_assets
+  period: FY2024
+  label: Total current assets
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: current_liabilities
+  period: FY2024
+  label: Total current liabilities
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: revenue
+  period: FY2025
+  label: Total net revenue
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: operating_income
+  period: FY2025
+  label: Operating income (loss)
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: finance_cost
+  period: FY2025
+  label: Interest expense, net
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: d_and_a
+  period: FY2025
+  label: Depreciation and amortization
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: pbt
+  period: FY2025
+  label: Income (loss) before income tax
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: tax_expense
+  period: FY2025
+  label: Provision for (benefit from) income taxes
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: pat_before_nci
+  period: FY2025
+  label: Net income (loss)
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: pat
+  period: FY2025
+  label: Net income (loss) attributable to common stockholders
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: cfo
+  period: FY2025
+  label: Net cash provided by operating activities
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: purchase_of_ppe
+  period: FY2025
+  label: Purchase of property and equipment
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: purchase_of_intangibles
+  period: FY2025
+  label: Capitalized software / intangibles (if printed separately)
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: total_assets
+  period: FY2025
+  label: Total assets
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: total_liabilities
+  period: FY2025
+  label: Total liabilities
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: total_equity
+  period: FY2025
+  label: Total stockholders' equity
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: non_controlling_interest
+  period: FY2025
+  label: Noncontrolling interests
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: borrowings_current
+  period: FY2025
+  label: Current portion of long-term debt
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: borrowings_noncurrent
+  period: FY2025
+  label: Long-term debt
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: cash_and_equivalents
+  period: FY2025
+  label: Cash and cash equivalents
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: trade_receivables
+  period: FY2025
+  label: Accounts receivable, net
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: current_assets
+  period: FY2025
+  label: Total current assets
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+- field_key: current_liabilities
+  period: FY2025
+  label: Total current liabilities
+  value: TODO
+  unit: '(In thousands / In millions: TODO copy header as printed)'
+  doc: block_10k_fy2025
+  page: TODO
+  verified_by: TODO
+quarterly_items: []
+peers:
+- company_name: PayPal Holdings, Inc.
+  ticker: 'NASDAQ: PYPL'
+  line_items:
+  - field_key: revenue
+    period: FY2024
+    label: revenue
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: revenue
+    period: FY2025
+    label: revenue
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: operating_income
+    period: FY2025
+    label: operating_income
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: d_and_a
+    period: FY2025
+    label: d_and_a
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: pat
+    period: FY2025
+    label: pat
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: total_equity
+    period: FY2025
+    label: total_equity
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  close_price:
+    value: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  diluted_eps:
+    value: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  price_as_of: TODO
+- company_name: Fiserv, Inc.
+  ticker: 'NYSE: FI'
+  line_items:
+  - field_key: revenue
+    period: FY2024
+    label: revenue
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: revenue
+    period: FY2025
+    label: revenue
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: operating_income
+    period: FY2025
+    label: operating_income
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: d_and_a
+    period: FY2025
+    label: d_and_a
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: pat
+    period: FY2025
+    label: pat
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: total_equity
+    period: FY2025
+    label: total_equity
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  close_price:
+    value: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  diluted_eps:
+    value: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  price_as_of: TODO
+- company_name: Affirm Holdings, Inc.
+  ticker: 'NASDAQ: AFRM'
+  line_items:
+  - field_key: revenue
+    period: FY2024
+    label: revenue
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: revenue
+    period: FY2025
+    label: revenue
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: operating_income
+    period: FY2025
+    label: operating_income
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: d_and_a
+    period: FY2025
+    label: d_and_a
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: pat
+    period: FY2025
+    label: pat
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: total_equity
+    period: FY2025
+    label: total_equity
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  close_price:
+    value: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  diluted_eps:
+    value: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  price_as_of: TODO
+- company_name: Toast, Inc.
+  ticker: 'NYSE: TOST'
+  line_items:
+  - field_key: revenue
+    period: FY2024
+    label: revenue
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: revenue
+    period: FY2025
+    label: revenue
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: operating_income
+    period: FY2025
+    label: operating_income
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: d_and_a
+    period: FY2025
+    label: d_and_a
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: pat
+    period: FY2025
+    label: pat
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: total_equity
+    period: FY2025
+    label: total_equity
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  close_price:
+    value: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  diluted_eps:
+    value: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  price_as_of: TODO
+evidence:
+- id: ev_business_overview
+  doc: TODO
+  page: TODO
+  snippet: 'TODO: copy the business overview paragraph verbatim'
+  verified_by: TODO
+- id: ev_kmp
+  doc: TODO
+  page: TODO
+  snippet: 'TODO: copy the KMP / executive officers list verbatim'
+  verified_by: TODO
+management_roster:
+- name: TODO
+  role: TODO
+  since: null
+  evidence: ev_kmp
+  verified_by: TODO
+news_events: []
+sentiment:
+  removed_posts: []
+  audience_breakdown: []
+  items: []
+contradictions: []
+prose:
+  insights: []
+  summary: null
+  market_advantages: []
+  market_disadvantages: []
+  market_positioning_prose: null
+stated_gaps:
+- Lease liabilities are excluded from gross debt

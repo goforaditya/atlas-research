@@ -1,0 +1,900 @@
+# HOW TO FILL THIS FILE
+#   * Copy each `value` exactly as printed in the filing (e.g. "17,695.5" or "(1,234)"), with the table's
+#     unit header in `unit` (e.g. "₹ in million", "In thousands"). Code converts units; never convert by hand.
+#   * Set `page` to the PDF page number and `verified_by` to your name. Every number needs all three.
+#   * `python -m scripts.build_golden_fixture` refuses to build while any TODO remains.
+#   * If a line is not printed in the filing (e.g. Total liabilities), delete that entry; the check is skipped
+#     with a stated reason. Never back-solve a figure.
+#   * Peers are optional: delete the `peers` list to ship without a peer table (a stated gap is shown).
+#   * News, sentiment and prose: dates, headlines and quotes are also copied from sources; prose numbers are
+#     written as {{metric_id}} placeholders that the builder expands, so nobody types a number into prose.
+# Seed figures from spec Section 11.2 (NOT verified; confirm each against the filing page before entering):
+#   FY24 Revenue from operations  ₹1,769.55 cr  (Value Research IPO page; the RHP reports ₹ million, i.e. 17,695.5)
+#   FY25 Revenue from operations  ₹2,274.27 cr  (same page; confirm in RHP / AR FY25)
+#   FY26                          all figures to fill from AR FY26. Open item: if AR FY26 is not published, switch periods to FY23-FY25.
+#   Open item: confirm the NSE symbol (assumed PINELABS) and BSE scrip code.
+replay_id: pine_labs_nse
+synthetic: false
+company_query: Pine Labs Ltd
+display:
+  company_name: Pine Labs Ltd
+  ticker: 'NSE: PINELABS'
+  sector: Fintech · Merchant POS & BNPL Infrastructure
+  jurisdiction: IN
+  cached_at: TODO
+entity:
+  legal_name: Pine Labs Limited
+  ticker: PINELABS
+  exchange: NSE
+  jurisdiction: IN
+  is_listed: true
+  cik: null
+  bse_scrip_code: TODO
+  listing_date: '2025-11-14'
+  sector: Fintech · Merchant POS & BNPL Infrastructure
+  headquarters: Noida, Uttar Pradesh
+  fy_end_month: March
+  currency: INR_CR
+  rejected_candidates: []
+gaap: ind_as
+sub_questions: []
+documents:
+  pine_labs_rhp:
+    title: RHP (Nov 2025)
+    source_url: 'TODO: sebi.gov.in or bseindia.com RHP PDF link'
+    tier: T1
+    pdf: 'TODO: optional local path'
+  pine_labs_ar_fy26:
+    title: AR FY26
+    source_url: TODO (only if published; else use FY23 to FY25 from the RHP)
+    tier: T1
+line_items:
+- field_key: revenue
+  period: FY24
+  label: Revenue from operations
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: other_income
+  period: FY24
+  label: Other income
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: finance_cost
+  period: FY24
+  label: Finance costs
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: d_and_a
+  period: FY24
+  label: Depreciation and amortisation expense
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: pbt
+  period: FY24
+  label: Profit / (loss) before tax
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: tax_expense
+  period: FY24
+  label: Total tax expense
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: pat_before_nci
+  period: FY24
+  label: Profit / (loss) for the year
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: pat
+  period: FY24
+  label: Profit / (loss) attributable to owners of the Company
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: cfo
+  period: FY24
+  label: Net cash from / (used in) operating activities
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: purchase_of_ppe
+  period: FY24
+  label: Purchase of property, plant and equipment
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: purchase_of_intangibles
+  period: FY24
+  label: Purchase of intangible assets
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: total_assets
+  period: FY24
+  label: Total assets
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: total_liabilities
+  period: FY24
+  label: Total liabilities
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: total_equity
+  period: FY24
+  label: Total equity
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: non_controlling_interest
+  period: FY24
+  label: Non-controlling interests
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: borrowings_current
+  period: FY24
+  label: Borrowings (current)
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: borrowings_noncurrent
+  period: FY24
+  label: Borrowings (non-current)
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: cash_and_equivalents
+  period: FY24
+  label: Cash and cash equivalents
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: trade_receivables
+  period: FY24
+  label: Trade receivables
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: current_assets
+  period: FY24
+  label: Total current assets
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: current_liabilities
+  period: FY24
+  label: Total current liabilities
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: revenue
+  period: FY25
+  label: Revenue from operations
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: other_income
+  period: FY25
+  label: Other income
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: finance_cost
+  period: FY25
+  label: Finance costs
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: d_and_a
+  period: FY25
+  label: Depreciation and amortisation expense
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: pbt
+  period: FY25
+  label: Profit / (loss) before tax
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: tax_expense
+  period: FY25
+  label: Total tax expense
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: pat_before_nci
+  period: FY25
+  label: Profit / (loss) for the year
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: pat
+  period: FY25
+  label: Profit / (loss) attributable to owners of the Company
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: cfo
+  period: FY25
+  label: Net cash from / (used in) operating activities
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: purchase_of_ppe
+  period: FY25
+  label: Purchase of property, plant and equipment
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: purchase_of_intangibles
+  period: FY25
+  label: Purchase of intangible assets
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: total_assets
+  period: FY25
+  label: Total assets
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: total_liabilities
+  period: FY25
+  label: Total liabilities
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: total_equity
+  period: FY25
+  label: Total equity
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: non_controlling_interest
+  period: FY25
+  label: Non-controlling interests
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: borrowings_current
+  period: FY25
+  label: Borrowings (current)
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: borrowings_noncurrent
+  period: FY25
+  label: Borrowings (non-current)
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: cash_and_equivalents
+  period: FY25
+  label: Cash and cash equivalents
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: trade_receivables
+  period: FY25
+  label: Trade receivables
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: current_assets
+  period: FY25
+  label: Total current assets
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: current_liabilities
+  period: FY25
+  label: Total current liabilities
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_rhp
+  page: TODO
+  verified_by: TODO
+- field_key: revenue
+  period: FY26
+  label: Revenue from operations
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: other_income
+  period: FY26
+  label: Other income
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: finance_cost
+  period: FY26
+  label: Finance costs
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: d_and_a
+  period: FY26
+  label: Depreciation and amortisation expense
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: pbt
+  period: FY26
+  label: Profit / (loss) before tax
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: tax_expense
+  period: FY26
+  label: Total tax expense
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: pat_before_nci
+  period: FY26
+  label: Profit / (loss) for the year
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: pat
+  period: FY26
+  label: Profit / (loss) attributable to owners of the Company
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: cfo
+  period: FY26
+  label: Net cash from / (used in) operating activities
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: purchase_of_ppe
+  period: FY26
+  label: Purchase of property, plant and equipment
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: purchase_of_intangibles
+  period: FY26
+  label: Purchase of intangible assets
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: total_assets
+  period: FY26
+  label: Total assets
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: total_liabilities
+  period: FY26
+  label: Total liabilities
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: total_equity
+  period: FY26
+  label: Total equity
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: non_controlling_interest
+  period: FY26
+  label: Non-controlling interests
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: borrowings_current
+  period: FY26
+  label: Borrowings (current)
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: borrowings_noncurrent
+  period: FY26
+  label: Borrowings (non-current)
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: cash_and_equivalents
+  period: FY26
+  label: Cash and cash equivalents
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: trade_receivables
+  period: FY26
+  label: Trade receivables
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: current_assets
+  period: FY26
+  label: Total current assets
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+- field_key: current_liabilities
+  period: FY26
+  label: Total current liabilities
+  value: TODO
+  unit: '₹ in million (RHP; TODO: confirm header as printed)'
+  doc: pine_labs_ar_fy26
+  page: TODO
+  verified_by: TODO
+quarterly_items: []
+peers:
+- company_name: One97 Communications Ltd
+  ticker: 'NSE: PAYTM'
+  line_items:
+  - field_key: revenue
+    period: FY25
+    label: revenue
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: revenue
+    period: FY26
+    label: revenue
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: pbt
+    period: FY26
+    label: pbt
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: finance_cost
+    period: FY26
+    label: finance_cost
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: other_income
+    period: FY26
+    label: other_income
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: d_and_a
+    period: FY26
+    label: d_and_a
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: pat
+    period: FY26
+    label: pat
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: total_equity
+    period: FY26
+    label: total_equity
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  close_price:
+    value: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  diluted_eps:
+    value: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  price_as_of: TODO
+- company_name: Infibeam Avenues Ltd
+  ticker: 'NSE: INFIBEAM'
+  line_items:
+  - field_key: revenue
+    period: FY25
+    label: revenue
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: revenue
+    period: FY26
+    label: revenue
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: pbt
+    period: FY26
+    label: pbt
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: finance_cost
+    period: FY26
+    label: finance_cost
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: other_income
+    period: FY26
+    label: other_income
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: d_and_a
+    period: FY26
+    label: d_and_a
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: pat
+    period: FY26
+    label: pat
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: total_equity
+    period: FY26
+    label: total_equity
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  close_price:
+    value: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  diluted_eps:
+    value: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  price_as_of: TODO
+- company_name: One MobiKwik Systems Ltd
+  ticker: 'NSE: MOBIKWIK'
+  line_items:
+  - field_key: revenue
+    period: FY25
+    label: revenue
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: revenue
+    period: FY26
+    label: revenue
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: pbt
+    period: FY26
+    label: pbt
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: finance_cost
+    period: FY26
+    label: finance_cost
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: other_income
+    period: FY26
+    label: other_income
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: d_and_a
+    period: FY26
+    label: d_and_a
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: pat
+    period: FY26
+    label: pat
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: total_equity
+    period: FY26
+    label: total_equity
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  close_price:
+    value: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  diluted_eps:
+    value: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  price_as_of: TODO
+- company_name: PB Fintech Ltd
+  ticker: 'NSE: POLICYBZR'
+  line_items:
+  - field_key: revenue
+    period: FY25
+    label: revenue
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: revenue
+    period: FY26
+    label: revenue
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: pbt
+    period: FY26
+    label: pbt
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: finance_cost
+    period: FY26
+    label: finance_cost
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: other_income
+    period: FY26
+    label: other_income
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: d_and_a
+    period: FY26
+    label: d_and_a
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: pat
+    period: FY26
+    label: pat
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  - field_key: total_equity
+    period: FY26
+    label: total_equity
+    value: TODO
+    unit: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  close_price:
+    value: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  diluted_eps:
+    value: TODO
+    doc: TODO
+    page: TODO
+    verified_by: TODO
+  price_as_of: TODO
+evidence:
+- id: ev_business_overview
+  doc: TODO
+  page: TODO
+  snippet: 'TODO: copy the business overview paragraph verbatim'
+  verified_by: TODO
+- id: ev_kmp
+  doc: TODO
+  page: TODO
+  snippet: 'TODO: copy the KMP / executive officers list verbatim'
+  verified_by: TODO
+management_roster:
+- name: TODO
+  role: TODO
+  since: null
+  evidence: ev_kmp
+  verified_by: TODO
+news_events: []
+sentiment:
+  removed_posts: []
+  audience_breakdown: []
+  items: []
+contradictions: []
+prose:
+  insights: []
+  summary: null
+  market_advantages: []
+  market_disadvantages: []
+  market_positioning_prose: null
+stated_gaps:
+- Lease liabilities are excluded from gross debt

@@ -1,0 +1,1832 @@
+# Synthetic sample company for development and UI work. Every company, person, number and source is fictional
+# (taken from reference/ui-demo.html). It is NOT one of the three golden companies and must never be presented as real.
+replay_id: sample_synthetic
+synthetic: true
+company_query: Nexora Payments
+display:
+  company_name: Nexora Payments Ltd (synthetic sample)
+  ticker: 'NSE: NXRA'
+  sector: Fintech · Payments (synthetic)
+  jurisdiction: IN
+  cached_at: '2026-10-26T00:00:00Z'
+entity:
+  legal_name: Nexora Payments Ltd
+  ticker: NXRA
+  exchange: NSE
+  jurisdiction: IN
+  is_listed: true
+  listing_date: '2021-11-10'
+  sector: Fintech · Payments
+  headquarters: Bengaluru
+  fy_end_month: March
+  currency: INR_CR
+  rejected_candidates:
+  - 'Nexora Pay Pvt Ltd: unlisted subsidiary with no current filings'
+  - 'Nexora Pharma Ltd: different sector'
+gaap: ind_as
+sub_questions:
+- How closely does operating cash flow track reported profit over the last five years?
+- Are receivables growing faster than revenue, and why?
+- How is capital expenditure funded?
+- What did the latest RBI and SEBI orders say about the company?
+- Why did key managerial personnel leave during the year?
+- Which material events were disclosed under Regulation 30?
+- What do merchants say about settlements and support?
+- What do employees say about targets and attrition?
+- How do investors frame the recent fundraise?
+- Which listed peers compete in merchant acquiring?
+- How do growth and margins compare with the peer median?
+- What sustains the company's licence and distribution advantages?
+documents:
+  nexora_ar_fy26:
+    title: AR FY26
+    source_url: synthetic://nexora/annual-report-fy26.pdf
+    tier: T1
+    retrieved_at: '2026-10-15T10:00:00Z'
+  nexora_ar_fy24:
+    title: AR FY24
+    source_url: synthetic://nexora/annual-report-fy24.pdf
+    tier: T1
+    retrieved_at: '2026-10-15T10:00:00Z'
+  nexora_ar_fy22:
+    title: AR FY22
+    source_url: synthetic://nexora/annual-report-fy22.pdf
+    tier: T1
+    retrieved_at: '2026-10-15T10:00:00Z'
+  nexora_q1fy27_results:
+    title: Q1 FY27 results
+    source_url: synthetic://nexora/q1fy27-results.pdf
+    tier: T1
+  nexora_bse_filings:
+    title: BSE filings
+    source_url: synthetic://bse/nexora/announcements
+    tier: T2
+  rbi_press:
+    title: RBI press release
+    source_url: synthetic://rbi/press-releases
+    tier: T1
+  nexora_q4_call:
+    title: Q4 FY26 earnings call
+    source_url: synthetic://nexora/q4fy26-call-transcript
+    tier: T2
+  business_ledger:
+    title: Business Ledger
+    source_url: synthetic://press/business-ledger
+    tier: T3
+  broker_note:
+    title: Broker note
+    source_url: synthetic://broker/nexora-initiation
+    tier: T4
+  paynest_ar_fy26:
+    title: Paynest AR FY26
+    source_url: synthetic://paynest/annual-report-fy26.pdf
+    tier: T1
+  cashvale_ar_fy26:
+    title: Cashvale AR FY26
+    source_url: synthetic://cashvale/annual-report-fy26.pdf
+    tier: T1
+  unopay_ar_fy26:
+    title: UnoPay AR FY26
+    source_url: synthetic://unopay/annual-report-fy26.pdf
+    tier: T1
+  bsettle_ar_fy26:
+    title: Bharat Settle AR FY26
+    source_url: synthetic://bsettle/annual-report-fy26.pdf
+    tier: T1
+line_items:
+- field_key: revenue
+  period: FY22
+  label: Revenue from operations
+  value: 1,420.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: other_income
+  period: FY22
+  label: Other income
+  value: '8.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: finance_cost
+  period: FY22
+  label: Finance costs
+  value: '21.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: d_and_a
+  period: FY22
+  label: Depreciation and amortisation expense
+  value: '24.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pbt
+  period: FY22
+  label: Profit before tax
+  value: '105.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: tax_expense
+  period: FY22
+  label: Total tax expense
+  value: '67.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pat_before_nci
+  period: FY22
+  label: Profit for the year
+  value: '38.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pat
+  period: FY22
+  label: Profit attributable to owners of the Company
+  value: '38.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: cfo
+  period: FY22
+  label: Net cash generated from operating activities
+  value: '52.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 116
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: purchase_of_ppe
+  period: FY22
+  label: Purchase of property, plant and equipment
+  value: '-28.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 116
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: purchase_of_intangibles
+  period: FY22
+  label: Purchase of intangible assets
+  value: '-12.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 116
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: total_assets
+  period: FY22
+  label: Total assets
+  value: 1,347.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: total_liabilities
+  period: FY22
+  label: Total liabilities
+  value: '737.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: total_equity
+  period: FY22
+  label: Total equity
+  value: '610.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: borrowings_current
+  period: FY22
+  label: Current borrowings
+  value: '63.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: borrowings_noncurrent
+  period: FY22
+  label: Non-current borrowings
+  value: '147.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: cash_and_equivalents
+  period: FY22
+  label: Cash and cash equivalents
+  value: '160.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: trade_receivables
+  period: FY22
+  label: Trade receivables
+  value: '190.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: current_assets
+  period: FY22
+  label: Total current assets
+  value: '720.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: current_liabilities
+  period: FY22
+  label: Total current liabilities
+  value: '540.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy22
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: revenue
+  period: FY23
+  label: Revenue from operations
+  value: 1,985.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: other_income
+  period: FY23
+  label: Other income
+  value: '12.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: finance_cost
+  period: FY23
+  label: Finance costs
+  value: '26.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: d_and_a
+  period: FY23
+  label: Depreciation and amortisation expense
+  value: '31.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pbt
+  period: FY23
+  label: Profit before tax
+  value: '214.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: tax_expense
+  period: FY23
+  label: Total tax expense
+  value: '93.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pat_before_nci
+  period: FY23
+  label: Profit for the year
+  value: '121.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pat
+  period: FY23
+  label: Profit attributable to owners of the Company
+  value: '121.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: cfo
+  period: FY23
+  label: Net cash generated from operating activities
+  value: '140.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 116
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: purchase_of_ppe
+  period: FY23
+  label: Purchase of property, plant and equipment
+  value: '-46.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 116
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: purchase_of_intangibles
+  period: FY23
+  label: Purchase of intangible assets
+  value: '-20.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 116
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: total_assets
+  period: FY23
+  label: Total assets
+  value: 1,641.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: total_liabilities
+  period: FY23
+  label: Total liabilities
+  value: '901.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: total_equity
+  period: FY23
+  label: Total equity
+  value: '740.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: borrowings_current
+  period: FY23
+  label: Current borrowings
+  value: '69.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: borrowings_noncurrent
+  period: FY23
+  label: Non-current borrowings
+  value: '161.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: cash_and_equivalents
+  period: FY23
+  label: Cash and cash equivalents
+  value: '290.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: trade_receivables
+  period: FY23
+  label: Trade receivables
+  value: '300.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: current_assets
+  period: FY23
+  label: Total current assets
+  value: '960.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: current_liabilities
+  period: FY23
+  label: Total current liabilities
+  value: '690.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: revenue
+  period: FY24
+  label: Revenue from operations
+  value: 2,610.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: other_income
+  period: FY24
+  label: Other income
+  value: '18.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: finance_cost
+  period: FY24
+  label: Finance costs
+  value: '31.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: d_and_a
+  period: FY24
+  label: Depreciation and amortisation expense
+  value: '42.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pbt
+  period: FY24
+  label: Profit before tax
+  value: '337.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: tax_expense
+  period: FY24
+  label: Total tax expense
+  value: '123.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pat_before_nci
+  period: FY24
+  label: Profit for the year
+  value: '214.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pat
+  period: FY24
+  label: Profit attributable to owners of the Company
+  value: '214.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: cfo
+  period: FY24
+  label: Net cash generated from operating activities
+  value: '230.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 116
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: purchase_of_ppe
+  period: FY24
+  label: Purchase of property, plant and equipment
+  value: '-66.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 116
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: purchase_of_intangibles
+  period: FY24
+  label: Purchase of intangible assets
+  value: '-29.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 116
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: total_assets
+  period: FY24
+  label: Total assets
+  value: 2,045.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: total_liabilities
+  period: FY24
+  label: Total liabilities
+  value: 1,085.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: total_equity
+  period: FY24
+  label: Total equity
+  value: '960.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: borrowings_current
+  period: FY24
+  label: Current borrowings
+  value: '75.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: borrowings_noncurrent
+  period: FY24
+  label: Non-current borrowings
+  value: '175.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: cash_and_equivalents
+  period: FY24
+  label: Cash and cash equivalents
+  value: '410.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: trade_receivables
+  period: FY24
+  label: Trade receivables
+  value: '420.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: current_assets
+  period: FY24
+  label: Total current assets
+  value: 1,240.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: current_liabilities
+  period: FY24
+  label: Total current liabilities
+  value: '860.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy24
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: revenue
+  period: FY25
+  label: Revenue from operations
+  value: 3,240.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: other_income
+  period: FY25
+  label: Other income
+  value: '26.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: finance_cost
+  period: FY25
+  label: Finance costs
+  value: '38.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: d_and_a
+  period: FY25
+  label: Depreciation and amortisation expense
+  value: '63.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pbt
+  period: FY25
+  label: Profit before tax
+  value: '443.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: tax_expense
+  period: FY25
+  label: Total tax expense
+  value: '142.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pat_before_nci
+  period: FY25
+  label: Profit for the year
+  value: '301.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pat
+  period: FY25
+  label: Profit attributable to owners of the Company
+  value: '301.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: cfo
+  period: FY25
+  label: Net cash generated from operating activities
+  value: '262.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 116
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: purchase_of_ppe
+  period: FY25
+  label: Purchase of property, plant and equipment
+  value: '-98.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 116
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: purchase_of_intangibles
+  period: FY25
+  label: Purchase of intangible assets
+  value: '-42.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 116
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: total_assets
+  period: FY25
+  label: Total assets
+  value: 2,657.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: total_liabilities
+  period: FY25
+  label: Total liabilities
+  value: 1,397.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: total_equity
+  period: FY25
+  label: Total equity
+  value: 1,260.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: borrowings_current
+  period: FY25
+  label: Current borrowings
+  value: '93.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: borrowings_noncurrent
+  period: FY25
+  label: Non-current borrowings
+  value: '217.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: cash_and_equivalents
+  period: FY25
+  label: Cash and cash equivalents
+  value: '520.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: trade_receivables
+  period: FY25
+  label: Trade receivables
+  value: '610.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: current_assets
+  period: FY25
+  label: Total current assets
+  value: 1,620.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: current_liabilities
+  period: FY25
+  label: Total current liabilities
+  value: 1,130.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: revenue
+  period: FY26
+  label: Revenue from operations
+  value: 3,810.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: other_income
+  period: FY26
+  label: Other income
+  value: '30.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: finance_cost
+  period: FY26
+  label: Finance costs
+  value: '52.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: d_and_a
+  period: FY26
+  label: Depreciation and amortisation expense
+  value: '81.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pbt
+  period: FY26
+  label: Profit before tax
+  value: '468.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: tax_expense
+  period: FY26
+  label: Total tax expense
+  value: '172.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pat_before_nci
+  period: FY26
+  label: Profit for the year
+  value: '296.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pat
+  period: FY26
+  label: Profit attributable to owners of the Company
+  value: '296.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 112
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: cfo
+  period: FY26
+  label: Net cash generated from operating activities
+  value: '198.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 116
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: purchase_of_ppe
+  period: FY26
+  label: Purchase of property, plant and equipment
+  value: '-147.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 116
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: purchase_of_intangibles
+  period: FY26
+  label: Purchase of intangible assets
+  value: '-63.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 116
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: total_assets
+  period: FY26
+  label: Total assets
+  value: 3,454.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: total_liabilities
+  period: FY26
+  label: Total liabilities
+  value: 1,914.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: total_equity
+  period: FY26
+  label: Total equity
+  value: 1,540.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: borrowings_current
+  period: FY26
+  label: Current borrowings
+  value: '156.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: borrowings_noncurrent
+  period: FY26
+  label: Non-current borrowings
+  value: '364.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: cash_and_equivalents
+  period: FY26
+  label: Cash and cash equivalents
+  value: '430.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: trade_receivables
+  period: FY26
+  label: Trade receivables
+  value: '880.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: current_assets
+  period: FY26
+  label: Total current assets
+  value: 1,980.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: current_liabilities
+  period: FY26
+  label: Total current liabilities
+  value: 1,500.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 114
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: segment_revenue
+  period: FY26
+  label: Segment revenue - Payment gateway
+  segment: Payment gateway
+  value: 2,134.00
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 158
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: segment_revenue
+  period: FY26
+  label: Segment revenue - In-store POS and devices
+  segment: In-store POS and devices
+  value: '991.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 158
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: segment_revenue
+  period: FY26
+  label: Segment revenue - Merchant lending
+  segment: Merchant lending
+  value: '457.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 158
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: segment_revenue
+  period: FY26
+  label: Segment revenue - Banking APIs
+  segment: Banking APIs
+  value: '228.00'
+  unit: ₹ in crore
+  doc: nexora_ar_fy26
+  page: 158
+  verified_by: synthetic (ui-demo.html; not a real filing)
+quarterly_items:
+- field_key: revenue
+  period: Q1FY26
+  label: Revenue from operations
+  value: '872.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: d_and_a
+  period: Q1FY26
+  label: Depreciation and amortisation expense
+  value: '20.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: finance_cost
+  period: Q1FY26
+  label: Finance costs
+  value: '13.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: other_income
+  period: Q1FY26
+  label: Other income
+  value: '8.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pbt
+  period: Q1FY26
+  label: Profit before tax
+  value: '109.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: revenue
+  period: Q2FY26
+  label: Revenue from operations
+  value: '930.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: d_and_a
+  period: Q2FY26
+  label: Depreciation and amortisation expense
+  value: '20.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: finance_cost
+  period: Q2FY26
+  label: Finance costs
+  value: '13.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: other_income
+  period: Q2FY26
+  label: Other income
+  value: '8.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pbt
+  period: Q2FY26
+  label: Profit before tax
+  value: '115.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: revenue
+  period: Q3FY26
+  label: Revenue from operations
+  value: '985.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: d_and_a
+  period: Q3FY26
+  label: Depreciation and amortisation expense
+  value: '20.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: finance_cost
+  period: Q3FY26
+  label: Finance costs
+  value: '13.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: other_income
+  period: Q3FY26
+  label: Other income
+  value: '8.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pbt
+  period: Q3FY26
+  label: Profit before tax
+  value: '123.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: revenue
+  period: Q4FY26
+  label: Revenue from operations
+  value: 1,023.00
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: d_and_a
+  period: Q4FY26
+  label: Depreciation and amortisation expense
+  value: '20.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: finance_cost
+  period: Q4FY26
+  label: Finance costs
+  value: '13.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: other_income
+  period: Q4FY26
+  label: Other income
+  value: '8.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pbt
+  period: Q4FY26
+  label: Profit before tax
+  value: '124.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: revenue
+  period: Q1FY27
+  label: Revenue from operations
+  value: 1,012.00
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: d_and_a
+  period: Q1FY27
+  label: Depreciation and amortisation expense
+  value: '20.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: finance_cost
+  period: Q1FY27
+  label: Finance costs
+  value: '13.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: other_income
+  period: Q1FY27
+  label: Other income
+  value: '8.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- field_key: pbt
+  period: Q1FY27
+  label: Profit before tax
+  value: '118.00'
+  unit: ₹ in crore
+  doc: nexora_q1fy27_results
+  page: 3
+  verified_by: synthetic (ui-demo.html; not a real filing)
+evidence:
+- id: ev_nexora_business
+  doc: nexora_ar_fy26
+  page: 8
+  verified_by: synthetic (ui-demo.html; not a real filing)
+  snippet: Nexora provides a payment gateway, in-store POS and soundbox devices, merchant lending (Zeplo) and banking APIs to about 1.9 million
+    active merchants.
+- id: ev_nexora_kmp
+  doc: nexora_ar_fy26
+  page: 24
+  verified_by: synthetic (ui-demo.html; not a real filing)
+  snippet: 'Key Managerial Personnel: Anita Verghese, Managing Director & CEO; Sandeep Kulkarni, Chief Financial Officer (from April 2026); Rahul
+    Menon, Chief Technology Officer.'
+- id: ev_zeplo_acq
+  doc: nexora_bse_filings
+  verified_by: synthetic (ui-demo.html; not a real filing)
+  snippet: Nexora Payments Ltd has completed the acquisition of Zeplo Tech Pvt Ltd for a consideration of ₹340 cr.
+- id: ev_ridgeway
+  doc: nexora_bse_filings
+  verified_by: synthetic (ui-demo.html; not a real filing)
+  snippet: Nexora has entered into a multi-year settlement partnership with Ridgeway Bank.
+- id: ev_cfo_exit
+  doc: nexora_bse_filings
+  verified_by: synthetic (ui-demo.html; not a real filing)
+  snippet: Mr Rohit Anand has resigned as Chief Financial Officer with effect from 30 days of this intimation. No reason has been stated.
+- id: ev_cfo_appt
+  doc: nexora_bse_filings
+  verified_by: synthetic (ui-demo.html; not a real filing)
+  snippet: The Board approved the appointment of Mr Sandeep Kulkarni as Chief Financial Officer.
+- id: ev_rbi_pa
+  doc: rbi_press
+  verified_by: synthetic (ui-demo.html; not a real filing)
+  snippet: RBI grants final authorisation to Nexora Payments Ltd to operate as a Payment Aggregator.
+- id: ev_qip
+  doc: nexora_bse_filings
+  verified_by: synthetic (ui-demo.html; not a real filing)
+  snippet: Nexora has completed a Qualified Institutions Placement of ₹600 cr at an issue price of ₹842 per share, a dilution of 7.4%.
+- id: ev_rbi_penalty
+  doc: rbi_press
+  verified_by: synthetic (ui-demo.html; not a real filing)
+  snippet: RBI imposes monetary penalty of ₹1.2 cr on Nexora Payments Ltd for non-compliance with merchant KYC directions.
+- id: ev_outage
+  doc: business_ledger
+  verified_by: synthetic (ui-demo.html; not a real filing)
+  snippet: A six-hour settlement outage at Nexora left merchants reporting delayed payouts.
+- id: ev_press_revenue
+  doc: business_ledger
+  verified_by: synthetic (ui-demo.html; not a real filing)
+  snippet: Nexora reported FY26 revenue of ₹3,900 cr, up strongly on the year.
+- id: ev_call_collections
+  doc: nexora_q4_call
+  verified_by: synthetic (ui-demo.html; not a real filing)
+  snippet: 'CEO: Collections are normalising and we expect working capital to ease through FY27.'
+management_roster:
+- name: Anita Verghese
+  role: Managing Director & CEO
+  evidence: ev_nexora_kmp
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- name: Sandeep Kulkarni
+  role: Chief Financial Officer
+  since: Apr 2026
+  evidence: ev_nexora_kmp
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- name: Rahul Menon
+  role: Chief Technology Officer
+  evidence: ev_nexora_kmp
+  verified_by: synthetic (ui-demo.html; not a real filing)
+news_events:
+- id: nw_zeplo
+  date: Nov 2025
+  category: Acquisition
+  headline: Acquires Zeplo Tech (merchant lending APIs)
+  summary: Completed acquisition of Zeplo Tech for ₹340 cr [[ev_zeplo_acq]].
+  polarity: neutral
+  source_names:
+  - ET Markets
+  - BSE filing
+  tier: T2
+  corroborated_by_filing: true
+  article_count_merged: 9
+  evidence: ev_zeplo_acq
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- id: nw_ridgeway
+  date: Jan 2026
+  category: Partnership
+  headline: Multi-year settlement partnership with Ridgeway Bank
+  summary: Exchange disclosure confirms a multi-year settlement partnership.
+  polarity: positive
+  source_names:
+  - Exchange disclosure
+  tier: T2
+  corroborated_by_filing: true
+  article_count_merged: 4
+  evidence: ev_ridgeway
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- id: nw_cfo_exit
+  date: Mar 2026
+  category: Management
+  headline: CFO Rohit Anand resigns; no reason given
+  summary: The CFO resigned effective 30 days [[ev_cfo_exit]] after the intimation; the filing states no reason.
+  polarity: negative
+  source_names:
+  - BSE filing
+  - Business Ledger
+  tier: T2
+  corroborated_by_filing: true
+  article_count_merged: 11
+  evidence: ev_cfo_exit
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- id: nw_cfo_appt
+  date: Apr 2026
+  category: Management
+  headline: Sandeep Kulkarni appointed CFO (ex-Cashvale)
+  summary: Board appointed a new CFO from a listed peer.
+  polarity: neutral
+  source_names:
+  - Exchange disclosure
+  tier: T2
+  corroborated_by_filing: true
+  article_count_merged: 3
+  evidence: ev_cfo_appt
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- id: nw_rbi_pa
+  date: May 2026
+  category: Regulatory
+  headline: Receives final RBI payment aggregator authorisation
+  summary: RBI granted final payment aggregator authorisation, removing the licence overhang.
+  polarity: positive
+  source_names:
+  - RBI order
+  - press
+  tier: T1
+  corroborated_by_filing: true
+  article_count_merged: 8
+  evidence: ev_rbi_pa
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- id: nw_qip
+  date: Jun 2026
+  category: Fundraise
+  headline: QIP at ₹842 per share
+  summary: Raised ₹600 cr [[ev_qip]] through a QIP priced at ₹842 [[ev_qip]] per share.
+  polarity: neutral
+  source_names:
+  - Exchange filing
+  tier: T2
+  corroborated_by_filing: true
+  article_count_merged: 7
+  evidence: ev_qip
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- id: nw_rbi_penalty
+  date: Aug 2026
+  category: Controversy
+  headline: RBI penalty for merchant KYC lapses
+  summary: RBI imposed a penalty of ₹1.2 cr [[ev_rbi_penalty]] for merchant KYC lapses.
+  polarity: negative
+  source_names:
+  - RBI press release
+  tier: T1
+  corroborated_by_filing: true
+  article_count_merged: 6
+  evidence: ev_rbi_penalty
+  verified_by: synthetic (ui-demo.html; not a real filing)
+- id: nw_outage
+  date: Sep 2026
+  category: Controversy
+  headline: Six-hour settlement outage delays merchant payouts
+  summary: A settlement outage delayed merchant payouts; no filing confirms the cause.
+  polarity: negative
+  source_names:
+  - Business Ledger
+  - Reddit
+  tier: T3
+  corroborated_by_filing: false
+  article_count_merged: 13
+  evidence: ev_outage
+  verified_by: synthetic (ui-demo.html; not a real filing)
+sentiment:
+  removed_posts:
+  - &id001
+    reason: Near-duplicate of 3+ accounts (5-gram Jaccard >= 0.85)
+  - *id001
+  - *id001
+  - &id002
+    reason: Reddit account < 30 days old
+  - *id002
+  - reason: Play Store review burst
+  audience_breakdown:
+  - audience: Customers
+    dominant_tone: negative
+    trend_description: Worse since the September outage
+  - audience: Employees
+    dominant_tone: mixed
+    trend_description: Enterprise sales targets strained after the CFO exit
+  - audience: Investors
+    dominant_tone: positive
+    trend_description: Upbeat after the QIP, little focus on cash conversion
+  items:
+  - id: p_reddit_payouts
+    platform: Reddit
+    audience: Customer
+    quote: Payouts T+3 on weekends, ticket open 9 days.
+    polarity: negative
+    verdict: signal
+    reasons:
+    - Recurring theme across many independent posts
+    - Corroborated by the September outage
+    corroborating_ids:
+    - nw_outage
+    - met_dso_fy26
+    url: synthetic://reddit/r/india/nexora-payouts
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - id: p_reddit_moon
+    platform: Reddit
+    audience: Investor
+    quote: NXRA to the moon, GMV beat!!
+    polarity: positive
+    verdict: noise
+    reasons:
+    - Account 19 days old with 6 near-identical posts
+    - Price hype without cash-flow grounding
+    url: synthetic://reddit/r/IndianStreetBets/nxra-moon
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - id: p_hn_targets
+    platform: Hacker News
+    audience: Employee
+    quote: Aggressive enterprise targets; attrition after CFO exit.
+    polarity: negative
+    verdict: signal
+    reasons:
+    - 3 independent employee accounts, consistent
+    - Matches the CFO resignation filing
+    corroborating_ids:
+    - nw_cfo_exit
+    url: synthetic://hn/item/nexora-targets
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - id: p_broker_buy
+    platform: Broker note
+    audience: Investor
+    quote: BUY; QIP removes balance-sheet worry.
+    polarity: positive
+    verdict: signal
+    reasons:
+    - Credible source consistent with the QIP filing
+    - Omits cash conversion
+    corroborating_ids:
+    - nw_qip
+    url: synthetic://broker/nexora-initiation
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - id: p_play_rating
+    platform: Play Store
+    audience: Customer
+    quote: Settlements late again after the outage, support does not reply.
+    polarity: negative
+    verdict: signal
+    reasons:
+    - Rating drop follows the outage
+    - Consistent with Reddit payout complaints
+    corroborating_ids:
+    - nw_outage
+    url: synthetic://play/nexora-merchant/reviews
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - id: p_reddit_takeover
+    platform: Reddit
+    audience: Investor
+    quote: Insider says takeover bid coming.
+    polarity: positive
+    verdict: noise
+    reasons:
+    - Unverified rumour
+    - No filing or news match
+    url: synthetic://reddit/r/IndianStreetBets/takeover
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - id: p_column_qip
+    platform: Column
+    audience: Investor
+    quote: QIP timing looks shrewd.
+    polarity: neutral
+    verdict: signal
+    reasons:
+    - Opinion consistent with filings
+    corroborating_ids:
+    - nw_qip
+    url: synthetic://press/column-qip
+    verified_by: synthetic (ui-demo.html; not a real filing)
+peers:
+- company_name: Paynest Ltd
+  ticker: 'NSE: PAYNEST'
+  line_items:
+  - field_key: revenue
+    period: FY25
+    label: Revenue from operations
+    value: 1,000.00
+    unit: ₹ in crore
+    doc: paynest_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: revenue
+    period: FY26
+    label: Revenue from operations
+    value: 1,224.00
+    unit: ₹ in crore
+    doc: paynest_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: d_and_a
+    period: FY26
+    label: Depreciation and amortisation expense
+    value: '23.00'
+    unit: ₹ in crore
+    doc: paynest_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: finance_cost
+    period: FY26
+    label: Finance costs
+    value: '10.00'
+    unit: ₹ in crore
+    doc: paynest_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: other_income
+    period: FY26
+    label: Other income
+    value: '5.00'
+    unit: ₹ in crore
+    doc: paynest_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: pbt
+    period: FY26
+    label: Profit before tax
+    value: '195.00'
+    unit: ₹ in crore
+    doc: paynest_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: pat
+    period: FY26
+    label: Profit attributable to owners of the Company
+    value: '150.00'
+    unit: ₹ in crore
+    doc: paynest_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: total_equity
+    period: FY26
+    label: Total equity
+    value: '714.00'
+    unit: ₹ in crore
+    doc: paynest_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  close_price:
+    value: '520'
+    doc: paynest_ar_fy26
+    page: 1
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  diluted_eps:
+    value: '10'
+    doc: paynest_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  price_as_of: '2026-10-15'
+- company_name: Cashvale Ltd
+  ticker: 'NSE: CASHVALE'
+  line_items:
+  - field_key: revenue
+    period: FY25
+    label: Revenue from operations
+    value: 1,000.00
+    unit: ₹ in crore
+    doc: cashvale_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: revenue
+    period: FY26
+    label: Revenue from operations
+    value: 1,118.00
+    unit: ₹ in crore
+    doc: cashvale_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: d_and_a
+    period: FY26
+    label: Depreciation and amortisation expense
+    value: '23.00'
+    unit: ₹ in crore
+    doc: cashvale_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: finance_cost
+    period: FY26
+    label: Finance costs
+    value: '10.00'
+    unit: ₹ in crore
+    doc: cashvale_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: other_income
+    period: FY26
+    label: Other income
+    value: '5.00'
+    unit: ₹ in crore
+    doc: cashvale_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: pbt
+    period: FY26
+    label: Profit before tax
+    value: '107.00'
+    unit: ₹ in crore
+    doc: cashvale_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: pat
+    period: FY26
+    label: Profit attributable to owners of the Company
+    value: '90.00'
+    unit: ₹ in crore
+    doc: cashvale_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: total_equity
+    period: FY26
+    label: Total equity
+    value: '584.00'
+    unit: ₹ in crore
+    doc: cashvale_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  close_price:
+    value: '290'
+    doc: cashvale_ar_fy26
+    page: 1
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  diluted_eps:
+    value: '10'
+    doc: cashvale_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  price_as_of: '2026-10-15'
+- company_name: UnoPay Ltd
+  ticker: 'NSE: UNOPAY'
+  line_items:
+  - field_key: revenue
+    period: FY25
+    label: Revenue from operations
+    value: 1,000.00
+    unit: ₹ in crore
+    doc: unopay_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: revenue
+    period: FY26
+    label: Revenue from operations
+    value: 1,310.00
+    unit: ₹ in crore
+    doc: unopay_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: d_and_a
+    period: FY26
+    label: Depreciation and amortisation expense
+    value: '23.00'
+    unit: ₹ in crore
+    doc: unopay_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: finance_cost
+    period: FY26
+    label: Finance costs
+    value: '10.00'
+    unit: ₹ in crore
+    doc: unopay_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: other_income
+    period: FY26
+    label: Other income
+    value: '5.00'
+    unit: ₹ in crore
+    doc: unopay_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: pbt
+    period: FY26
+    label: Profit before tax
+    value: '95.00'
+    unit: ₹ in crore
+    doc: unopay_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: pat
+    period: FY26
+    label: Profit attributable to owners of the Company
+    value: '-40.00'
+    unit: ₹ in crore
+    doc: unopay_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: total_equity
+    period: FY26
+    label: Total equity
+    value: 1,000.00
+    unit: ₹ in crore
+    doc: unopay_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  close_price:
+    value: '85'
+    doc: unopay_ar_fy26
+    page: 1
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  diluted_eps:
+    value: '-2'
+    doc: unopay_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  price_as_of: '2026-10-15'
+- company_name: Bharat Settle Ltd
+  ticker: 'NSE: BSETTLE'
+  line_items:
+  - field_key: revenue
+    period: FY25
+    label: Revenue from operations
+    value: 1,000.00
+    unit: ₹ in crore
+    doc: bsettle_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: revenue
+    period: FY26
+    label: Revenue from operations
+    value: 1,092.00
+    unit: ₹ in crore
+    doc: bsettle_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: d_and_a
+    period: FY26
+    label: Depreciation and amortisation expense
+    value: '23.00'
+    unit: ₹ in crore
+    doc: bsettle_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: finance_cost
+    period: FY26
+    label: Finance costs
+    value: '10.00'
+    unit: ₹ in crore
+    doc: bsettle_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: other_income
+    period: FY26
+    label: Other income
+    value: '5.00'
+    unit: ₹ in crore
+    doc: bsettle_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: pbt
+    period: FY26
+    label: Profit before tax
+    value: '207.00'
+    unit: ₹ in crore
+    doc: bsettle_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: pat
+    period: FY26
+    label: Profit attributable to owners of the Company
+    value: '150.00'
+    unit: ₹ in crore
+    doc: bsettle_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  - field_key: total_equity
+    period: FY26
+    label: Total equity
+    value: '843.00'
+    unit: ₹ in crore
+    doc: bsettle_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  close_price:
+    value: '240'
+    doc: bsettle_ar_fy26
+    page: 1
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  diluted_eps:
+    value: '10'
+    doc: bsettle_ar_fy26
+    page: 90
+    verified_by: synthetic (ui-demo.html; not a real filing)
+  price_as_of: '2026-10-15'
+contradictions:
+- id: ct_fy26_revenue
+  topic: FY26 consolidated revenue
+  type: NUMERIC_DISCREPANCY
+  a_claim: Revenue ₹3,900 cr (press)
+  a_evidence: ev_press_revenue
+  b_claim: Revenue {{li_fy26_revenue}} (audited filing)
+  b_evidence: ev_nexora_ar_fy26_p112_revenue_fy26
+  note: The press figure appears to include other income.
+- id: ct_collections
+  topic: Working capital and collections
+  type: NARRATIVE_VS_METRIC
+  a_claim: 'Management: collections are normalising (Q4 FY26 call)'
+  a_evidence: ev_call_collections
+  b_claim: DSO rose to {{met_dso_fy26}} from {{met_dso_fy24}}
+  b_evidence: ev_nexora_ar_fy26_p114_trade_receivables_fy26
+prose:
+  insights:
+  - id: in_credit_growth
+    title: Growth is financed by customers' credit, not cash
+    classification: fact
+    polarity: negative
+    body: Revenue grew {{met_rev_yoy_fy26}} while receivables grew {{met_receivables_yoy_fy26}}. DSO moved from {{met_dso_fy24}} to {{met_dso_fy26}}
+      and CFO/PAT fell to {{met_cfo_to_pat_fy26}}. Revenue is being booked faster than it is collected.
+    metrics:
+    - met_rev_yoy_fy26
+    - met_receivables_yoy_fy26
+    - met_dso_fy24
+    - met_dso_fy26
+    - met_cfo_to_pat_fy26
+    red_flags:
+    - RF_01_RECEIVABLES_STRETCH
+    - RF_02_LOW_CASH_CONVERSION
+  - id: in_sentiment_echo
+    title: Merchant sentiment echoes the cash signal
+    classification: inference
+    polarity: negative
+    body: Settlement complaints and the September outage line up with the stretch in receivables. Customer posts are only counted where news or
+      filings corroborate them.
+    metrics:
+    - met_dso_fy26
+    news:
+    - nw_outage
+    sentiment:
+    - p_reddit_payouts
+    - p_play_rating
+  - id: in_leverage
+    title: Leverage looks safe only because of the QIP
+    classification: inference
+    polarity: neutral
+    body: Gross debt grew {{met_gross_debt_yoy_fy26}} and net debt stands at {{met_net_debt_to_ebitda_fy26}} EBITDA. Interest cover slipped to
+      {{met_interest_cover_fy26}}, and the equity raise rather than operating cash funds the balance sheet.
+    metrics:
+    - met_gross_debt_yoy_fy26
+    - met_net_debt_to_ebitda_fy26
+    - met_interest_cover_fy26
+    news:
+    - nw_qip
+    red_flags:
+    - RF_04_DEBT_OUTGROWING_REV
+  - id: in_cfo_timing
+    title: CFO exit three months before the QIP
+    classification: hypothesis
+    polarity: negative
+    body: The CFO resigned without a stated reason shortly before the capital raise. Filings do not link the two events.
+    news:
+    - nw_cfo_exit
+    - nw_qip
+  summary:
+    verdict_headline: Growth is real, cash quality is deteriorating
+    verdict_prose: Revenue grew {{met_rev_yoy_fy26}} to {{li_fy26_revenue}}, but operating cash flow moved {{met_cfo_yoy_fy26}} while receivables
+      rose {{met_receivables_yoy_fy26}}. Merchant sentiment and a CFO exit point the same way.
+    business_overview: Payment gateway, in-store POS and soundbox devices, merchant lending (Zeplo) and banking APIs for merchants in India.
+    revenue_mix_summary: 'FY26 segment revenue: payment gateway {{li_fy26_segment_revenue_payment_gateway}}, in-store POS and devices {{li_fy26_segment_revenue_in_store_pos_and_devices}},
+      merchant lending {{li_fy26_segment_revenue_merchant_lending}}, banking APIs {{li_fy26_segment_revenue_banking_apis}}.'
+    management_summary: Anita Verghese is Managing Director and CEO; Sandeep Kulkarni became CFO in April 2026; Rahul Menon is CTO.
+    governance_watch_note: The previous CFO left in March with no stated reason, three months before the QIP.
+    opportunities:
+    - Final RBI authorisation removes the licence overhang
+    - Lending cross-sell to the existing merchant base
+    - QIP proceeds fund capex and expansion
+    risks:
+    - Receivables stretching faster than revenue
+    - Cash conversion below the institutional threshold for two years running
+    - 'Compliance and reliability: KYC penalty and settlement outage'
+    quarterly_direction_note: Q1 FY27 revenue grew {{met_q_rev_yoy_q1fy27}} YoY with EBITDA margin at {{met_q_ebitda_margin_q1fy27}}, down from
+      {{met_q_ebitda_margin_q1fy26}} a year earlier.
+    analyst_follow_up_notes:
+    - 'Next check: Q2 FY27 receivables'
+    - Ask management for the split of receivables between enterprise and bank partners
+    - Reduce weight on broker targets until cash conversion recovers
+  market_advantages:
+  - Broad licence set after final RBI authorisation
+  - In-house lending stack on a large merchant base
+  - EBITDA margin of {{peer_nxra_ebitda_margin_pct}} is above the peer median of {{peer_median_ebitda_margin_pct}}
+  market_disadvantages:
+  - Revenue growth of {{peer_nxra_rev_growth_pct}} trails Paynest at {{peer_paynest_rev_growth_pct}}
+  - Margin below Bharat Settle at {{peer_bsettle_ebitda_margin_pct}}
+  market_positioning_prose: Nexora grew {{peer_nxra_rev_growth_pct}} against a peer median of {{peer_median_rev_growth_pct}}, with ROE of {{peer_nxra_roe_pct}}
+    versus {{peer_median_roe_pct}} for the peer set.
+stated_gaps:
+- Lease liabilities are excluded from gross debt
