@@ -1,0 +1,47 @@
+[project]
+name = "atlas-research"
+version = "1.0.0"
+description = "Explanatory deep research agent producing investment research reports with deterministic financial computation and full provenance."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "sse-starlette>=2.1",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.6",
+    "aiosqlite>=0.20",
+    "langgraph>=0.2.60",
+    "google-genai>=1.0",
+    "httpx>=0.27",
+    "pyyaml>=6.0",
+    "pymupdf>=1.24",
+    "pdfplumber>=0.11",
+    "feedparser>=6.0",
+    "google-play-scraper>=1.2",
+    "jinja2>=3.1",
+    "weasyprint>=62",
+    "python-ulid>=3.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "respx>=0.21",
+    "ruff>=0.7",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]

@@ -1,0 +1,11 @@
+.env
+data/atlas_state.db*
+node_modules/
+frontend/dist/
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+test-results/
+playwright-report/
