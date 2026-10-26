@@ -28,6 +28,7 @@ class Settings(BaseSettings):
     atlas_golden_dir: Path = REPO_ROOT / "data" / "golden_runs"
     atlas_rules_path: Path = REPO_ROOT / "data" / "rules" / "default_red_flags.yaml"
     atlas_frontend_dist: Path = REPO_ROOT / "frontend" / "dist"
+    atlas_include_unconfirmed_replays: bool = False  # serve replays built from unconfirmed seed figures
 
     max_live_runs_per_hour_per_ip: int = 10
     daily_llm_budget_usd: float = 5.00

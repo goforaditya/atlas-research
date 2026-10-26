@@ -4,9 +4,9 @@ replay_id: lumen_straits_synthetic
 synthetic: true
 company_query: Lumen Straits
 display:
-  company_name: Lumen Straits Holdings Ltd (synthetic sample)
+  company_name: Lumen Straits Holdings Ltd
   ticker: 'NYSE: LMST'
-  sector: Fintech · Cross-border remittance (synthetic)
+  sector: Fintech · Cross-border remittance
   jurisdiction: US
   cached_at: '2026-10-26T00:00:00Z'
 entity:
@@ -1816,5 +1816,5 @@ prose:
   market_positioning_prose: Lumen Straits grew {{peer_lmst_rev_growth_pct}} against a peer median of {{peer_median_rev_growth_pct}}, but its ROE
     of {{peer_lmst_roe_pct}} trails the median of {{peer_median_roe_pct}}.
 stated_gaps:
-- Covenant test results are not disclosed in this sample
+- Covenant test results are not disclosed
 - Lease liabilities are excluded from gross debt

@@ -44,7 +44,7 @@ class Footnotes:
         if ev is None:
             return prefix or f"Internal reference {token}"
         page = f", p.{ev.page_number}" if ev.page_number else ""
-        url = f", {ev.source_url}" if ev.source_url else ""
+        url = f", {ev.source_url}" if ev.source_url and ev.source_url.startswith(("http://", "https://")) else ""
         lead = f"{prefix}: " if prefix else ""
         return f"{lead}{ev.document_title}{page} ({ev.source_tier.value}){url}"
 
@@ -116,7 +116,7 @@ def _slug(text: str) -> str:
 
 
 def export_filename(state: ResearchRunState, replay_id: Optional[str], fmt: str, today: Optional[date] = None) -> str:
-    base = replay_id or _slug(state.entity.legal_name if state.entity else state.company_query)
+    base = _slug(state.entity.legal_name) if state.entity else (replay_id or _slug(state.company_query))
     return f"atlas_{base}_{(today or date.today()).strftime('%Y%m%d')}.{fmt}"
 
 
@@ -177,8 +177,7 @@ def md_table(t: Table) -> str:
 
 # ----------------------------------------------------------------- Markdown
 
-def build_markdown(state: ResearchRunState, *, as_of: Optional[date] = None, synthetic: bool = False,
-                   unconfirmed: bool = False) -> str:
+def build_markdown(state: ResearchRunState, *, as_of: Optional[date] = None, unconfirmed: bool = False) -> str:
     fn = Footnotes(state)
     p: Callable[[Optional[str]], str] = lambda t: prose_md(t, fn)  # noqa: E731
     e, s = state.entity, state.summary
@@ -189,8 +188,6 @@ def build_markdown(state: ResearchRunState, *, as_of: Optional[date] = None, syn
             f"As of {(as_of or date.today()).isoformat()}", f"Run {state.run_id}",
             f"Figures in {CURRENCY_LABEL[e.currency.value]}" if e else None]
     out.append(" · ".join(m for m in meta if m))
-    if synthetic:
-        out.append("\n> **Synthetic sample.** This company is made up to demonstrate the pipeline. None of its figures are real.")
     if unconfirmed:
         out.append("\n> **Unconfirmed seed figures.** These numbers come from the build specification's seed table (reviewer memory, press and IPO-portal summaries) and have not yet been checked against the filings. Do not rely on them.")
 
@@ -297,7 +294,6 @@ ol.notes { font-size: 8.5px; color: #5B6578; padding-left: 16px; }
 </style></head><body>
 <h1>{{ title }}</h1>
 <div class="meta">{{ meta }}</div>
-{% if synthetic %}<p class="banner"><b>Synthetic sample.</b> This company is made up to demonstrate the pipeline. None of its figures are real.</p>{% endif %}
 {% if unconfirmed %}<p class="banner"><b>Unconfirmed seed figures.</b> These numbers come from the build specification's seed table and have not yet been checked against the filings. Do not rely on them.</p>{% endif %}
 {% if s %}
 <h2>Summary</h2>
@@ -338,8 +334,7 @@ ol.notes { font-size: 8.5px; color: #5B6578; padding-left: 16px; }
 _env = Environment(autoescape=True)
 
 
-def build_html(state: ResearchRunState, *, as_of: Optional[date] = None, synthetic: bool = False,
-               unconfirmed: bool = False) -> str:
+def build_html(state: ResearchRunState, *, as_of: Optional[date] = None, unconfirmed: bool = False) -> str:
     fn = Footnotes(state)
     p: Callable[[Optional[str]], str] = lambda t: prose_html(t, fn)  # noqa: E731
     e, s = state.entity, state.summary
@@ -355,7 +350,7 @@ def build_html(state: ResearchRunState, *, as_of: Optional[date] = None, synthet
         tables.append(("Calculation ledger", ledger_table(state)))
     st = state.sentiment
     ctx = dict(
-        title=e.legal_name if e else state.company_query, meta=" · ".join(m for m in meta if m), synthetic=synthetic, unconfirmed=unconfirmed, s=s,
+        title=e.legal_name if e else state.company_query, meta=" · ".join(m for m in meta if m), unconfirmed=unconfirmed, s=s,
         verdict=p(s.verdict_prose) if s else "", mix=p(s.revenue_mix_summary) if s else "",
         quarterly=p(s.quarterly_direction_note) if s and s.quarterly_direction_note else "",
         opportunities=[p(o) for o in s.opportunities] if s else [], risks=[p(r) for r in s.risks] if s else [],
@@ -384,8 +379,7 @@ def build_html(state: ResearchRunState, *, as_of: Optional[date] = None, synthet
     return _env.from_string(_TEMPLATE).render(**ctx)
 
 
-def render_pdf(state: ResearchRunState, *, as_of: Optional[date] = None, synthetic: bool = False,
-               unconfirmed: bool = False) -> bytes:
+def render_pdf(state: ResearchRunState, *, as_of: Optional[date] = None, unconfirmed: bool = False) -> bytes:
     from weasyprint import HTML  # imported lazily: needs system Pango libraries
 
-    return HTML(string=build_html(state, as_of=as_of, synthetic=synthetic, unconfirmed=unconfirmed)).write_pdf()
+    return HTML(string=build_html(state, as_of=as_of, unconfirmed=unconfirmed)).write_pdf()

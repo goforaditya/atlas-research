@@ -245,6 +245,9 @@ def test_health_and_replays(tmp_path):
         sample = next(r for r in replays if r["replay_id"] == "sample_synthetic")
         assert sample["synthetic"] is True and sample["total_events"] == 24
         assert sample["headline_verdict"] == "Growth is real, cash quality is deteriorating"
+        # Seed replays about real companies are not served unless explicitly enabled.
+        assert not any(r.get("unconfirmed") for r in replays)
+        assert "block_nyse_seed" not in h["golden_runs_loaded"]
 
 
 def test_replay_run_streams_every_event_instantly(tmp_path):
@@ -344,11 +347,11 @@ def test_export_markdown(tmp_path):
         r = client.get(f"/api/v1/runs/{run['run_id']}/export?format=md")
         assert r.status_code == 200
         assert r.headers["content-type"].startswith("text/markdown")
-        assert re.fullmatch(r'attachment; filename="atlas_sample_synthetic_\d{8}\.md"', r.headers["content-disposition"])
+        assert re.fullmatch(r'attachment; filename="atlas_nexora_payments_ltd_\d{8}\.md"', r.headers["content-disposition"])
         md = r.text
         assert "[[" not in md, "raw citation tokens must become footnotes"
         assert md.startswith("# Nexora Payments Ltd")
-        assert "Synthetic sample" in md
+        assert "synthetic" not in md.lower(), "demo exports carry no sample labels or synthetic:// URLs"
         for section in ("## Summary", "## Financials", "## News", "## Sentiment", "## Market", "## Insights", "## Method", "## Stated gaps"):
             assert section in md
         # Every footnote reference has a definition, numbered from 1 without gaps.

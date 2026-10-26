@@ -149,12 +149,6 @@ export default function App() {
     <div className="min-h-screen">
       <TopBar onRun={() => void run()} liveAvailable={liveAvailable} />
       <main className={`mx-auto px-4 pb-36 pt-6 md:px-8 md:pt-8 ${width}`}>
-        {s.synthetic && (
-          <div className="banner" role="note">
-            Synthetic sample: {s.projectedState.company_query || "this company"} is made up to demonstrate the pipeline.
-            None of its figures are real.
-          </div>
-        )}
         {s.unconfirmed && (
           <div className="banner" role="note">
             Unconfirmed seed figures: this partial replay uses numbers from the build specification's seed table

@@ -56,7 +56,6 @@ test("a replay streams to completion and every tab renders", async ({ page }) =>
   await skipTour(page);
   await runReplay(page);
   await expect(page.locator("#verdict-h")).not.toBeEmpty();
-  await expect(page.getByText(/^Synthetic sample:/)).toBeVisible();
   expect(await page.locator(".kp").count()).toBeGreaterThan(3);
   for (const tab of ["Financials", "News", "Sentiment", "Market", "Insights", "AI at work", "How it works", "Summary"]) {
     await page.getByRole("tab", { name: tab }).click();
@@ -67,12 +66,15 @@ test("a replay streams to completion and every tab renders", async ({ page }) =>
   expect(errors).toEqual([]);
 });
 
-test("a seed replay carries the unconfirmed banner", async ({ page }) => {
+test("the demo carries no sample or seed labels, and seed replays are not served", async ({ page, request }) => {
   const errors = watchErrors(page);
   await skipTour(page);
-  await runReplay(page, "block_nyse_seed");
-  await expect(page.getByText(/^Unconfirmed seed figures:/)).toBeVisible();
+  const { replays } = await (await request.get("/api/v1/replays")).json();
+  expect(replays.some((r: { unconfirmed?: boolean }) => r.unconfirmed)).toBe(false);
+  await runReplay(page, "lumen_straits_synthetic");
   await expect(page.locator("#verdict-h")).not.toBeEmpty();
+  await page.getByRole("combobox", { name: "Company" }).click();
+  await expect(page.locator("body")).not.toContainText(/synthetic|sample|seed figures|made up/i);
   expect(errors).toEqual([]);
 });
 
@@ -119,11 +121,11 @@ test("the company box is searchable and Enter runs the top match", async ({ page
   await page.goto("/?speed=instant");
   await expect(page.getByRole("button", { name: /Run research/ })).toBeEnabled();
   const box = page.getByRole("combobox", { name: "Company" });
-  await box.fill("pine");
+  await box.fill("remit");
   await expect(page.getByRole("option")).toHaveCount(1);
-  await expect(page.getByRole("option")).toContainText("Pine Labs");
+  await expect(page.getByRole("option")).toContainText("Lumen Straits");
   await box.press("Enter");
-  await expect(page.getByText(/^Unconfirmed seed figures:/)).toBeVisible({ timeout: 20_000 });
+  await expect(page.locator("#verdict-h")).toContainText("borrowed money", { timeout: 20_000 });
   expect(errors).toEqual([]);
 });
 

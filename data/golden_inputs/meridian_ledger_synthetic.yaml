@@ -4,9 +4,9 @@ replay_id: meridian_ledger_synthetic
 synthetic: true
 company_query: Meridian Ledger
 display:
-  company_name: Meridian Ledger Inc. (synthetic sample)
+  company_name: Meridian Ledger Inc.
   ticker: 'NASDAQ: MRDN'
-  sector: Fintech · Spend management (synthetic)
+  sector: Fintech · Spend management
   jurisdiction: US
   cached_at: '2026-10-26T00:00:00Z'
 entity:
@@ -1772,5 +1772,5 @@ prose:
   market_positioning_prose: Meridian grew {{peer_mrdn_rev_growth_pct}} against a peer median of {{peer_median_rev_growth_pct}}, with ROE of {{peer_mrdn_roe_pct}}
     versus {{peer_median_roe_pct}}.
 stated_gaps:
-- Stock-based compensation amount is not recorded in this sample
+- Stock-based compensation amount is not broken out in the recorded statements
 - Lease liabilities are excluded from gross debt

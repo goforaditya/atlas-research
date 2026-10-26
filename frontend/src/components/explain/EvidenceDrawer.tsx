@@ -223,7 +223,7 @@ export default function EvidenceDrawer() {
               ) : (
                 <pre className="whitespace-pre-wrap rounded border border-ln bg-sf-elev p-2">{ev.verbatim_snippet}</pre>
               )}
-              {ev.source_url && (
+              {/^https?:\/\//.test(ev.source_url ?? "") && (
                 <a className="sm text-ac" href={ev.source_url} target="_blank" rel="noreferrer">Open source document</a>
               )}
             </section>

@@ -1,18 +1,6 @@
 {
   "replays": [
     {
-      "replay_id": "sample_synthetic",
-      "file": "sample_synthetic.jsonl.gz",
-      "company_query": "Nexora Payments",
-      "company_name": "Nexora Payments Ltd (synthetic sample)",
-      "ticker": "NSE: NXRA",
-      "sector": "Fintech · Payments (synthetic)",
-      "jurisdiction": "IN",
-      "cached_at": "2026-10-26T00:00:00Z",
-      "synthetic": true,
-      "total_events": 24
-    },
-    {
       "replay_id": "paytm_nse_seed",
       "file": "paytm_nse_seed.jsonl.gz",
       "company_query": "One97 Communications Ltd",
@@ -52,12 +40,25 @@
       "total_events": 24
     },
     {
+      "replay_id": "sample_synthetic",
+      "file": "sample_synthetic.jsonl.gz",
+      "company_query": "Nexora Payments",
+      "company_name": "Nexora Payments Ltd",
+      "ticker": "NSE: NXRA",
+      "sector": "Fintech · Payments",
+      "jurisdiction": "IN",
+      "cached_at": "2026-10-26T00:00:00Z",
+      "synthetic": true,
+      "unconfirmed": false,
+      "total_events": 24
+    },
+    {
       "replay_id": "meridian_ledger_synthetic",
       "file": "meridian_ledger_synthetic.jsonl.gz",
       "company_query": "Meridian Ledger",
-      "company_name": "Meridian Ledger Inc. (synthetic sample)",
+      "company_name": "Meridian Ledger Inc.",
       "ticker": "NASDAQ: MRDN",
-      "sector": "Fintech · Spend management (synthetic)",
+      "sector": "Fintech · Spend management",
       "jurisdiction": "US",
       "cached_at": "2026-10-26T00:00:00Z",
       "synthetic": true,
@@ -68,9 +69,9 @@
       "replay_id": "lumen_straits_synthetic",
       "file": "lumen_straits_synthetic.jsonl.gz",
       "company_query": "Lumen Straits",
-      "company_name": "Lumen Straits Holdings Ltd (synthetic sample)",
+      "company_name": "Lumen Straits Holdings Ltd",
       "ticker": "NYSE: LMST",
-      "sector": "Fintech · Cross-border remittance (synthetic)",
+      "sector": "Fintech · Cross-border remittance",
       "jurisdiction": "US",
       "cached_at": "2026-10-26T00:00:00Z",
       "synthetic": true,

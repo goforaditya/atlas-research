@@ -114,9 +114,14 @@ def load_replays(settings: Settings) -> tuple[dict[str, Fixture], dict[str, dict
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     for entry in manifest.get("replays", []):
         path = golden / entry["file"]
-        if path.exists():
-            fixtures[entry["replay_id"]] = load_fixture(path)
-            entries[entry["replay_id"]] = entry
+        if not path.exists():
+            continue
+        fx = load_fixture(path)
+        # Replays built from unconfirmed seed figures about real companies are served only when explicitly enabled.
+        if fx.header.get("unconfirmed") and not settings.atlas_include_unconfirmed_replays:
+            continue
+        fixtures[entry["replay_id"]] = fx
+        entries[entry["replay_id"]] = entry
     return fixtures, entries
 
 
@@ -317,13 +322,13 @@ def create_app(settings: Optional[Settings] = None) -> FastAPI:
             raise ApiError(409, "RUN_NOT_COMPLETE", "The run is still in progress; export it once it completes.")
         state = ResearchRunState.model_validate(run_state(app, record))
         header = app.state.fixtures[record.replay_id].header if record.replay_id else {}
-        synthetic, unconfirmed = bool(header.get("synthetic")), bool(header.get("unconfirmed"))
+        unconfirmed = bool(header.get("unconfirmed"))
         filename = export_filename(state, record.replay_id, format)
         disposition = {"Content-Disposition": f'attachment; filename="{filename}"'}
         if format == "md":
-            body = build_markdown(state, synthetic=synthetic, unconfirmed=unconfirmed)
+            body = build_markdown(state, unconfirmed=unconfirmed)
             return Response(body, media_type="text/markdown; charset=utf-8", headers=disposition)
-        pdf = await asyncio.to_thread(render_pdf, state, synthetic=synthetic, unconfirmed=unconfirmed)
+        pdf = await asyncio.to_thread(render_pdf, state, unconfirmed=unconfirmed)
         return Response(pdf, media_type="application/pdf", headers=disposition)
 
     mount_spa(app, settings.atlas_frontend_dist)

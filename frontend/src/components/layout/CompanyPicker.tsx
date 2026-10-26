@@ -12,7 +12,6 @@ function matches(r: ReplayInfo, q: string): boolean {
 }
 
 function tag(r: ReplayInfo): string | null {
-  if (r.synthetic) return "Sample";
   if (r.unconfirmed) return "Seed figures";
   return null;
 }

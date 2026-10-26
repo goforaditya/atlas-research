@@ -4,9 +4,9 @@ replay_id: sample_synthetic
 synthetic: true
 company_query: Nexora Payments
 display:
-  company_name: Nexora Payments Ltd (synthetic sample)
+  company_name: Nexora Payments Ltd
   ticker: 'NSE: NXRA'
-  sector: Fintech · Payments (synthetic)
+  sector: Fintech · Payments
   jurisdiction: IN
   cached_at: '2026-10-26T00:00:00Z'
 entity:
