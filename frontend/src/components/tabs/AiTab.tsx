@@ -103,7 +103,7 @@ export default function AiTab() {
 
       <section className="card" aria-labelledby="genai-h">
         <h2 id="genai-h">Where GenAI did the work</h2>
-        <p className="sm mu mt-0">Each step of this run, with what the model decided. Turn on How it works to inspect every call.</p>
+        <p className="sm mu mt-0">Each step of this run, with what the model decided. Turn on Show workings to inspect every call.</p>
         <ol className="m-0 list-none p-0">
           {stages.map((st, i) => (
             <li key={st.id} className="flex gap-4 border-b border-ln py-3 last:border-b-0">

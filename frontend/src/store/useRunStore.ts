@@ -65,7 +65,7 @@ const initial: RunStoreState = {
   scrubberIndex: -1,
   isPlayingScrubber: false,
   replaySpeed: 5,
-  theme: "dark",
+  theme: "light",
   selectedStageId: null,
   activeEvidenceId: null,
   tourStep: null,

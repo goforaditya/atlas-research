@@ -14,15 +14,16 @@ async function skipTour(page: Page) {
 
 async function runReplay(page: Page, replayId = "sample_synthetic") {
   await page.goto("/?speed=instant");
-  await page.waitForSelector('select[aria-label="Replay company"] option', { state: "attached" });
-  await page.locator('select[aria-label="Replay company"]').selectOption(replayId);
+  await expect(page.getByRole("button", { name: /Run research/ })).toBeEnabled();
+  await page.getByRole("combobox", { name: "Company" }).click();
+  await page.locator(`[role="option"][data-replay-id="${replayId}"]`).click();
   await page.getByRole("button", { name: /Run research/ }).click();
   await expect(page.getByRole("link", { name: "Export PDF" })).toBeVisible({ timeout: 20_000 });
 }
 
 /** The workings view (stage tracker and scrubber) is off by default. */
 async function showWorkings(page: Page) {
-  await page.getByRole("button", { name: "How it works" }).click();
+  await page.getByRole("button", { name: "Show workings" }).click();
   await expect(page.getByText(/Event (\d+) of \1/)).toBeVisible();
 }
 
@@ -57,7 +58,7 @@ test("a replay streams to completion and every tab renders", async ({ page }) =>
   await expect(page.locator("#verdict-h")).not.toBeEmpty();
   await expect(page.getByText(/^Synthetic sample:/)).toBeVisible();
   expect(await page.locator(".kp").count()).toBeGreaterThan(3);
-  for (const tab of ["Financials", "News", "Sentiment", "Market", "Insights", "AI at work", "Method", "Summary"]) {
+  for (const tab of ["Financials", "News", "Sentiment", "Market", "Insights", "AI at work", "How it works", "Summary"]) {
     await page.getByRole("tab", { name: tab }).click();
     await expect(page.getByRole("tabpanel")).not.toBeEmpty();
   }
@@ -109,6 +110,37 @@ test("the first page is just a picker, and the AI view tells the GenAI story", a
   await page.getByRole("tab", { name: "AI at work" }).click();
   await expect(page.getByRole("tabpanel")).toContainText("Proactive intelligence");
   await expect(page.getByRole("tabpanel")).toContainText("red flags raised");
+  expect(errors).toEqual([]);
+});
+
+test("the company box is searchable and Enter runs the top match", async ({ page }) => {
+  const errors = watchErrors(page);
+  await skipTour(page);
+  await page.goto("/?speed=instant");
+  await expect(page.getByRole("button", { name: /Run research/ })).toBeEnabled();
+  const box = page.getByRole("combobox", { name: "Company" });
+  await box.fill("pine");
+  await expect(page.getByRole("option")).toHaveCount(1);
+  await expect(page.getByRole("option")).toContainText("Pine Labs");
+  await box.press("Enter");
+  await expect(page.getByText(/^Unconfirmed seed figures:/)).toBeVisible({ timeout: 20_000 });
+  expect(errors).toEqual([]);
+});
+
+test("the How it works tab traces a real figure and the auditor answers from the run", async ({ page }) => {
+  const errors = watchErrors(page);
+  await skipTour(page);
+  await runReplay(page);
+  await page.getByRole("tab", { name: "How it works" }).click();
+  await expect(page.getByRole("tabpanel")).toContainText("Figure verification, traced live");
+  await expect(page.locator(".trace > li")).not.toHaveCount(0);
+  await page.getByRole("button", { name: "Ask the auditor" }).click();
+  const chat = page.getByRole("dialog", { name: "Atlas auditor" });
+  await chat.getByRole("button", { name: "Which red flags should worry me?" }).click();
+  await expect(chat).toContainText(/rules (fired|in order)|forensic rules fired/, { timeout: 5_000 });
+  await chat.getByRole("textbox", { name: "Message the auditor" }).fill("can I trust the numbers?");
+  await chat.getByRole("button", { name: "Send" }).click();
+  await expect(chat).toContainText("Three layers of control", { timeout: 5_000 });
   expect(errors).toEqual([]);
 });
 

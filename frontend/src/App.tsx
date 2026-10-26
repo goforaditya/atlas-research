@@ -6,6 +6,7 @@ import TabBar, { TABS } from "./components/layout/TabBar";
 import PipelineStageTracker from "./components/explain/PipelineStageTracker";
 import EvidenceDrawer from "./components/explain/EvidenceDrawer";
 import GuidedTourOverlay from "./components/explain/GuidedTourOverlay";
+import AuditorChat from "./components/explain/AuditorChat";
 import { STAGE_ORDER, type StageId } from "./types/atlas";
 import { stageStatusesAt } from "./utils/stateProjector";
 import SummaryTab from "./components/tabs/SummaryTab";
@@ -37,7 +38,7 @@ function useThemeEffect() {
     if (loaded.current) return;
     loaded.current = true;
     try {
-      const t = localStorage.getItem("atlas_theme");
+      const t = localStorage.getItem("atlas_theme_v2");
       if (t === "light" || t === "dark") setTheme(t);
     } catch {
       /* storage unavailable: follow the system theme */
@@ -48,8 +49,8 @@ function useThemeEffect() {
     if (theme === "system") root.removeAttribute("data-theme");
     else root.setAttribute("data-theme", theme);
     try {
-      if (theme === "system") localStorage.removeItem("atlas_theme");
-      else localStorage.setItem("atlas_theme", theme);
+      if (theme === "system") localStorage.removeItem("atlas_theme_v2");
+      else localStorage.setItem("atlas_theme_v2", theme);
     } catch {
       /* ignore */
     }
@@ -77,7 +78,7 @@ function QuietProgress() {
   return (
     <div className="mb-6" aria-live="polite">
       <div className="mb-2 flex justify-between sm">
-        <span>{current ? `${PLAIN_STAGE[current]}…` : "Starting…"}</span>
+        <span>{current ? `${PLAIN_STAGE[current]}â€¦` : "Startingâ€¦"}</span>
         <span className="mu">{done} of {STAGE_ORDER.length}</span>
       </div>
       <div className="bar"><i style={{ width: `${(done / STAGE_ORDER.length) * 100}%` }} /></div>
@@ -147,7 +148,7 @@ export default function App() {
   return (
     <div className="min-h-screen">
       <TopBar onRun={() => void run()} liveAvailable={liveAvailable} />
-      <main className={`mx-auto px-4 pb-16 pt-6 md:px-8 md:pt-8 ${width}`}>
+      <main className={`mx-auto px-4 pb-36 pt-6 md:px-8 md:pt-8 ${width}`}>
         {s.synthetic && (
           <div className="banner" role="note">
             Synthetic sample: {s.projectedState.company_query || "this company"} is made up to demonstrate the pipeline.
@@ -173,6 +174,7 @@ export default function App() {
           </div>
         ))}
       </main>
+      {s.events.length > 0 && <AuditorChat />}
       <EvidenceDrawer />
       <GuidedTourOverlay />
     </div>

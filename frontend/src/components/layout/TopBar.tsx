@@ -2,6 +2,7 @@ import { Download, HelpCircle, Moon, Sun } from "lucide-react";
 import { useRunStore } from "../../store/useRunStore";
 import { exportUrl } from "../../api/client";
 import { emptyState } from "../../utils/stateProjector";
+import CompanyPicker from "./CompanyPicker";
 
 /** One quiet bar: company picker and run button, then the workings toggle, export, tour and theme (B.10). */
 export default function TopBar({ onRun, liveAvailable }: { onRun: () => void; liveAvailable: boolean }) {
@@ -16,7 +17,7 @@ export default function TopBar({ onRun, liveAvailable }: { onRun: () => void; li
                 title="Back to the start" disabled={busy}
                 onClick={() => useRunStore.setState({ phase: "idle", events: [], runId: null, scrubberIndex: -1, projectedState: emptyState(),
                                                      activeTab: "sum", synthetic: false, unconfirmed: false, errorMessage: null, base: null })}>
-          <span aria-hidden="true" className="inline-block h-2.5 w-2.5 rounded-full bg-ac shadow-[0_0_12px_var(--ac)]" />Atlas
+          <span aria-hidden="true" className="brand-mark h-6 w-6" />Atlas
         </button>
 
         <div data-tour-id="mode-selector" className="order-last flex min-w-0 basis-full flex-wrap items-center gap-2 md:order-none md:basis-auto md:flex-1 md:flex-nowrap">
@@ -29,22 +30,10 @@ export default function TopBar({ onRun, liveAvailable }: { onRun: () => void; li
               Live
             </button>
           </div>
-          {s.mode === "replay" ? (
-            <select aria-label="Replay company" className="field w-0 min-w-0 flex-1 md:min-w-[200px] md:max-w-[420px]"
-                    value={s.selectedReplayId ?? ""} onChange={(e) => s.selectReplay(e.target.value)}>
-              {s.replays.length === 0 && <option value="">No replays available</option>}
-              {s.replays.map((r) => (
-                <option key={r.replay_id} value={r.replay_id}>
-                  {r.company_name}{r.ticker ? ` (${r.ticker})` : ""}{r.synthetic && !/synthetic/i.test(r.company_name) ? " · synthetic sample" : ""}
-                </option>
-              ))}
-            </select>
-          ) : (
-            <input aria-label="Company to research" className="field w-0 min-w-0 flex-1 md:min-w-[200px] md:max-w-[420px]"
-                   value={s.query} onChange={(e) => s.setQuery(e.target.value)} placeholder="Company name or ticker"
-                   onKeyDown={(e) => e.key === "Enter" && !busy && onRun()} />
-          )}
-          <button type="button" className="btn w-full md:w-auto" onClick={onRun}
+          <div className="flex w-0 min-w-0 flex-1 md:min-w-[220px] md:max-w-[420px]">
+            <CompanyPicker onRun={onRun} disabled={busy} />
+          </div>
+          <button type="button" className="btn btn-accent w-full md:w-auto" onClick={onRun}
                   disabled={busy || (s.mode === "replay" ? !s.selectedReplayId : !s.query.trim())}>
             {busy ? "Researching…" : "Run research"}
           </button>
@@ -53,7 +42,7 @@ export default function TopBar({ onRun, liveAvailable }: { onRun: () => void; li
         <div className="flex shrink-0 items-center gap-0 sm:gap-1">
           <button type="button" data-tour-id="explain-clean-toggle" className="btn-ghost sm !px-2.5 sm:!px-3.5" aria-pressed={s.explainMode}
                   onClick={() => s.setExplainMode(!s.explainMode)}>
-            How it works
+            Show workings
           </button>
           {s.runId && s.phase === "completed" && (
             <>

@@ -3,6 +3,7 @@ import type { StageEvent } from "../../types/atlas";
 import { STAGE_LABELS } from "../../types/atlas";
 import { useRunStore } from "../../store/useRunStore";
 import ContradictionResolver from "../explain/ContradictionResolver";
+import EngineeringDeepDive from "../explain/EngineeringDeepDive";
 import { ActorPill } from "../explain/PipelineStageTracker";
 import { WaitingFor } from "../explain/TimelineScrubber";
 
@@ -41,6 +42,8 @@ export default function MethodTab() {
 
   return (
     <div>
+      <EngineeringDeepDive />
+      <h2 className="mb-4 mt-10">This run</h2>
       {state.entity && (
         <section className="card">
           <h2>Entity and plan</h2>

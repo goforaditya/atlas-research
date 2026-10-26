@@ -2,39 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Two themes after the Aera and coffee-app references: a dark moss night theme with one lime accent and glass
-   cards (the default), and a light sage-paper theme. Light applies when the user picks it; dark is forced by
-   data-theme="dark" and otherwise follows prefers-color-scheme. */
+/* "Wall Street meets Marina Bay": crisp institutional navy ink on cool white, one confident blue accent, and a
+   Singapore-red brand dot. Light is the default (iOS-style grouped background); dark is a deep harbour navy.
+   Dark applies when the user picks it or, with no choice stored, when the system asks for it. */
 :root {
-  --bg: #f3f4ee; --sf: #f3f4ee; --sf-elev: #ffffff; --chip: #e6e9df; --tx: #161b15; --mu: #5f6858; --ln: #e1e5d8;
-  --ac: #3f7a2a; --ac2: #e7f1dc; --ps: #2f7a3a; --ps2: #e4f2e2; --ng: #c43d2f; --ng2: #fbeceb;
-  --wn: #8f5d00; --wn2: #fbf1dc;
-  --hl: #161b15; --tab-on: #161b15; --tab-on-tx: #ffffff; --seg-on: #ffffff;
-  --card: #ffffff; --card-bd: transparent; --glow: 0 1px 2px rgba(22, 27, 21, .04), 0 8px 24px rgba(22, 27, 21, .05);
-  --page: #f3f4ee;
-  --c1: #3f7a2a; --c2: #b5508a; /* chart series, validated for CVD separation */
+  --bg: #f2f4f8; --sf: #f2f4f8; --sf-elev: #ffffff; --chip: #eaeef4; --tx: #0b1b33; --mu: #5a6a80; --ln: #e1e6ee;
+  --ac: #1652e0; --ac2: #e8effd; --ps: #0b7a55; --ps2: #e2f4ec; --ng: #c8102e; --ng2: #fcebee;
+  --wn: #9a5b00; --wn2: #fdf3e1;
+  --hl: #0b1b33; --tab-on: color-mix(in srgb, var(--ac) 11%, transparent); --tab-on-tx: #ffffff; --seg-on: #ffffff;
+  --brand-red: #e4002b; --navy: #0b2a5b;
+  --card: #ffffff; --card-bd: rgba(11, 27, 51, .06); --glow: 0 1px 2px rgba(11, 27, 51, .04), 0 10px 30px rgba(11, 27, 51, .06);
+  --glass: rgba(255, 255, 255, .72); --glass-bd: rgba(255, 255, 255, .9);
+  --page: radial-gradient(1100px 520px at 50% -220px, #dfe8fb 0%, rgba(242, 244, 248, 0) 70%), #f2f4f8;
+  --c1: #1652e0; --c2: #d98a00; /* chart series, validated for CVD separation */
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #121712; --sf: #121712; --sf-elev: #1c231b; --chip: #283026; --tx: #edefe6; --mu: #9aa392; --ln: #2a3328;
-    --ac: #d6ff4b; --ac2: #29331a; --ps: #8fd16a; --ps2: #1d2b17; --ng: #ff8a7a; --ng2: #321b17;
-    --wn: #ffc84e; --wn2: #33290f;
-    --hl: #d6ff4b; --tab-on: #d6ff4b; --tab-on-tx: #121712; --seg-on: #3d473a;
-    --card: rgba(46, 54, 43, .55); --card-bd: rgba(237, 239, 230, .07); --glow: 0 12px 40px rgba(0, 0, 0, .35);
-    --page: radial-gradient(1200px 600px at 15% -10%, #233021 0%, rgba(18, 23, 18, 0) 60%), radial-gradient(900px 500px at 100% 0%, #1b2419 0%, rgba(18, 23, 18, 0) 55%), #121712;
-    --c1: #b9e02e; --c2: #e07a70;
+    --bg: #07111f; --sf: #07111f; --sf-elev: #0f1c30; --chip: #172539; --tx: #e9eef6; --mu: #94a3b8; --ln: #1c2a40;
+    --ac: #5b8dff; --ac2: #14254a; --ps: #3ccf98; --ps2: #0e2a22; --ng: #ff6b7d; --ng2: #34141c;
+    --wn: #f5b84a; --wn2: #33260d;
+    --hl: #ffffff; --tab-on: color-mix(in srgb, var(--ac) 22%, transparent); --tab-on-tx: #07111f; --seg-on: #22324a;
+    --card: rgba(16, 28, 48, .78); --card-bd: rgba(233, 238, 246, .07); --glow: 0 12px 40px rgba(0, 0, 0, .35);
+    --glass: rgba(20, 33, 54, .72); --glass-bd: rgba(233, 238, 246, .1);
+    --page: radial-gradient(1100px 560px at 50% -220px, #12305f 0%, rgba(7, 17, 31, 0) 70%), #07111f;
+    --c1: #5b8dff; --c2: #f2a93b;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #121712; --sf: #121712; --sf-elev: #1c231b; --chip: #283026; --tx: #edefe6; --mu: #9aa392; --ln: #2a3328;
-  --ac: #d6ff4b; --ac2: #29331a; --ps: #8fd16a; --ps2: #1d2b17; --ng: #ff8a7a; --ng2: #321b17;
-  --wn: #ffc84e; --wn2: #33290f;
-  --hl: #d6ff4b; --tab-on: #d6ff4b; --tab-on-tx: #121712; --seg-on: #3d473a;
-  --card: rgba(46, 54, 43, .55); --card-bd: rgba(237, 239, 230, .07); --glow: 0 12px 40px rgba(0, 0, 0, .35);
-  --page: radial-gradient(1200px 600px at 15% -10%, #233021 0%, rgba(18, 23, 18, 0) 60%), radial-gradient(900px 500px at 100% 0%, #1b2419 0%, rgba(18, 23, 18, 0) 55%), #121712;
-  --c1: #b9e02e; --c2: #e07a70;
+  --bg: #07111f; --sf: #07111f; --sf-elev: #0f1c30; --chip: #172539; --tx: #e9eef6; --mu: #94a3b8; --ln: #1c2a40;
+  --ac: #5b8dff; --ac2: #14254a; --ps: #3ccf98; --ps2: #0e2a22; --ng: #ff6b7d; --ng2: #34141c;
+  --wn: #f5b84a; --wn2: #33260d;
+  --hl: #ffffff; --tab-on: color-mix(in srgb, var(--ac) 22%, transparent); --tab-on-tx: #07111f; --seg-on: #22324a;
+  --card: rgba(16, 28, 48, .78); --card-bd: rgba(233, 238, 246, .07); --glow: 0 12px 40px rgba(0, 0, 0, .35);
+  --glass: rgba(20, 33, 54, .72); --glass-bd: rgba(233, 238, 246, .1);
+  --page: radial-gradient(1100px 560px at 50% -220px, #12305f 0%, rgba(7, 17, 31, 0) 70%), #07111f;
+  --c1: #5b8dff; --c2: #f2a93b;
   color-scheme: dark;
 }
 
@@ -125,8 +129,77 @@
 }
 
 @layer components {
+  /* Brand: an app-icon squircle in navy-to-blue with a Singapore-red dot. */
+  .brand-mark { position: relative; display: inline-block; flex-shrink: 0; border-radius: 28%;
+                background: linear-gradient(140deg, var(--navy), var(--ac)); box-shadow: 0 6px 18px color-mix(in srgb, var(--ac) 30%, transparent); }
+  .brand-mark::after { content: ""; position: absolute; right: 22%; top: 22%; width: 26%; height: 26%; border-radius: 99px; background: var(--brand-red);
+                       box-shadow: 0 0 0 2px color-mix(in srgb, #fff 85%, transparent); }
+  .btn-accent { background: var(--ac); color: #fff; box-shadow: 0 6px 16px color-mix(in srgb, var(--ac) 28%, transparent); }
+
+  /* Company search (combobox) */
+  .picker { display: flex; align-items: center; gap: 10px; width: 100%; padding: 0 14px; border-radius: 14px;
+            background: var(--card); border: 1px solid var(--ln); transition: border-color 150ms, box-shadow 150ms; }
+  .picker:focus-within { border-color: var(--ac); box-shadow: 0 0 0 4px var(--ac2); }
+  .picker input:focus-visible { outline: none; }
+  .picker-hero { padding: 4px 20px; border-radius: 18px; box-shadow: var(--glow); }
+  .menu { max-height: 360px; overflow-y: auto; border-radius: 18px; background: var(--sf-elev); border: 1px solid var(--ln);
+          box-shadow: 0 18px 50px rgba(11, 27, 51, .18); }
+  .avatar { display: inline-grid; place-items: center; flex-shrink: 0; width: 34px; height: 34px; border-radius: 10px;
+            background: var(--ac2); color: var(--ac); font-weight: 700; }
+  .chip-btn { cursor: pointer; border: 1px solid var(--ln); border-radius: 99px; padding: 6px 14px; background: var(--card);
+              color: var(--tx); font-size: 14px; font-weight: 500; transition: border-color 150ms, color 150ms; }
+  .chip-btn:hover { border-color: var(--ac); color: var(--ac); }
+  .pill-ac { background: var(--ac2); color: var(--ac); }
+  .pill-hy { background: color-mix(in srgb, var(--c2) 14%, transparent); color: var(--wn); }
+
+  /* iOS 26-style floating glass tab bar */
+  .tabbar-wrap { position: fixed; left: 0; right: 0; bottom: max(14px, env(safe-area-inset-bottom)); z-index: 40;
+                 display: flex; justify-content: center; padding: 0 12px; pointer-events: none; }
+  .tabbar { pointer-events: auto; display: flex; gap: 2px; max-width: 100%; overflow-x: auto; padding: 6px; border-radius: 34px;
+            background: var(--glass); border: 1px solid var(--glass-bd);
+            -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%);
+            box-shadow: 0 12px 40px rgba(11, 27, 51, .18), inset 0 1px 0 rgba(255, 255, 255, .35); }
+  .tabbar-item { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 66px; padding: 7px 10px 6px;
+                 border: 0; border-radius: 28px; background: transparent; color: var(--mu); font-size: 11px; font-weight: 600;
+                 cursor: pointer; transition: background 200ms, color 200ms; }
+  .tabbar-item:hover { color: var(--tx); }
+  .tabbar-item[aria-selected="true"] { background: var(--tab-on); color: var(--ac); }
+
+  /* Engineering deep-dive */
+  .lane { border-radius: 16px; padding: 12px; background: var(--chip); }
+  .stage-node { display: block; width: 100%; cursor: pointer; margin-top: 6px; padding: 10px 12px; border-radius: 12px; text-align: left;
+                border: 1px solid var(--card-bd); background: var(--card); color: var(--tx); font-size: 14px; }
+  .stage-node:hover, .stage-node[aria-expanded="true"] { border-color: var(--ac); }
+  .trace > li { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--ln); margin: 0; }
+  .trace > li:last-child { border-bottom: 0; }
+  .trace-n { display: inline-grid; place-items: center; flex-shrink: 0; width: 26px; height: 26px; border-radius: 99px;
+             background: var(--ac); color: #fff; font-size: 13px; font-weight: 700; }
+  .quote { margin: 8px 0 0; padding: 10px 14px; border-left: 3px solid var(--ac); border-radius: 0 10px 10px 0; background: var(--chip); font-size: 14px; }
+  .rule-box { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 14px; background: var(--chip); }
+  .icon-tile { display: inline-grid; place-items: center; flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px; background: var(--ac2); color: var(--ac); }
+
+  /* Auditor chat */
+  .chat-fab { position: fixed; right: 16px; bottom: calc(max(14px, env(safe-area-inset-bottom)) + 84px); z-index: 45;
+              display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border: 0; border-radius: 99px; cursor: pointer;
+              background: var(--navy); color: #fff; font-weight: 600; box-shadow: 0 12px 30px rgba(11, 27, 51, .3); }
+  :root[data-theme="dark"] .chat-fab { background: var(--ac); }
+  .chat-sheet { position: fixed; z-index: 60; right: 16px; bottom: 16px; display: flex; flex-direction: column;
+                width: min(400px, calc(100vw - 32px)); height: min(640px, calc(100vh - 32px)); border-radius: 24px; overflow: hidden;
+                background: var(--sf-elev); border: 1px solid var(--ln); box-shadow: 0 24px 70px rgba(11, 27, 51, .28); animation: sheet-in 220ms ease-out; }
+  @media (max-width: 639px) { .chat-sheet { right: 0; left: 0; bottom: 0; width: 100%; height: 82vh; border-radius: 24px 24px 0 0; } }
+  .bubble-ai { max-width: 92%; padding: 12px 14px; border-radius: 18px 18px 18px 6px; background: var(--chip); font-size: 14.5px; line-height: 1.5; }
+  .bubble-you { max-width: 82%; padding: 10px 14px; border-radius: 18px 18px 6px 18px; background: var(--ac); color: #fff; font-size: 14.5px; }
+  .chat-action { cursor: pointer; border: 1px solid var(--ac); border-radius: 99px; padding: 5px 12px; background: transparent; color: var(--ac);
+                 font-size: 13px; font-weight: 600; }
+  .chat-action:hover { background: var(--ac2); }
+  .typing { display: inline-flex; gap: 4px; }
+  .typing > i { width: 6px; height: 6px; border-radius: 99px; background: var(--mu); animation: pulse 1s ease-in-out infinite; }
+  .typing > i:nth-child(2) { animation-delay: .15s; }
+  .typing > i:nth-child(3) { animation-delay: .3s; }
+
   .drawer-in { animation: drawer-in 220ms ease-out; }
   .pulse-dot { display: inline-block; width: 10px; height: 10px; border-radius: 99px; background: var(--ac); animation: pulse 1.1s ease-in-out infinite; }
 }
+@keyframes sheet-in { from { transform: translateY(16px); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes drawer-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
 @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.8); } }
