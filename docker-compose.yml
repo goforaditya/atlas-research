@@ -1,0 +1,13 @@
+# Local development: one container serving the API and the built UI on http://localhost:8080.
+# For frontend hot reload, run `npm run dev` in frontend/ (Vite proxies /api to localhost:8080).
+services:
+  atlas:
+    build: .
+    ports: ["8080:8080"]
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      ATLAS_DB_PATH: /app/data/atlas_state.db
+    volumes:
+      - ./data:/app/data
