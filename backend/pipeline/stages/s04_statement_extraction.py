@@ -283,9 +283,11 @@ async def _india(ctx: RunContext, entity: ResolvedEntity):
             if page is None:
                 gaps.append(f"{rep['title']}: consolidated {stmt.replace('_', ' ')} page not found")
                 continue
+            if stmt == "profit_and_loss":
+                ctx.scratch.setdefault("pnl_pages", {})[rep["fiscal_year"]] = (rep["path"], page)
             got += await extract_table(ctx, rep, page, fields, periods, unit, calls, gaps)
         per_report.append(got)
-    if reports:
+    if reports and not ctx.scratch.get("skip_segments"):
         latest = reports[-1]
         seg_page = find_page(latest["path"], SEGMENT_TITLE)
         if seg_page:

@@ -1,22 +1,25 @@
-"""Pipeline wiring: stage metadata and the StageEvent emitter shared by live runs and fixture building.
+"""Pipeline wiring: stage metadata, the StageEvent emitter and the LangGraph StateGraph for all 12 stages.
 
-The LangGraph StateGraph for all 12 stages is added in Task 14; the emitter below is what it uses to
-assign event_seq and progress_pct (Section 4, event rules).
+Topology (Section 4): S1 -> S2 -> {S3 -> S4 -> S5, S7}; S5 -> {S6, S9}; {S5, S7} -> S8; {S6, S8, S9} -> S10 -> S11 -> S12.
+Every node emits a running event and one terminal event; event_seq comes from one lock-protected counter.
 """
 from __future__ import annotations
 
 import asyncio
 import json
+import operator
 import time
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
+from datetime import UTC, date, datetime
 from pathlib import Path
-from typing import Any, Optional
+from typing import Annotated, Any, Optional, TypedDict
 
 from pydantic import BaseModel
 
 from backend.schemas.common import ActorBadge, StageId, StageStatus
 from backend.schemas.events import CodeVsLlmAction, ExplainStagePanelData, StageEvent, ToolCallTrace
+from backend.schemas.state import ResearchRunState
 
 
 @dataclass(frozen=True)
@@ -183,3 +186,177 @@ def emit_result(ctx: RunContext, stage: StageId, result: StageResult, elapsed_ms
     """The terminal StageEvent for one stage run, with a JSON-safe state_patch."""
     return ctx.emitter.emit(stage, result.status, result.log_line, elapsed_ms=elapsed_ms, explain_panel=result.panel,
                             state_patch=to_json(result.patch))
+
+
+STATE_FIELDS = set(ResearchRunState.model_fields) - {"run_id", "mode", "company_query", "status", "started_at_ms"}
+
+
+def as_run_state(state: dict[str, Any]) -> ResearchRunState:
+    """A ResearchRunState view of the graph state (stage outputs are already model instances)."""
+    return ResearchRunState(run_id=state.get("run_id", "run"), mode="live", company_query=state.get("company_query", ""),
+                            status="running", started_at_ms=state.get("started_at_ms", 0),
+                            **{k: v for k, v in state.items() if k in STATE_FIELDS and v is not None})
+
+
+# ---------------------------------------------------------------- the StateGraph
+
+
+def merge_registry(a: Optional[dict[str, Any]], b: Optional[dict[str, Any]]) -> dict[str, Any]:
+    return {**(a or {}), **(b or {})}
+
+
+class GraphState(TypedDict, total=False):
+    run_id: str
+    company_query: str
+    started_at_ms: int
+    today: date
+    status: str
+    entity: Any
+    sub_questions: list
+    fiscal_years: list
+    line_items: list
+    quarterly_items: list
+    quarterly_metrics: list
+    management_roster: list
+    reconciliation_checks: list
+    metrics_ledger: list
+    red_flags: list
+    news_events: list
+    sentiment: Any
+    peer_comps: list
+    market_advantages: list
+    market_disadvantages: list
+    market_positioning_prose: Optional[str]
+    insights: list
+    provenance_nodes: list
+    provenance_edges: list
+    contradictions: list
+    summary: Any
+    verification: Any
+    # Keys several stages contribute to (written concurrently by S3/S7 and S6/S8/S9).
+    stated_gaps: Annotated[list, operator.add]
+    evidence_registry: Annotated[dict, merge_registry]
+    sources_read_count: Annotated[int, operator.add]
+
+
+REDUCED_KEYS = ("stated_gaps", "evidence_registry", "sources_read_count")
+CRITICAL_STAGES = {StageId.S01_ENTITY, StageId.S03_RETRIEVE, StageId.S04_EXTRACT}
+RUNNING_LOG: dict[StageId, str] = {
+    StageId.S01_ENTITY: "Searching BSE and SEC registries",
+    StageId.S02_PLAN: "Generating 12 sub-questions across 4 buckets",
+    StageId.S03_RETRIEVE: "Fetching annual reports and statements",
+    StageId.S04_EXTRACT: "Locating statement pages and extracting tables",
+    StageId.S05_METRICS: "compute_all_metrics(line_items)",
+    StageId.S06_RED_FLAGS: "Evaluating the red-flag rules",
+    StageId.S07_NEWS: "Fetching press and exchange releases",
+    StageId.S08_SENTIMENT: "Fetching public posts and filtering bots",
+    StageId.S09_MARKET: "Selecting listed sector peers",
+    StageId.S10_CONTRADICTION: "Comparing T1 figures with T2/T3/T4 claims",
+    StageId.S11_SYNTHESIS: "Synthesising insights with [[token]] citations",
+    StageId.S12_VERIFY: "Scanning prose for numeric tokens",
+}
+
+
+class PipelineHalted(Exception):
+    def __init__(self, stage: StageId, message: str):
+        super().__init__(f"{stage.value}: {message}")
+        self.stage = stage
+
+
+@dataclass
+class Reducer:
+    """Running totals of the reducer keys, so each event carries the already-reduced value (Section 4)."""
+
+    values: dict[str, Any] = field(default_factory=lambda: {"stated_gaps": [], "evidence_registry": {}, "sources_read_count": 0})
+
+    def add(self, patch: dict[str, Any]) -> dict[str, Any]:
+        if "stated_gaps" in patch:
+            self.values["stated_gaps"] = self.values["stated_gaps"] + list(patch["stated_gaps"])
+        if "evidence_registry" in patch:
+            self.values["evidence_registry"] = {**self.values["evidence_registry"], **patch["evidence_registry"]}
+        if "sources_read_count" in patch:
+            self.values["sources_read_count"] += int(patch["sources_read_count"])
+        return {**patch, **{k: self.values[k] for k in REDUCED_KEYS if k in patch}}
+
+
+def stage_runners() -> dict[StageId, Callable[[RunContext, dict[str, Any]], Awaitable[StageResult]]]:
+    from backend.pipeline.stages import (
+        s01_entity_resolution,
+        s02_research_planning,
+        s03_filing_retrieval,
+        s04_statement_extraction,
+        s05_metrics_engine,
+        s06_red_flag_engine,
+        s07_news_intelligence,
+        s08_sentiment_filter,
+        s09_market_peers,
+        s10_contradiction_resolver,
+        s11_synthesis,
+        s12_verification_gate,
+    )
+
+    mods = [s01_entity_resolution, s02_research_planning, s03_filing_retrieval, s04_statement_extraction,
+            s05_metrics_engine, s06_red_flag_engine, s07_news_intelligence, s08_sentiment_filter, s09_market_peers,
+            s10_contradiction_resolver, s11_synthesis, s12_verification_gate]
+    return {sid: m.run for sid, m in zip(StageId, mods, strict=True)}
+
+
+def build_graph(ctx: RunContext, on_event: Callable[[StageEvent], Awaitable[None]],
+                runners: Optional[dict[StageId, Callable[..., Awaitable[StageResult]]]] = None) -> Any:
+    from langgraph.graph import END, START, StateGraph
+
+    runners = runners or stage_runners()
+    reducer = Reducer()
+
+    async def send(stage: StageId, status: StageStatus, log: str, panel_data: Optional[ExplainStagePanelData],
+                   patch: dict[str, Any]) -> None:
+        async with ctx.emitter._lock:
+            full = reducer.add(patch) if patch else {}
+            ev = ctx.emitter.emit(stage, status, log, explain_panel=panel_data, state_patch=to_json(full))
+            await on_event(ev)
+
+    def node(stage: StageId) -> Callable[[GraphState], Awaitable[dict[str, Any]]]:
+        async def run_stage(state: GraphState) -> dict[str, Any]:
+            await send(stage, StageStatus.RUNNING, RUNNING_LOG[stage], None, {})
+            try:
+                result = await runners[stage](ctx, dict(state))
+            except PipelineHalted:
+                raise
+            except Exception as exc:  # noqa: BLE001 - a stage bug becomes a failed event, not a silent hang
+                result = StageResult(StageStatus.FAILED, f"{STAGE_META[stage].title} failed: {type(exc).__name__}", {},
+                                     panel(stage, [], [], [(ActorBadge.CODE, "The stage raised an error")], "Stage failed",
+                                           f"{type(exc).__name__}: {exc}"[:400], []))
+            await send(stage, result.status, result.log_line, result.panel, result.patch)
+            if result.status == StageStatus.FAILED and stage in CRITICAL_STAGES:
+                raise PipelineHalted(stage, result.log_line)
+            return {k: v for k, v in result.patch.items() if k in GraphState.__annotations__}
+        return run_stage
+
+    g = StateGraph(GraphState)
+    for sid in StageId:
+        g.add_node(sid.value, node(sid))
+    s = {sid: sid.value for sid in StageId}
+    g.add_edge(START, s[StageId.S01_ENTITY])
+    g.add_edge(s[StageId.S01_ENTITY], s[StageId.S02_PLAN])
+    g.add_edge(s[StageId.S02_PLAN], s[StageId.S03_RETRIEVE])
+    g.add_edge(s[StageId.S02_PLAN], s[StageId.S07_NEWS])
+    g.add_edge(s[StageId.S03_RETRIEVE], s[StageId.S04_EXTRACT])
+    g.add_edge(s[StageId.S04_EXTRACT], s[StageId.S05_METRICS])
+    g.add_edge(s[StageId.S05_METRICS], s[StageId.S06_RED_FLAGS])
+    g.add_edge(s[StageId.S05_METRICS], s[StageId.S09_MARKET])
+    g.add_edge([s[StageId.S05_METRICS], s[StageId.S07_NEWS]], s[StageId.S08_SENTIMENT])
+    g.add_edge([s[StageId.S06_RED_FLAGS], s[StageId.S08_SENTIMENT], s[StageId.S09_MARKET]], s[StageId.S10_CONTRADICTION])
+    g.add_edge(s[StageId.S10_CONTRADICTION], s[StageId.S11_SYNTHESIS])
+    g.add_edge(s[StageId.S11_SYNTHESIS], s[StageId.S12_VERIFY])
+    g.add_edge(s[StageId.S12_VERIFY], END)
+    return g.compile()
+
+
+async def execute(ctx: RunContext, company_query: str, on_event: Callable[[StageEvent], Awaitable[None]], *,
+                  today: Optional[date] = None, runners: Optional[dict[StageId, Any]] = None) -> dict[str, Any]:
+    """Run the compiled graph; returns the final graph state. Raises PipelineHalted on a critical stage failure."""
+    graph = build_graph(ctx, on_event, runners)
+    initial: GraphState = {"run_id": ctx.emitter.run_id, "company_query": company_query, "started_at_ms": ctx.emitter.started_at_ms,
+                           "today": today or datetime.now(UTC).date(), "stated_gaps": [], "evidence_registry": {},
+                           "sources_read_count": 0}
+    return await graph.ainvoke(initial)

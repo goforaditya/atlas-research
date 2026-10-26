@@ -592,3 +592,64 @@ async def test_s05_s06_tolerate_empty_inputs(tmp_path):
     assert r5.status == StageStatus.WARNING and r5.patch["metrics_ledger"] == []
     r6 = await s06.run(ctx, {**r5.patch, "line_items": []})
     assert all(f.status == "insufficient_data" for f in r6.patch["red_flags"])
+
+
+# ---------------------------------------------------------------- s07-s12 rules (the full graph is in test_full_pipeline)
+
+
+def test_s07_corroboration_needs_a_matching_filing_within_window():
+    from datetime import date as d
+
+    from backend.pipeline.stages import s07_news_intelligence as s07
+
+    filings = [{"filing_id": "fl_01", "event_category": "Management", "date": "2026-05-04", "tier": "T2", "source": "SEC 8-K",
+                "title": "Form 8-K items 5.02", "url": "https://www.sec.gov/x"}]
+    assert s07.corroborating_filing("Management", d(2026, 5, 2), filings) is not None
+    assert s07.corroborating_filing("Management", d(2026, 8, 2), filings) is None  # outside 45 days
+    assert s07.corroborating_filing("Acquisition", d(2026, 5, 2), filings) is None  # wrong kind
+
+
+def test_s08_uncorroborated_isolated_signal_becomes_noise():
+    from datetime import UTC, datetime
+
+    from backend.pipeline.prompts import SentimentOut
+    from backend.pipeline.stages import s08_sentiment_filter as s08
+    from backend.sources.sentiment_fetcher import Post
+
+    posts = {f"p{i}": Post(f"p{i}", "Reddit", f"u{i}", f"text {i}", datetime(2026, 9, 1, tzinfo=UTC)) for i in range(4)}
+
+    def item(pid, audience="Customer", ids=()):
+        return {"post_id": pid, "platform": "Reddit", "audience": audience, "quote_text": "x", "polarity": "negative",
+                "verdict": "signal", "verdict_reasons": ["r"], "corroborating_ids": list(ids)}
+
+    out = SentimentOut.model_validate({"audience_breakdown": [], "items": [
+        item("p0", "Employee"), item("p1", ids=["met_dso_fy26", "met_made_up"]), item("p9")]})
+    items, notes = s08.build_items(out, posts, {"met_dso_fy26"})
+    by = {i.post_id: i for i in items}
+    assert set(by) == {"p0", "p1"}  # p9 was never fetched
+    assert by["p0"].verdict == "noise" and by["p1"].verdict == "signal" and by["p1"].corroborating_ids == ["met_dso_fy26"]
+    assert by["p0"].quote_text == "text 0" and by["p0"].evidence.source_tier == SourceTier.T4
+
+
+def test_s10_numbers_in_claims_must_come_from_the_source():
+    from backend.pipeline.stages.s10_contradiction_resolver import Source, numbers_grounded
+    from backend.tests.conftest import make_evidence
+
+    src = Source(make_evidence(), ["84.3 d", "Trade receivables 880.00"])
+    assert numbers_grounded("DSO rose to 84.3 days in FY26", src)
+    assert numbers_grounded("Receivables of 880.00", src)
+    assert not numbers_grounded("DSO rose to 91 days", src)
+
+
+async def test_s12_gate_on_the_sample_fixture_state(tmp_path):
+    from backend.pipeline.stages import s12_verification_gate as s12
+    from backend.replay.player import load_fixture, project_final_state
+
+    root = Path(__file__).resolve().parents[2]
+    projected = project_final_state(load_fixture(root / "data/golden_runs/sample_synthetic.jsonl.gz"))
+    final = ResearchRunState.model_validate({"run_id": "r", "mode": "replay", "company_query": "Nexora", "started_at_ms": 0,
+                                             **projected})
+    state = {k: getattr(final, k) for k in ResearchRunState.model_fields}
+    res = await s12.run(make_ctx(tmp_path, ScriptedLLM({})), state)
+    assert res.status == StageStatus.COMPLETED and res.patch["verification"].passed
+    assert all(a.actor.value == "CODE" for a in res.panel.actions)

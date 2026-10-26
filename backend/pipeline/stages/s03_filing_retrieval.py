@@ -251,8 +251,10 @@ async def _india(ctx: RunContext, entity: ResolvedEntity, today: Optional[date])
             rejected += 1
             calls.append(trace(ctx, "verify_document_authenticity", C, {"url": d.url}, 0, check.reason, "fallback"))
     annual = sorted([d for d in accepted if d.category == "annual_report" and d.fiscal_year],
-                    key=lambda d: d.fiscal_year)[-MAX_ANNUAL_REPORTS:]
-    results = sorted([d for d in accepted if d.category == "results"], key=lambda d: d.filed_on)[-MAX_QUARTERLY:]
+                    key=lambda d: d.fiscal_year)[-ctx.scratch.get("max_annual_reports", MAX_ANNUAL_REPORTS):]
+    results = sorted([d for d in accepted if d.category == "results"],
+                     key=lambda d: d.filed_on)[-ctx.scratch.get("max_quarterly", MAX_QUARTERLY):] if ctx.scratch.get(
+                         "max_quarterly", MAX_QUARTERLY) else []
     ctx.scratch["filing_events"] = [{"title": d.title, "date": d.filed_on, "url": d.url, "tier": d.tier.value,
                                      "category": d.category} for d in accepted if d.category != "annual_report"]
     actions.append((C, f"Fetched {len(docs)} BSE/NSE document(s); {rejected} rejected by host check"))

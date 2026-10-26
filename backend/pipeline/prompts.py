@@ -169,6 +169,16 @@ class SentimentOut(BaseModel):
 
 # ---------------------------------------------------------------- Stage 9
 
+PEER_CANDIDATES_SYSTEM = """List up to 8 listed companies that compete directly with {legal_name} ({sector}, {jurisdiction}).
+Give each company's legal or listed name only. Do not give tickers, codes or any figures; code looks every name up in the exchange and SEC registries and drops names it cannot find."""
+
+PEER_CANDIDATES_USER = """ENTITY: {entity_json}"""
+
+
+class PeerCandidatesOut(BaseModel):
+    names: list[str]
+
+
 PEER_SELECTION_SYSTEM = """You select 4 direct listed peers for {legal_name} ({sector}, {jurisdiction}).
 Choose only from CANDIDATE_PEERS, which are filers reachable through SEC XBRL or BSE. Never invent a ticker.
 Prefer companies with the same business model and region. Give one short reason per peer."""
