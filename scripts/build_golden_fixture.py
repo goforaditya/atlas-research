@@ -145,7 +145,7 @@ def _render_page(ctx: Ctx, doc_id: str, page: Optional[int]) -> tuple[Optional[s
     if not src.exists():
         ctx.gaps.append(f"{doc.get('title', doc_id)} p.{page} page image unavailable (PDF not found locally)")
         return None, None
-    import fitz  # PyMuPDF
+    import pymupdf as fitz
 
     stem = f"{_slug(doc_id)}_p{page}"
     png, one_page = ctx.out_dir / f"{stem}.png", ctx.out_dir / f"{stem}.pdf"
