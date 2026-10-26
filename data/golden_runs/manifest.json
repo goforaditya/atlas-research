@@ -11,6 +11,45 @@
       "cached_at": "2026-10-26T00:00:00Z",
       "synthetic": true,
       "total_events": 24
+    },
+    {
+      "replay_id": "paytm_nse_seed",
+      "file": "paytm_nse_seed.jsonl.gz",
+      "company_query": "One97 Communications Ltd",
+      "company_name": "One97 Communications Ltd (Paytm) (unconfirmed seed figures)",
+      "ticker": "NSE: PAYTM",
+      "sector": "Fintech · Payments & Financial Services",
+      "jurisdiction": "IN",
+      "cached_at": "2026-10-26T00:00:00Z",
+      "synthetic": false,
+      "unconfirmed": true,
+      "total_events": 24
+    },
+    {
+      "replay_id": "pine_labs_nse_seed",
+      "file": "pine_labs_nse_seed.jsonl.gz",
+      "company_query": "Pine Labs Ltd",
+      "company_name": "Pine Labs Ltd (unconfirmed seed figures)",
+      "ticker": "NSE: PINELABS",
+      "sector": "Fintech · Merchant POS & BNPL Infrastructure",
+      "jurisdiction": "IN",
+      "cached_at": "2026-10-26T00:00:00Z",
+      "synthetic": false,
+      "unconfirmed": true,
+      "total_events": 24
+    },
+    {
+      "replay_id": "block_nyse_seed",
+      "file": "block_nyse_seed.jsonl.gz",
+      "company_query": "Block, Inc.",
+      "company_name": "Block, Inc. (formerly Square) (unconfirmed seed figures)",
+      "ticker": "NYSE: XYZ",
+      "sector": "Fintech · Seller Ecosystem & Cash App",
+      "jurisdiction": "US",
+      "cached_at": "2026-10-26T00:00:00Z",
+      "synthetic": false,
+      "unconfirmed": true,
+      "total_events": 24
     }
   ]
 }

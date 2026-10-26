@@ -79,7 +79,7 @@ export default function App() {
       const url = speed === "instant" ? res.stream_url.replace(/speed=[^&]*/, "speed=instant") : res.stream_url;
       const store = useRunStore.getState();
       store.beginRun({ run_id: res.run_id, mode: res.mode, company_query: res.company_query, started_at_ms: Date.now() },
-                     st.mode === "replay" && !!replay?.synthetic);
+                     st.mode === "replay" && !!replay?.synthetic, st.mode === "replay" && !!replay?.unconfirmed);
       closeStream.current = subscribe(url, {
         onStarted: (p) => useRunStore.setState((x) => {
           x.base = { ...p };
@@ -118,6 +118,12 @@ export default function App() {
           <div className="banner" role="note">
             Synthetic sample: {s.projectedState.company_query || "this company"} is made up to demonstrate the pipeline.
             None of its figures are real.
+          </div>
+        )}
+        {s.unconfirmed && (
+          <div className="banner" role="note">
+            Unconfirmed seed figures: this partial replay uses numbers from the build specification's seed table
+            that have not yet been checked against the filings. Most sections are stated gaps.
           </div>
         )}
         {s.phase === "error" && s.errorMessage && <div className="rf sm" role="alert">{s.errorMessage}</div>}

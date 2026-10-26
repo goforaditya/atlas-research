@@ -1,0 +1,116 @@
+# PARTIAL REPLAY FROM UNCONFIRMED SEED FIGURES (spec Section 11.2). Built at Aryan's request with no network access.
+# Every value below is copied from the spec's seed table, not from a filing. None has a page reference yet.
+# The replay carries an 'unconfirmed' banner. Replace with the verified <id>.yaml build once figures are checked.
+replay_id: block_nyse_seed
+synthetic: false
+seed_unconfirmed: true
+company_query: Block, Inc.
+display:
+  company_name: Block, Inc. (formerly Square) (unconfirmed seed figures)
+  ticker: 'NYSE: XYZ'
+  sector: Fintech · Seller Ecosystem & Cash App
+  jurisdiction: US
+  cached_at: '2026-10-26T00:00:00Z'
+entity:
+  legal_name: Block, Inc.
+  ticker: XYZ
+  exchange: NYSE
+  jurisdiction: US
+  is_listed: true
+  cik: '0001512673'
+  bse_scrip_code: null
+  listing_date: null
+  sector: Fintech · Seller Ecosystem & Cash App
+  headquarters: Oakland, California
+  fy_end_month: December
+  currency: USD_M
+  rejected_candidates: []
+gaap: us_gaap
+sub_questions: []
+documents:
+  seed_memory:
+    title: Spec seed (reviewer memory)
+    source_url: spec:atlas_research_build_specification_v2.md#11.2
+    tier: T4
+  seed_v1:
+    title: Spec seed (v1 spec, unverified)
+    source_url: spec:atlas_research_build_specification_v2.md#11.2
+    tier: T4
+line_items:
+- field_key: revenue
+  period: FY2023
+  label: Total net revenue
+  value: 21,916
+  unit: In millions
+  doc: seed_memory
+  verified_by: UNCONFIRMED seed (spec 11.2)
+  snippet: 'Seed: FY2023 total net revenue $21,916 M (reviewer memory; confirm in 10-K FY2024)'
+- field_key: revenue
+  period: FY2024
+  label: Total net revenue
+  value: 24,121
+  unit: In millions
+  doc: seed_memory
+  verified_by: UNCONFIRMED seed (spec 11.2)
+  snippet: 'Seed: FY2024 total net revenue $24,121 M (reviewer memory; confirm in 10-K FY2024)'
+- field_key: cfo
+  period: FY2024
+  label: Net cash provided by operating activities
+  value: 1,724
+  unit: In millions
+  doc: seed_v1
+  verified_by: UNCONFIRMED seed (spec 11.2)
+  snippet: 'Seed: FY2024 CFO $1,724 M (v1 spec, unverified)'
+- field_key: purchase_of_ppe
+  period: FY2024
+  label: Purchases of property and equipment
+  value: (162)
+  unit: In millions
+  doc: seed_v1
+  verified_by: UNCONFIRMED seed (spec 11.2)
+  snippet: 'Seed: FY2024 capex $162 M (v1 spec, unverified)'
+stated_gaps:
+- 'Partial replay: only the spec''s seed figures are included; all other statement lines, news, sentiment and peers are not
+  yet sourced'
+- Seed figures have no filing page reference and are not verified
+- FY2025 figures not yet sourced from the 10-K FY2025
+prose:
+  insights:
+  - id: in_rev_growth
+    title: Revenue grew in FY2024 (seed figures)
+    classification: fact
+    polarity: positive
+    body: Seed figures show total net revenue of {{li_fy2023_revenue}} in FY2023 and {{li_fy2024_revenue}} in FY2024, growth
+      of {{met_rev_yoy_fy2024}}.
+    items:
+    - li_fy2023_revenue
+    - li_fy2024_revenue
+    metrics:
+    - met_rev_yoy_fy2024
+  - id: in_fcf
+    title: Positive free cash flow in FY2024 (seed figures)
+    classification: fact
+    polarity: positive
+    body: Operating cash flow of {{li_fy2024_cfo}} less capex of {{li_fy2024_capex}} gives free cash flow of {{met_fcf_fy2024}},
+      a margin of {{met_fcf_margin_fy2024}}.
+    items:
+    - li_fy2024_cfo
+    - li_fy2024_capex
+    metrics:
+    - met_fcf_fy2024
+    - met_fcf_margin_fy2024
+  summary:
+    verdict_headline: 'Partial replay: revenue and cash-flow seeds only, not yet verified'
+    verdict_prose: Revenue grew {{met_rev_yoy_fy2024}} to {{li_fy2024_revenue}} and free cash flow was {{met_fcf_fy2024}}
+      on unconfirmed seed figures.
+    business_overview: Not yet sourced from the 10-K.
+    revenue_mix_summary: Segment revenue not yet sourced.
+    management_summary: Executive officers not yet sourced.
+    governance_watch_note: null
+    opportunities:
+    - Confirm the cash generation against the FY2024 cash-flow statement
+    risks:
+    - Seed figures may differ from the audited statements
+    quarterly_direction_note: Quarterly results not yet sourced.
+    analyst_follow_up_notes:
+    - Fill FY2024 and FY2025 from XBRL companyfacts once sec.gov is reachable

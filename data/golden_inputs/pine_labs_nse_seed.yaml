@@ -1,0 +1,83 @@
+# PARTIAL REPLAY FROM UNCONFIRMED SEED FIGURES (spec Section 11.2). Built at Aryan's request with no network access.
+# Every value below is copied from the spec's seed table, not from a filing. None has a page reference yet.
+# The replay carries an 'unconfirmed' banner. Replace with the verified <id>.yaml build once figures are checked.
+replay_id: pine_labs_nse_seed
+synthetic: false
+seed_unconfirmed: true
+company_query: Pine Labs Ltd
+display:
+  company_name: Pine Labs Ltd (unconfirmed seed figures)
+  ticker: 'NSE: PINELABS'
+  sector: Fintech · Merchant POS & BNPL Infrastructure
+  jurisdiction: IN
+  cached_at: '2026-10-26T00:00:00Z'
+entity:
+  legal_name: Pine Labs Limited
+  ticker: PINELABS
+  exchange: NSE
+  jurisdiction: IN
+  is_listed: true
+  cik: null
+  listing_date: '2025-11-14'
+  sector: Fintech · Merchant POS & BNPL Infrastructure
+  headquarters: Noida, Uttar Pradesh
+  fy_end_month: March
+  currency: INR_CR
+  rejected_candidates: []
+gaap: ind_as
+sub_questions: []
+documents:
+  seed_vr:
+    title: Value Research IPO page (spec seed)
+    source_url: https://www.valueresearchonline.com/ipo/371576/pine-labs-ltd/
+    tier: T3
+line_items:
+- field_key: revenue
+  period: FY24
+  label: Revenue from operations
+  value: 1,769.55
+  unit: ₹ in crore
+  doc: seed_vr
+  verified_by: UNCONFIRMED seed (spec 11.2)
+  snippet: 'Seed: FY24 revenue from operations ₹1,769.55 cr (Value Research IPO page; confirm in RHP, reported in ₹ million)'
+- field_key: revenue
+  period: FY25
+  label: Revenue from operations
+  value: 2,274.27
+  unit: ₹ in crore
+  doc: seed_vr
+  verified_by: UNCONFIRMED seed (spec 11.2)
+  snippet: 'Seed: FY25 revenue from operations ₹2,274.27 cr (Value Research IPO page; confirm in RHP / AR FY25)'
+stated_gaps:
+- 'Partial replay: only the spec''s seed figures are included; all other statement lines, news, sentiment and peers are not
+  yet sourced'
+- Seed figures have no filing page reference and are not verified
+- FY26 figures not yet sourced; open item whether to use FY24-FY26 or FY23-FY25
+prose:
+  insights:
+  - id: in_rev_growth
+    title: Revenue grew in FY25 (seed figures)
+    classification: fact
+    polarity: positive
+    body: Seed figures show revenue of {{li_fy24_revenue}} in FY24 and {{li_fy25_revenue}} in FY25, growth of {{met_rev_yoy_fy25}}.
+      Not yet checked against the RHP.
+    items:
+    - li_fy24_revenue
+    - li_fy25_revenue
+    metrics:
+    - met_rev_yoy_fy25
+  summary:
+    verdict_headline: 'Partial replay: two revenue seeds only, not yet verified'
+    verdict_prose: Revenue grew {{met_rev_yoy_fy25}} to {{li_fy25_revenue}} on unconfirmed seed figures from an IPO portal.
+    business_overview: Not yet sourced from the RHP.
+    revenue_mix_summary: Segment revenue not yet sourced.
+    management_summary: Key managerial personnel not yet sourced.
+    governance_watch_note: null
+    opportunities:
+    - Confirm revenue growth against the RHP
+    risks:
+    - Seed figures come from a third-party portal, not a filing
+    quarterly_direction_note: Quarterly results not yet sourced.
+    analyst_follow_up_notes:
+    - Copy FY24 and FY25 figures from the RHP (₹ million) with page numbers
+    - Confirm the BSE scrip code

@@ -354,6 +354,7 @@ export interface ReplayInfo {
   headline_verdict: string;
   company_query: string;
   synthetic: boolean;
+  unconfirmed?: boolean;
 }
 
 export interface CreateRunRequest {

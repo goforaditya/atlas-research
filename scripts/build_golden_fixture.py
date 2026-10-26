@@ -72,15 +72,19 @@ def _is_todo(v: Any) -> bool:
 
 
 def validate_inputs(data: dict) -> list[str]:
-    """Every numeric field needs value, page, a document with source_url, and verified_by."""
+    """Every numeric field needs value, page, a document with source_url, and verified_by.
+
+    A `seed_unconfirmed: true` file (a partial replay from the spec's seed table) may omit `page`, because the
+    figure has not been located in the filing yet; its replay is flagged `unconfirmed` and the UI says so."""
     errors: list[str] = []
+    seed = bool(data.get("seed_unconfirmed"))
     docs = data.get("documents") or {}
     for doc_id, doc in docs.items():
         if _is_todo(doc.get("source_url")):
             errors.append(f"documents.{doc_id}: source_url missing")
 
     def numeric(path: str, row: dict) -> None:
-        for key in ("value", "page", "verified_by", "doc"):
+        for key in ("value", "verified_by", "doc") if seed else ("value", "page", "verified_by", "doc"):
             if _is_todo(row.get(key)):
                 errors.append(f"{path}: {key} is missing or TODO")
         if row.get("doc") and row["doc"] not in docs:
@@ -184,9 +188,10 @@ def build_line_item(ctx: Ctx, row: dict, prefix: str = "") -> LineItem:
     seg = row.get("segment")
     suffix = f"_{_slug(seg)}" if seg else ""
     item_id = f"li_{prefix}{period.lower()}_{key}{suffix}"
-    ev_id = f"ev_{_slug(row['doc'])}_p{row['page']}_{key}{suffix}_{period.lower()}{('_' + prefix.rstrip('_')) if prefix else ''}"
+    page = int(row["page"]) if row.get("page") not in (None, "") else None
+    ev_id = f"ev_{_slug(row['doc'])}_p{row['page'] if page else 'seed'}_{key}{suffix}_{period.lower()}{('_' + prefix.rstrip('_')) if prefix else ''}"
     snippet = row.get("snippet") or f"{row['label']} {raw}"
-    ev = make_evidence(ctx, ev_id, row["doc"], int(row["page"]), snippet, raw, row["unit"], row.get("bbox"))
+    ev = make_evidence(ctx, ev_id, row["doc"], page, snippet, raw, row["unit"], row.get("bbox"))
     return LineItem(
         item_id=item_id, fiscal_period=period, field_key=key, reported_label=row["label"], value=value,
         formatted_value=format_currency(value, ctx.currency), unit=ctx.currency,
@@ -411,6 +416,7 @@ def build_fixture(data: dict, out_dir: Path) -> tuple[dict, list[dict]]:
         "_meta": True, "replay_id": replay_id, "company_query": data["company_query"],
         "recorded_at": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"), "built_by": "build_golden_fixture",
         "schema_version": SCHEMA_VERSION, "total_events": len(events), "synthetic": bool(data.get("synthetic", False)),
+        "unconfirmed": bool(data.get("seed_unconfirmed", False)),
     }
     return header, events
 
@@ -689,7 +695,8 @@ def update_manifest(golden_dir: Path, data: dict, header: dict, fixture_name: st
     manifest = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {"replays": []}
     entry = {
         "replay_id": data["replay_id"], "file": fixture_name, "company_query": data["company_query"],
-        **data["display"], "synthetic": header["synthetic"], "total_events": header["total_events"],
+        **data["display"], "synthetic": header["synthetic"],
+        "unconfirmed": header.get("unconfirmed", False), "total_events": header["total_events"],
     }
     manifest["replays"] = [r for r in manifest["replays"] if r["replay_id"] != data["replay_id"]] + [entry]
     path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

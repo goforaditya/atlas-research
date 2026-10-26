@@ -12,9 +12,10 @@ async function skipTour(page: Page) {
   await page.addInitScript(() => localStorage.setItem("atlas_tour_completed", "true"));
 }
 
-async function runReplay(page: Page) {
+async function runReplay(page: Page, replayId = "sample_synthetic") {
   await page.goto("/");
   await page.waitForSelector('select[aria-label="Replay company"] option', { state: "attached" });
+  await page.locator('select[aria-label="Replay company"]').selectOption(replayId);
   await page.getByRole("button", { name: "Instant" }).click();
   await page.getByRole("button", { name: /Run research/ }).click();
   await expect(page.getByText(/Event (\d+) of \1/)).toBeVisible({ timeout: 20_000 });
@@ -54,6 +55,15 @@ test("a replay streams to completion and every tab renders", async ({ page }) =>
   }
   await page.getByRole("tab", { name: "Financials" }).click();
   await expect(page.locator('[data-tour-id="calculation-ledger"]')).toContainText("DSO");
+  expect(errors).toEqual([]);
+});
+
+test("a seed replay carries the unconfirmed banner", async ({ page }) => {
+  const errors = watchErrors(page);
+  await skipTour(page);
+  await runReplay(page, "block_nyse_seed");
+  await expect(page.getByText(/^Unconfirmed seed figures:/)).toBeVisible();
+  await expect(page.locator("#verdict-h")).not.toBeEmpty();
   expect(errors).toEqual([]);
 });
 

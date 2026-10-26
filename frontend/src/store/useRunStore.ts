@@ -31,6 +31,7 @@ export interface RunStoreState {
   errorMessage: string | null;
   base: RunBase | null;
   synthetic: boolean;
+  unconfirmed: boolean;
 }
 
 export interface RunStoreActions {
@@ -38,7 +39,7 @@ export interface RunStoreActions {
   selectReplay: (id: string) => void;
   setQuery: (q: string) => void;
   setMode: (m: RunMode) => void;
-  beginRun: (base: RunBase, synthetic: boolean) => void;
+  beginRun: (base: RunBase, synthetic: boolean, unconfirmed?: boolean) => void;
   appendEvent: (e: StageEvent) => void;
   completeRun: () => void;
   failRun: (message: string) => void;
@@ -76,6 +77,7 @@ const initial: RunStoreState = {
   errorMessage: null,
   base: null,
   synthetic: false,
+  unconfirmed: false,
 };
 
 function project(s: RunStoreState): ResearchRunState {
@@ -109,8 +111,9 @@ export const useRunStore = create<RunStoreState & RunStoreActions>()(
       set((s) => {
         s.mode = m;
       }),
-    beginRun: (base, synthetic) =>
+    beginRun: (base, synthetic, unconfirmed = false) =>
       set((s) => {
+        s.unconfirmed = unconfirmed;
         s.runId = base.run_id;
         s.base = base;
         s.synthetic = synthetic;

@@ -127,6 +127,7 @@ class ReplayInfo(BaseModel):
     headline_verdict: str
     company_query: str = ""
     synthetic: bool = Field(False, description="True for the development sample; the UI shows a synthetic-data banner")
+    unconfirmed: bool = Field(False, description="True for a partial replay built from unconfirmed seed figures; the UI shows a warning banner")
 
 
 class ReplayListResponse(BaseModel):

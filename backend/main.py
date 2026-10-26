@@ -207,7 +207,8 @@ def create_app(settings: Optional[Settings] = None) -> FastAPI:
                 replay_id=rid, company_name=entry["company_name"], ticker=entry["ticker"], sector=entry["sector"],
                 jurisdiction=entry["jurisdiction"], cached_at=entry.get("cached_at", ""),
                 total_events=fx.header["total_events"], headline_verdict=summary.get("verdict_headline", ""),
-                synthetic=bool(fx.header.get("synthetic", False)), company_query=fx.header["company_query"],
+                synthetic=bool(fx.header.get("synthetic", False)), unconfirmed=bool(fx.header.get("unconfirmed", False)),
+                company_query=fx.header["company_query"],
             ))
         out.sort(key=lambda r: (r.synthetic, r.company_name))
         return ReplayListResponse(replays=out)
@@ -315,13 +316,14 @@ def create_app(settings: Optional[Settings] = None) -> FastAPI:
         if record.mode is RunMode.LIVE and not record.done:
             raise ApiError(409, "RUN_NOT_COMPLETE", "The run is still in progress; export it once it completes.")
         state = ResearchRunState.model_validate(run_state(app, record))
-        synthetic = bool(record.replay_id and app.state.fixtures[record.replay_id].header.get("synthetic"))
+        header = app.state.fixtures[record.replay_id].header if record.replay_id else {}
+        synthetic, unconfirmed = bool(header.get("synthetic")), bool(header.get("unconfirmed"))
         filename = export_filename(state, record.replay_id, format)
         disposition = {"Content-Disposition": f'attachment; filename="{filename}"'}
         if format == "md":
-            body = build_markdown(state, synthetic=synthetic)
+            body = build_markdown(state, synthetic=synthetic, unconfirmed=unconfirmed)
             return Response(body, media_type="text/markdown; charset=utf-8", headers=disposition)
-        pdf = await asyncio.to_thread(render_pdf, state, synthetic=synthetic)
+        pdf = await asyncio.to_thread(render_pdf, state, synthetic=synthetic, unconfirmed=unconfirmed)
         return Response(pdf, media_type="application/pdf", headers=disposition)
 
     mount_spa(app, settings.atlas_frontend_dist)

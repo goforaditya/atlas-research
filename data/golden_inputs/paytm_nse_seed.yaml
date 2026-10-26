@@ -1,0 +1,122 @@
+# PARTIAL REPLAY FROM UNCONFIRMED SEED FIGURES (spec Section 11.2). Built at Aryan's request with no network access.
+# Every value below is copied from the spec's seed table, not from a filing. None has a page reference yet.
+# The replay carries an 'unconfirmed' banner. Replace with the verified <id>.yaml build once figures are checked.
+replay_id: paytm_nse_seed
+synthetic: false
+seed_unconfirmed: true
+company_query: One97 Communications Ltd
+display:
+  company_name: One97 Communications Ltd (Paytm) (unconfirmed seed figures)
+  ticker: 'NSE: PAYTM'
+  sector: Fintech · Payments & Financial Services
+  jurisdiction: IN
+  cached_at: '2026-10-26T00:00:00Z'
+entity:
+  legal_name: One97 Communications Limited
+  ticker: PAYTM
+  exchange: NSE
+  jurisdiction: IN
+  is_listed: true
+  cik: null
+  bse_scrip_code: '543396'
+  listing_date: '2021-11-18'
+  sector: Fintech · Payments & Financial Services
+  headquarters: Noida, Uttar Pradesh
+  fy_end_month: March
+  currency: INR_CR
+  rejected_candidates: []
+gaap: ind_as
+sub_questions: []
+documents:
+  seed_memory:
+    title: Spec seed (reviewer memory)
+    source_url: spec:atlas_research_build_specification_v2.md#11.2
+    tier: T4
+  seed_press:
+    title: Spec seed (press summary, May 2026)
+    source_url: spec:atlas_research_build_specification_v2.md#11.2
+    tier: T3
+line_items:
+- field_key: revenue
+  period: FY24
+  label: Revenue from operations
+  value: 9,978
+  unit: ₹ in crore
+  doc: seed_memory
+  verified_by: UNCONFIRMED seed (spec 11.2)
+  snippet: 'Seed: FY24 revenue from operations ₹9,978 cr (reviewer memory; confirm in AR FY24)'
+- field_key: revenue
+  period: FY25
+  label: Revenue from operations
+  value: 6,900
+  unit: ₹ in crore
+  doc: seed_memory
+  verified_by: UNCONFIRMED seed (spec 11.2)
+  snippet: 'Seed: FY25 revenue from operations ₹6,900 cr (reviewer memory; confirm in AR FY25)'
+- field_key: revenue
+  period: FY26
+  label: Revenue from operations (seed; may be total income)
+  value: 8,437
+  unit: ₹ in crore
+  doc: seed_press
+  verified_by: UNCONFIRMED seed (spec 11.2)
+  snippet: 'Seed: FY26 revenue ~₹8,437 cr (press summary of FY26 results; may be total income; confirm in AR FY26)'
+- field_key: pat
+  period: FY25
+  label: Profit/(loss) for the year
+  value: (663)
+  unit: ₹ in crore
+  doc: seed_press
+  verified_by: UNCONFIRMED seed (spec 11.2)
+  snippet: 'Seed: FY25 loss ~₹663 cr (press summary; confirm in AR FY26)'
+- field_key: pat
+  period: FY26
+  label: Profit/(loss) for the year
+  value: '552'
+  unit: ₹ in crore
+  doc: seed_press
+  verified_by: UNCONFIRMED seed (spec 11.2)
+  snippet: 'Seed: FY26 profit ~₹552 cr (press summary; confirm in AR FY26)'
+stated_gaps:
+- 'Partial replay: only the spec''s seed figures are included; all other statement lines, news, sentiment and peers are not
+  yet sourced'
+- Seed figures have no filing page reference and are not verified
+- FY26 revenue and both PAT seeds are approximate press figures
+prose:
+  insights:
+  - id: in_rev_reset
+    title: Revenue fell in FY25 and recovered in FY26 (seed figures)
+    classification: fact
+    polarity: neutral
+    body: Seed figures show revenue of {{li_fy24_revenue}} in FY24, {{li_fy25_revenue}} in FY25 and {{li_fy26_revenue}} in
+      FY26, a change of {{met_rev_yoy_fy25}} in FY25. None of these has been checked against the annual reports yet.
+    items:
+    - li_fy24_revenue
+    - li_fy25_revenue
+    - li_fy26_revenue
+    metrics:
+    - met_rev_yoy_fy25
+  - id: in_pat_turn
+    title: Seed figures show a swing from loss to profit
+    classification: fact
+    polarity: positive
+    body: PAT moved from {{li_fy25_pat}} in FY25 to {{li_fy26_pat}} in FY26 on the press-summary seeds.
+    items:
+    - li_fy25_pat
+    - li_fy26_pat
+  summary:
+    verdict_headline: 'Partial replay: revenue and profit seeds only, not yet verified'
+    verdict_prose: Revenue moved from {{li_fy24_revenue}} to {{li_fy25_revenue}} ({{met_rev_yoy_fy25}}) and then to {{li_fy26_revenue}}.
+      These are unconfirmed seed figures from the build specification.
+    business_overview: Not yet sourced from the annual report.
+    revenue_mix_summary: Segment revenue not yet sourced.
+    management_summary: Key managerial personnel not yet sourced.
+    governance_watch_note: null
+    opportunities:
+    - Confirm the profit turnaround against the FY26 annual report
+    risks:
+    - Seed figures may differ from the audited statements
+    quarterly_direction_note: Quarterly results not yet sourced.
+    analyst_follow_up_notes:
+    - Copy every figure from AR FY24 to FY26 with page numbers
+    - Check whether the FY26 seed is revenue from operations or total income

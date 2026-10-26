@@ -17,9 +17,14 @@ uv run uvicorn backend.main:app --port 8080
 # open http://localhost:8080
 ```
 
-Replays stream a recorded run through the same client code a live run uses. The repository ships one fixture,
-`sample_synthetic`: a **fictional** company used for development, shown with a "synthetic data" banner. The three
-real golden companies (Pine Labs, Paytm, Block) are added once their figures are verified (see below).
+Replays stream a recorded run through the same client code a live run uses. The repository ships four fixtures:
+
+* `sample_synthetic`: a **fictional** company used for development, shown with a "synthetic data" banner.
+* `paytm_nse_seed`, `pine_labs_nse_seed`, `block_nyse_seed`: **partial** replays built from the seed figures in the
+  build specification (Section 11.2), with no network access. They carry an "unconfirmed seed figures" banner (in
+  the UI and in exports) because no figure has yet been checked against a filing page. They contain only revenue,
+  profit and (for Block) cash-flow seeds; every other section is a stated gap. Replace each with the verified
+  `<id>.yaml` build (below) once the figures are copied from the filings.
 
 For frontend hot reload run `npm run dev` in `frontend/`; Vite proxies `/api` to `localhost:8080`.
 
