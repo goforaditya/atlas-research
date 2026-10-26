@@ -1,0 +1,74 @@
+# data/rules/default_red_flags.yaml
+version: "1.0"
+rules:
+  - rule_id: "RF_01_RECEIVABLES_STRETCH"
+    rule_name: "Receivables stretching"
+    severity: "high"
+    threshold_desc: "2-year DSO increase > 15.0 days OR Receivables YoY growth exceeds Revenue YoY growth by > 15.0 percentage points"
+    expression: "(dso_t - dso_t_minus_2 > 15.0) or ((receivables_yoy_t - rev_yoy_t) > 0.15)"
+    required_metrics: ["dso", "receivables_yoy", "rev_yoy"]
+    template_fired: "DSO rose from {dso_t_minus_2} to {dso_t} over two years; receivables grew {receivables_yoy_t} vs revenue growth of {rev_yoy_t}."
+    template_clear: "DSO change ({dso_t_minus_2} to {dso_t}) and receivables growth ({receivables_yoy_t}) remain aligned with revenue growth ({rev_yoy_t})."
+
+  - rule_id: "RF_02_LOW_CASH_CONVERSION"
+    rule_name: "Low cash conversion"
+    severity: "high"
+    threshold_desc: "CFO / PAT < 0.80x in latest fiscal year (when PAT > 0)"
+    expression: "pat_t > 0 and cfo_to_pat_t < 0.80"
+    required_metrics: ["cfo_to_pat"]
+    template_fired: "CFO/PAT is {cfo_to_pat_t}, below the 0.80x institutional threshold (was {cfo_to_pat_t_minus_2} two years prior)."
+    template_clear: "CFO/PAT of {cfo_to_pat_t} meets or exceeds the 0.80x cash conversion threshold."
+
+  - rule_id: "RF_03_NEGATIVE_FCF"
+    rule_name: "Negative free cash flow"
+    severity: "medium"
+    threshold_desc: "Free Cash Flow (CFO - Capex) < 0 in latest fiscal year"
+    expression: "fcf_t < 0"
+    required_metrics: ["fcf"]
+    template_fired: "CFO {cfo_t} minus capex {capex_t} resulted in negative free cash flow of {fcf_t}."
+    template_clear: "Positive free cash flow of {fcf_t} (CFO {cfo_t} minus capex {capex_t})."
+
+  - rule_id: "RF_04_DEBT_OUTGROWING_REV"
+    rule_name: "Debt outgrowing revenue"
+    severity: "medium"
+    threshold_desc: "Gross Debt YoY growth > Revenue YoY growth by > 20.0 percentage points"
+    expression: "(gross_debt_yoy_t - rev_yoy_t) > 0.20"
+    required_metrics: ["gross_debt_yoy", "rev_yoy"]
+    template_fired: "Gross debt grew {gross_debt_yoy_t} YoY compared to revenue growth of {rev_yoy_t}."
+    template_clear: "Gross debt growth ({gross_debt_yoy_t}) is within threshold relative to revenue growth ({rev_yoy_t})."
+
+  - rule_id: "RF_05_WEAK_INTEREST_COVERAGE"
+    rule_name: "Weak or deteriorating interest coverage"
+    severity: "high"
+    threshold_desc: "Interest coverage (EBIT / Interest) < 2.5x OR 1-year drop > 2.0x"
+    expression: "(interest_cover_t < 2.5) or ((interest_cover_t_minus_1 - interest_cover_t) > 2.0)"
+    required_metrics: ["interest_cover"]
+    template_fired: "Interest coverage moved from {interest_cover_t_minus_1} to {interest_cover_t} (threshold: >= 2.5x and drop <= 2.0x)."
+    template_clear: "Interest coverage stands at a healthy {interest_cover_t}."
+
+  - rule_id: "RF_06_PROFIT_CASH_DIVERGENCE"
+    rule_name: "Divergent PAT vs CFO trajectory"
+    severity: "high"
+    threshold_desc: "Revenue YoY > 10% while Operating Cash Flow YoY < -10%"
+    expression: "rev_yoy_t > 0.10 and cfo_yoy_t < -0.10"
+    required_metrics: ["rev_yoy", "cfo_yoy"]
+    template_fired: "Revenue expanded {rev_yoy_t} YoY while operating cash flow contracted {cfo_yoy_t} YoY."
+    template_clear: "Operating cash flow trajectory ({cfo_yoy_t}) moves in tandem with revenue growth ({rev_yoy_t})."
+
+  - rule_id: "RF_07_LIQUIDITY_SQUEEZE"
+    rule_name: "Working capital liquidity squeeze"
+    severity: "high"
+    threshold_desc: "Current Ratio (Current Assets / Current Liabilities) < 1.10x"
+    expression: "current_ratio_t < 1.10"
+    required_metrics: ["current_ratio"]
+    template_fired: "Current ratio is {current_ratio_t}, below the 1.10x liquidity buffer."
+    template_clear: "Current ratio of {current_ratio_t} exceeds the 1.10x minimum threshold."
+
+  - rule_id: "RF_08_MARGIN_COMPRESSION"
+    rule_name: "Material EBITDA margin compression"
+    severity: "low"
+    threshold_desc: "EBITDA margin YoY change < -150 bps"
+    expression: "ebitda_margin_chg_bps_t < -150"
+    required_metrics: ["ebitda_margin", "ebitda_margin_chg_bps"]
+    template_fired: "EBITDA margin compressed by {ebitda_margin_chg_bps_t} YoY to {ebitda_margin_t}."
+    template_clear: "EBITDA margin change of {ebitda_margin_chg_bps_t} YoY (to {ebitda_margin_t}) is within normal operating band."

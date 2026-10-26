@@ -4,7 +4,6 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
-from typing import Optional
 
 from backend.schemas.common import CurrencyUnit
 
@@ -24,7 +23,7 @@ _INR_MARK = re.compile(r"(₹|\brs\.?|\binr\b|\brupees?\b)", re.I)
 _USD_MARK = re.compile(r"(\$|\busd\b|\bus\$|\bdollars?\b)", re.I)
 
 
-def detect_unit(header: Optional[str]) -> UnitRule:
+def detect_unit(header: str | None) -> UnitRule:
     """Map a printed unit header to its target unit and factor (the table in Stage 4)."""
     if not header or not header.strip():
         raise UnitHeaderError("No unit header detected")
@@ -51,7 +50,7 @@ def detect_unit(header: Optional[str]) -> UnitRule:
     raise UnitHeaderError(f"Unrecognised unit header: {header!r}")
 
 
-def normalise_units(value: Optional[Decimal], unit_header: Optional[str], target_unit: CurrencyUnit | str) -> Optional[Decimal]:
+def normalise_units(value: Decimal | None, unit_header: str | None, target_unit: CurrencyUnit | str) -> Decimal | None:
     """Convert a parsed value from its printed unit to the target unit. None passes through."""
     rule = detect_unit(unit_header)
     target = CurrencyUnit(target_unit)
@@ -65,7 +64,7 @@ def normalise_units(value: Optional[Decimal], unit_header: Optional[str], target
 _BLANKS = {"", "-", "—", "–", "nil", "n/a", "na"}
 
 
-def parse_cell_decimal(raw_cell_text: Optional[str]) -> Optional[Decimal]:
+def parse_cell_decimal(raw_cell_text: str | None) -> Decimal | None:
     """'1,234.5' -> 1234.5; '(1,234)' and '-1,234' -> -1234; '-', '—' and blank -> None."""
     if raw_cell_text is None:
         return None

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Literal, Optional
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
@@ -43,7 +43,7 @@ class StageEvent(BaseModel):
     stage_status: StageStatus
     progress_pct: int = Field(..., ge=0, le=100)
     log_line: str = Field(..., description="Short terminal-style log line for Agent Run card")
-    explain_panel: Optional[ExplainStagePanelData] = Field(
+    explain_panel: ExplainStagePanelData | None = Field(
         None, description="Required on completed/warning/failed events; optional on running events"
     )
     state_patch: dict[str, Any] = Field(

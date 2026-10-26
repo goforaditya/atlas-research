@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import re
 from decimal import Decimal
-from typing import Literal, Optional
+from typing import Literal
 
 from backend.schemas.common import CurrencyUnit
 from backend.schemas.financials import LineItem
@@ -62,7 +62,7 @@ def _label(parts: list[tuple[str, int]]) -> str:
 
 
 def compute_derived_fields(
-    line_items: list[LineItem], gaap: Optional[Gaap] = None
+    line_items: list[LineItem], gaap: Gaap | None = None
 ) -> tuple[list[LineItem], list[str]]:
     """Return (derived line items, stated gaps). Any None input makes the derived value None with a gap.
 
@@ -84,12 +84,12 @@ def compute_derived_fields(
                 gaps.append(f"{period} {key} not derived: no inputs ({', '.join(k for k, _ in parts)}) in filing")
                 continue
             missing = [k for (k, _), li in zip(parts, inputs) if li is None or li.value is None]
-            value: Optional[Decimal] = None
+            value: Decimal | None = None
             if missing:
                 gaps.append(f"{period} {key} unavailable: missing {', '.join(missing)}")
             else:
                 total = Decimal(0)
-                for (k, sign), li in zip(parts, inputs):
+                for (_k, sign), li in zip(parts, inputs):
                     v = li.value  # type: ignore[union-attr]
                     if key == "capex":
                         v = abs(v)

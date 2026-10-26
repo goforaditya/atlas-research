@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Optional
 
 from pydantic import BaseModel, Field
 
@@ -78,14 +77,14 @@ class EvidenceCitation(BaseModel):
     source_url: str = Field(..., description="Public URL or local fixture path")
     source_tier: SourceTier
     trust_weight: float = Field(..., ge=0.0, le=1.0)
-    page_number: Optional[int] = None
-    table_id: Optional[str] = None
-    bbox: Optional[tuple[float, float, float, float]] = Field(
+    page_number: int | None = None
+    table_id: str | None = None
+    bbox: tuple[float, float, float, float] | None = Field(
         None, description="(x0, top, x1, bottom) in PDF points, TOP-LEFT origin (pdfplumber convention)"
     )
-    page_size: Optional[tuple[float, float]] = Field(None, description="(width, height) of the page in points")
-    excerpt_image_path: Optional[str] = Field(None, description="Rendered page PNG used by the Evidence Drawer")
+    page_size: tuple[float, float] | None = Field(None, description="(width, height) of the page in points")
+    excerpt_image_path: str | None = Field(None, description="Rendered page PNG used by the Evidence Drawer")
     verbatim_snippet: str = Field(..., description="Exact text/row from source document")
     extracted_value_raw: str = Field(..., description="Exact string extracted before normalization")
-    source_unit: Optional[str] = Field(None, description="Unit header as printed, e.g. '₹ in million', 'in thousands'")
-    retrieved_at: Optional[str] = Field(None, description="ISO timestamp the document was fetched")
+    source_unit: str | None = Field(None, description="Unit header as printed, e.g. '₹ in million', 'in thousands'")
+    retrieved_at: str | None = Field(None, description="ISO timestamp the document was fetched")

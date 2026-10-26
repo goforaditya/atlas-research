@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Literal
 
 from pydantic import BaseModel, Field
 
@@ -22,13 +22,13 @@ from .intelligence import (
 class ResolvedEntity(BaseModel):
     query: str
     legal_name: str
-    ticker: Optional[str] = None
-    exchange: Optional[str] = None
+    ticker: str | None = None
+    exchange: str | None = None
     jurisdiction: Literal["IN", "US", "GLOBAL_PRIVATE"]
     is_listed: bool
-    cik: Optional[str] = Field(None, description="SEC CIK, zero-padded to 10 digits, US only")
-    bse_scrip_code: Optional[str] = None
-    listing_date: Optional[str] = None
+    cik: str | None = Field(None, description="SEC CIK, zero-padded to 10 digits, US only")
+    bse_scrip_code: str | None = None
+    listing_date: str | None = None
     sector: str
     headquarters: str
     fy_end_month: str
@@ -45,7 +45,7 @@ class ExecutiveSummary(BaseModel):
     business_overview: str
     revenue_mix_summary: str
     management_summary: str
-    governance_watch_note: Optional[str] = None
+    governance_watch_note: str | None = None
     opportunities: list[str]
     risks: list[str]
     quarterly_direction_note: str
@@ -66,9 +66,9 @@ class ResearchRunState(BaseModel):
     company_query: str
     status: Literal["running", "completed", "failed"]
     started_at_ms: int
-    completed_at_ms: Optional[int] = None
+    completed_at_ms: int | None = None
     sources_read_count: int = 0
-    entity: Optional[ResolvedEntity] = None
+    entity: ResolvedEntity | None = None
     sub_questions: list[str] = Field(default_factory=list)
     fiscal_years: list[str] = Field(default_factory=list)
     line_items: list[LineItem] = Field(default_factory=list)
@@ -83,17 +83,17 @@ class ResearchRunState(BaseModel):
     metrics_ledger: list[MetricLedgerRow] = Field(default_factory=list)
     red_flags: list[RedFlagResult] = Field(default_factory=list)
     news_events: list[NewsEvent] = Field(default_factory=list)
-    sentiment: Optional[SentimentAggregate] = None
+    sentiment: SentimentAggregate | None = None
     peer_comps: list[PeerCompRow] = Field(default_factory=list)
     market_advantages: list[str] = Field(default_factory=list)
     market_disadvantages: list[str] = Field(default_factory=list)
-    market_positioning_prose: Optional[str] = None
+    market_positioning_prose: str | None = None
     insights: list[InsightCard] = Field(default_factory=list)
     provenance_nodes: list[ProvenanceNode] = Field(default_factory=list)
     provenance_edges: list[ProvenanceEdge] = Field(default_factory=list)
     contradictions: list[ContradictionRecord] = Field(default_factory=list)
-    summary: Optional[ExecutiveSummary] = None
-    verification: Optional[VerificationGateReport] = None
+    summary: ExecutiveSummary | None = None
+    verification: VerificationGateReport | None = None
     evidence_registry: dict[str, EvidenceCitation] = Field(default_factory=dict)
     stated_gaps: list[str] = Field(default_factory=list)
     events: list[StageEvent] = Field(default_factory=list)
@@ -104,7 +104,7 @@ class ResearchRunState(BaseModel):
 class CreateRunRequest(BaseModel):
     company_query: str = Field(..., min_length=1, max_length=200)
     mode: RunMode
-    replay_id: Optional[str] = None
+    replay_id: str | None = None
     replay_speed: float = 1.0
 
 
@@ -142,4 +142,4 @@ class HealthResponse(BaseModel):
 class ErrorResponse(BaseModel):
     error_code: str
     message: str
-    details: Optional[dict] = None
+    details: dict | None = None

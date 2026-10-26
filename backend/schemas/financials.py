@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from decimal import Decimal
-from typing import Literal, Optional
+from typing import Literal
 
 from pydantic import BaseModel, Field
 
@@ -27,13 +27,13 @@ class LineItem(BaseModel):
     fiscal_period: str = Field(..., description="e.g., 'FY24', 'FY25', 'FY26' (annual) or 'Q1FY27' (quarterly list only)")
     field_key: StandardFieldKey
     reported_label: str = Field(..., description="Exact label in filing, or the derivation for derived keys")
-    value: Optional[Decimal] = Field(None, description="Normalized numeric value; None if missing in filing")
+    value: Decimal | None = Field(None, description="Normalized numeric value; None if missing in filing")
     formatted_value: str = Field(..., description="Display string from formatters.py, '—' when None")
     unit: CurrencyUnit
     is_restated: bool = False
     is_derived: bool = False
     derived_from_item_ids: list[str] = Field(default_factory=list)
-    segment_name: Optional[str] = Field(None, description="Only for field_key='segment_revenue'")
+    segment_name: str | None = Field(None, description="Only for field_key='segment_revenue'")
     evidence: EvidenceCitation = Field(..., description="For derived items: the citation of the first input")
 
 
@@ -42,21 +42,21 @@ class ReconciliationCheck(BaseModel):
     fiscal_period: str
     check_name: str = Field(..., description="e.g., 'Balance Sheet Identity: Assets = Liabilities + Equity'")
     formula_desc: str
-    lhs_value: Optional[Decimal]
-    rhs_value: Optional[Decimal]
-    discrepancy: Optional[Decimal]
+    lhs_value: Decimal | None
+    rhs_value: Decimal | None
+    discrepancy: Decimal | None
     tolerance_pct: Decimal = Decimal("0.01")
     status: Literal["passed", "failed", "skipped"]
     passed: bool = Field(..., description="True only when status == 'passed'")
-    failure_reason: Optional[str] = None
-    skip_reason: Optional[str] = Field(None, description="e.g. 'Filing prints only Total equity and liabilities'")
+    failure_reason: str | None = None
+    skip_reason: str | None = Field(None, description="e.g. 'Filing prints only Total equity and liabilities'")
 
 
 class MetricInputRef(BaseModel):
     symbol: str = Field(..., description="Variable symbol in formula, e.g., 'Receivables_FY26'")
     line_item_id: str
     fiscal_period: str
-    value: Optional[Decimal]
+    value: Decimal | None
     evidence_id: str
 
 
@@ -68,11 +68,11 @@ class MetricLedgerRow(BaseModel):
     formula_template: str = Field(..., description="e.g., '(Receivables_t / Revenue_t) * 365'")
     formula_substituted: str = Field(..., description="e.g., '(880 / 3,810) * 365'")
     inputs: list[MetricInputRef]
-    value: Optional[Decimal] = Field(None, description="Computed Decimal; None if N/M or missing inputs")
+    value: Decimal | None = Field(None, description="Computed Decimal; None if N/M or missing inputs")
     formatted_value: str = Field(..., description="Display string, e.g., '84.3 d', '17.6%', 'N/M (Neg Base)'")
     unit: Literal["pct", "multiple", "days", "bps", "currency"]
     status: Literal["computed", "nm_negative_base", "nm_zero_div", "missing_input"]
-    status_note: Optional[str] = None
+    status_note: str | None = None
     primary_source_ref: str = Field(..., description="Short citation, e.g., 'AR FY26 p.116'")
 
 

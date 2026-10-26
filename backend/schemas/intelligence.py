@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from decimal import Decimal
-from typing import Literal, Optional
+from typing import Literal
 
 from pydantic import BaseModel, Field
 
@@ -59,11 +59,11 @@ class PeerCompRow(BaseModel):
     ticker: str
     is_target: bool = False
     is_median_row: bool = False
-    rev_growth_pct: Optional[Decimal] = None
-    ebitda_margin_pct: Optional[Decimal] = None
-    pe_multiple: Optional[Decimal] = Field(None, description="Close price / trailing diluted EPS; None for loss-makers")
-    price_as_of: Optional[str] = Field(None, description="Date of the closing price used for P/E")
-    roe_pct: Optional[Decimal] = None
+    rev_growth_pct: Decimal | None = None
+    ebitda_margin_pct: Decimal | None = None
+    pe_multiple: Decimal | None = Field(None, description="Close price / trailing diluted EPS; None for loss-makers")
+    price_as_of: str | None = Field(None, description="Date of the closing price used for P/E")
+    roe_pct: Decimal | None = None
     formatted: dict[str, str] = Field(default_factory=dict, description="formatted_value per column")
     evidence_ids: list[str] = Field(default_factory=list)
 
@@ -114,5 +114,5 @@ class InsightCard(BaseModel):
 class ManagementPerson(BaseModel):
     name: str
     role: str = Field(..., description="e.g. 'Managing Director & CEO'")
-    since: Optional[str] = None
+    since: str | None = None
     evidence_id: str

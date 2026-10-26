@@ -5,6 +5,7 @@ import json
 from decimal import Decimal
 
 import pytest
+from pydantic import ValidationError
 
 from backend.schemas import (
     ActorBadge,
@@ -132,7 +133,7 @@ def test_schema_roundtrip_decimal_is_json_string():
 
 def test_schema_roundtrip_derived_key_allowed_and_unknown_rejected():
     LineItem.model_validate({**LINE_ITEM, "field_key": "ebitda", "is_derived": True})
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationError):
         LineItem.model_validate({**LINE_ITEM, "field_key": "made_up_key"})
 
 

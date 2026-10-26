@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 from decimal import Decimal
-from typing import Optional
 
 from backend.schemas.financials import LineItem, ReconciliationCheck
 
@@ -42,7 +41,7 @@ def _judge(
     )
 
 
-def check_balance_sheet(period: str, values: dict[str, Optional[Decimal]]) -> ReconciliationCheck:
+def check_balance_sheet(period: str, values: dict[str, Decimal | None]) -> ReconciliationCheck:
     """|Assets - (Liabilities + Equity)| <= 1% of Assets. Total liabilities must be printed, never back-solved."""
     cid, name = f"rc_bs_{period.lower()}", "Balance Sheet Identity: Assets = Liabilities + Equity"
     formula = "|Total assets - (Total liabilities + Total equity incl. NCI)| <= 1% x Total assets"
@@ -57,7 +56,7 @@ def check_balance_sheet(period: str, values: dict[str, Optional[Decimal]]) -> Re
 
 
 def check_operating_profit(
-    period: str, values: dict[str, Optional[Decimal]], printed_ebitda: Optional[Decimal]
+    period: str, values: dict[str, Decimal | None], printed_ebitda: Decimal | None
 ) -> ReconciliationCheck:
     """|EBITDA_printed - D&A - EBIT| <= 1% of Revenue; only when the filing itself prints EBITDA."""
     cid, name = f"rc_op_{period.lower()}", "Operating Profit Cross-Foot: EBITDA - D&A = EBIT"
@@ -72,7 +71,7 @@ def check_operating_profit(
     return _judge(cid, period, name, formula, OP_TOLERANCE, printed_ebitda - dna, ebit, rev, "Revenue")  # type: ignore[operator]
 
 
-def check_net_profit(period: str, values: dict[str, Optional[Decimal]]) -> ReconciliationCheck:
+def check_net_profit(period: str, values: dict[str, Decimal | None]) -> ReconciliationCheck:
     """|PBT - Tax - PAT before NCI| <= 2% of |PBT|."""
     cid, name = f"rc_np_{period.lower()}", "Net Profit Cross-Foot: PBT - Tax = PAT"
     formula = "|PBT - Tax expense - PAT (before NCI)| <= 2% x |PBT|"
@@ -84,7 +83,7 @@ def check_net_profit(period: str, values: dict[str, Optional[Decimal]]) -> Recon
 
 
 def run_reconciliation_suite(
-    line_items: list[LineItem], printed_ebitda: Optional[dict[str, Decimal]] = None
+    line_items: list[LineItem], printed_ebitda: dict[str, Decimal] | None = None
 ) -> list[ReconciliationCheck]:
     """Run all three checks for every annual period present in line_items."""
     printed_ebitda = printed_ebitda or {}

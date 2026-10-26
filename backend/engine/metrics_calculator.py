@@ -6,9 +6,10 @@ Each `calc_*` function takes Decimals and returns a MetricOutcome holding the un
 from __future__ import annotations
 
 import re
+from collections.abc import Callable
 from dataclasses import dataclass
 from decimal import Decimal
-from typing import Callable, Optional
+from typing import Optional
 
 from backend.schemas.common import CurrencyUnit
 from backend.schemas.financials import LineItem, MetricInputRef, MetricLedgerRow
@@ -31,10 +32,10 @@ D = Optional[Decimal]
 class MetricOutcome:
     value: D
     status: str  # computed | nm_negative_base | nm_zero_div | missing_input
-    note: Optional[str] = None
+    note: str | None = None
 
 
-def _out(pair: tuple[D, str], note: Optional[str] = None) -> MetricOutcome:
+def _out(pair: tuple[D, str], note: str | None = None) -> MetricOutcome:
     return MetricOutcome(pair[0], pair[1], note)
 
 
@@ -201,7 +202,7 @@ SPECS: list[MetricSpec] = [
 SHORT_LABELS: dict[str, str] = {"dso": "DSO"}
 
 
-def _primary_ref(item: Optional[LineItem]) -> str:
+def _primary_ref(item: LineItem | None) -> str:
     if item is None:
         return "—"
     ev = item.evidence
@@ -260,7 +261,7 @@ def compute_all_metrics(line_items: list[LineItem]) -> list[MetricLedgerRow]:
             symbol_values: dict[str, D] = {}
             refs: list[MetricInputRef] = []
             args: list[D] = []
-            first_item: Optional[LineItem] = None
+            first_item: LineItem | None = None
             for symbol, field_key, off in spec.inputs:
                 p = periods[idx - off]
                 li = lookup.get((p, field_key))
