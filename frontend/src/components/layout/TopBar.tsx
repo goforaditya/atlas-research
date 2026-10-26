@@ -16,7 +16,7 @@ export default function TopBar({ onRun, liveAvailable }: { onRun: () => void; li
           <div className="text-micro text-mu">Every number computed in code, every claim cited</div>
         </div>
 
-        <div data-tour-id="mode-selector" className="flex flex-1 flex-wrap items-center gap-2">
+        <div data-tour-id="mode-selector" className="flex min-w-0 basis-full flex-wrap items-center gap-2 md:flex-1 md:basis-0">
           <div className="flex rounded-lg border border-ln" role="group" aria-label="Run mode">
             <button type="button" className="btn-ghost !border-0" aria-pressed={s.mode === "replay"}
                     onClick={() => s.setMode("replay")}>Replay</button>
@@ -27,7 +27,7 @@ export default function TopBar({ onRun, liveAvailable }: { onRun: () => void; li
             </button>
           </div>
           {s.mode === "replay" ? (
-            <select aria-label="Replay company" className="min-w-[200px] flex-1 rounded-lg border border-ln bg-sf px-2 py-[7px]"
+            <select aria-label="Replay company" className="w-0 min-w-0 flex-1 rounded-lg border border-ln bg-sf px-2 py-[7px] md:min-w-[200px]"
                     value={s.selectedReplayId ?? ""} onChange={(e) => s.selectReplay(e.target.value)}>
               {s.replays.length === 0 && <option value="">No replays available</option>}
               {s.replays.map((r) => (
@@ -37,11 +37,11 @@ export default function TopBar({ onRun, liveAvailable }: { onRun: () => void; li
               ))}
             </select>
           ) : (
-            <input aria-label="Company to research" className="min-w-[200px] flex-1 rounded-lg border border-ln bg-sf px-2 py-[7px]"
+            <input aria-label="Company to research" className="w-0 min-w-0 flex-1 rounded-lg border border-ln bg-sf px-2 py-[7px] md:min-w-[200px]"
                    value={s.query} onChange={(e) => s.setQuery(e.target.value)} placeholder="Company name or ticker"
                    onKeyDown={(e) => e.key === "Enter" && !busy && onRun()} />
           )}
-          <button type="button" className="btn inline-flex items-center gap-1" onClick={onRun}
+          <button type="button" className="btn inline-flex w-full items-center justify-center gap-1 md:w-auto" onClick={onRun}
                   disabled={busy || (s.mode === "replay" ? !s.selectedReplayId : !s.query.trim())}>
             <Play size={14} /> {busy ? "Running…" : "Run research"}
           </button>
@@ -49,10 +49,10 @@ export default function TopBar({ onRun, liveAvailable }: { onRun: () => void; li
 
         <div data-tour-id="explain-clean-toggle" className="flex rounded-lg border border-ln" role="group" aria-label="Report view">
           <button type="button" className="btn-ghost !border-0" aria-pressed={s.explainMode} onClick={() => s.setExplainMode(true)}>
-            Explain Mode{s.explainMode ? " (On)" : ""}
+            Explain<span className="hidden sm:inline"> Mode{s.explainMode ? " (On)" : ""}</span>
           </button>
           <button type="button" className="btn-ghost !border-0" aria-pressed={!s.explainMode} onClick={() => s.setExplainMode(false)}>
-            Clean Report
+            Clean<span className="hidden sm:inline"> Report</span>
           </button>
         </div>
 

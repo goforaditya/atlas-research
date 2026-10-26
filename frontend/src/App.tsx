@@ -6,9 +6,21 @@ import TabBar, { TABS } from "./components/layout/TabBar";
 import PipelineStageTracker from "./components/explain/PipelineStageTracker";
 import EvidenceDrawer from "./components/explain/EvidenceDrawer";
 import SummaryTab from "./components/tabs/SummaryTab";
+import FinancialsTab from "./components/tabs/FinancialsTab";
+import NewsTab from "./components/tabs/NewsTab";
+import SentimentTab from "./components/tabs/SentimentTab";
+import MarketTab from "./components/tabs/MarketTab";
+import InsightsTab from "./components/tabs/InsightsTab";
+import MethodTab from "./components/tabs/MethodTab";
 
-const TAB_COMPONENTS: Partial<Record<TabId, ComponentType>> = {
+const TAB_COMPONENTS: Record<TabId, ComponentType> = {
   sum: SummaryTab,
+  fin: FinancialsTab,
+  news: NewsTab,
+  sen: SentimentTab,
+  mkt: MarketTab,
+  ins: InsightsTab,
+  met: MethodTab,
 };
 
 function useThemeEffect() {
@@ -102,7 +114,7 @@ export default function App() {
         <TabBar />
         {TABS.map((t) => (
           <div key={t.id} role="tabpanel" id={`panel-${t.id}`} aria-labelledby={`tab-${t.id}`} hidden={s.activeTab !== t.id}>
-            {s.activeTab === t.id && (Active ? <Active /> : <div className="skeleton">This section arrives in a later build step.</div>)}
+            {s.activeTab === t.id && <Active />}
           </div>
         ))}
       </main>

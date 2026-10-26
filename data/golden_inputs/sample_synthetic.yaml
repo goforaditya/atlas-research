@@ -1822,7 +1822,7 @@ prose:
   market_advantages:
   - Broad licence set after final RBI authorisation
   - In-house lending stack on a large merchant base
-  - EBITDA margin of {{peer_nxra_ebitda_margin_pct}} is above the peer median of {{peer_median_ebitda_margin_pct}}
+  - Return on equity of {{peer_nxra_roe_pct}} is above the peer median of {{peer_median_roe_pct}}
   market_disadvantages:
   - Revenue growth of {{peer_nxra_rev_growth_pct}} trails Paynest at {{peer_paynest_rev_growth_pct}}
   - Margin below Bharat Settle at {{peer_bsettle_ebitda_margin_pct}}

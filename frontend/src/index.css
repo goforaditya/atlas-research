@@ -8,6 +8,7 @@
   --bg: #eef1f5; --sf: #ffffff; --sf-elev: #f8fafc; --tx: #14213d; --mu: #5b6578; --ln: #d8dee8;
   --ac: #2d4ed8; --ac2: #e6ecff; --ps: #12805c; --ps2: #e3f5ee; --ng: #c2352b; --ng2: #fdeceb;
   --wn: #b7791f; --wn2: #fcf3df;
+  --c1: #2d4ed8; --c2: #b7791f; /* chart series, validated for CVD separation */
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -15,6 +16,7 @@
     --bg: #0e1420; --sf: #161e2e; --sf-elev: #1e293b; --tx: #e6ebf5; --mu: #93a0b8; --ln: #26314a;
     --ac: #8aa4ff; --ac2: #1d2a52; --ps: #3fc395; --ps2: #12332a; --ng: #ff7b6e; --ng2: #3a1a19;
     --wn: #e5b25d; --wn2: #3a2d12;
+    --c1: #6684f0; --c2: #b5802a;
     color-scheme: dark;
   }
 }
@@ -22,6 +24,7 @@
   --bg: #0e1420; --sf: #161e2e; --sf-elev: #1e293b; --tx: #e6ebf5; --mu: #93a0b8; --ln: #26314a;
   --ac: #8aa4ff; --ac2: #1d2a52; --ps: #3fc395; --ps2: #12332a; --ng: #ff7b6e; --ng2: #3a1a19;
   --wn: #e5b25d; --wn2: #3a2d12;
+  --c1: #6684f0; --c2: #b5802a;
   color-scheme: dark;
 }
 

@@ -78,6 +78,16 @@ export default function SummaryTab() {
   const sum = state.summary;
   const fired = state.red_flags.filter((f) => f.fired);
   const v = state.verification;
+  const idle = useRunStore((s) => s.phase === "idle" && s.events.length === 0);
+
+  if (idle) {
+    return (
+      <div className="skeleton">
+        Pick a company and press <b>Run research</b>. Replays stream a recorded run with its real timing; drag the
+        timeline afterwards to watch the report assemble stage by stage.
+      </div>
+    );
+  }
 
   return (
     <div>
