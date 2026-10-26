@@ -6,12 +6,17 @@ assign event_seq and progress_pct (Section 4, event rules).
 from __future__ import annotations
 
 import asyncio
+import json
 import time
+from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, Optional
 
-from backend.schemas.common import StageId, StageStatus
-from backend.schemas.events import ExplainStagePanelData, StageEvent
+from pydantic import BaseModel
+
+from backend.schemas.common import ActorBadge, StageId, StageStatus
+from backend.schemas.events import CodeVsLlmAction, ExplainStagePanelData, StageEvent, ToolCallTrace
 
 
 @dataclass(frozen=True)
@@ -98,3 +103,83 @@ class EventEmitter:
     async def emit_async(self, *args: Any, **kwargs: Any) -> StageEvent:
         async with self._lock:
             return self.emit(*args, **kwargs)
+
+
+# ---------------------------------------------------------------- stage plumbing shared by all 12 stages
+
+@dataclass
+class StageResult:
+    status: StageStatus  # completed | warning | failed
+    log_line: str
+    patch: dict[str, Any]
+    panel: ExplainStagePanelData
+
+
+@dataclass
+class RunContext:
+    """Everything a stage needs besides the run state. Source clients are None when unavailable."""
+
+    settings: Any
+    llm: Any  # LLMClient
+    emitter: EventEmitter
+    sec: Any = None  # SecEdgarClient
+    india: Any = None  # IndiaFilingsClient
+    news: Any = None  # NewsFetcher
+    sentiment: Any = None  # SentimentFetcher
+    download: Optional[Callable[[str], Awaitable[bytes]]] = None
+    close_price: Optional[Callable[..., Awaitable[Any]]] = None
+    work_dir: Path = field(default_factory=lambda: Path("."))
+    scratch: dict[str, Any] = field(default_factory=dict)  # cross-stage private data (documents, snippets, claims)
+    call_seq: int = 0
+
+    def next_call_id(self) -> str:
+        self.call_seq += 1
+        return f"tc_{self.call_seq:03d}"
+
+
+def to_json(value: Any) -> Any:
+    """Pydantic models and Decimals -> JSON-safe values for state_patch."""
+    if isinstance(value, BaseModel):
+        return value.model_dump(mode="json")
+    if isinstance(value, list):
+        return [to_json(v) for v in value]
+    if isinstance(value, dict):
+        return {k: to_json(v) for k, v in value.items()}
+    return value
+
+
+def trace(ctx: RunContext, tool: str, actor: ActorBadge, args: dict[str, Any], duration_ms: int,
+          sample: Any, status: str = "ok") -> ToolCallTrace:
+    text = sample if isinstance(sample, str) else json.dumps(to_json(sample), ensure_ascii=False, default=str)
+    return ToolCallTrace(call_id=ctx.next_call_id(), tool_name=tool, actor=actor, arguments=to_json(args),
+                         duration_ms=max(0, int(duration_ms)), status=status, raw_output_sample=text[:1200])
+
+
+def from_fetch(ctx: RunContext, t: Any) -> ToolCallTrace:
+    """A sources.FetchTrace -> ToolCallTrace (always CODE)."""
+    return trace(ctx, t.tool_name, ActorBadge.CODE, t.arguments, t.duration_ms, t.raw_output_sample, t.status)
+
+
+def panel(stage: StageId, inputs: list[str], calls: list[ToolCallTrace], actions: list[tuple[ActorBadge, str]],
+          decision: str, rationale: str, guards: list[str]) -> ExplainStagePanelData:
+    meta = STAGE_META[stage]
+    return ExplainStagePanelData(
+        stage_id=stage, stage_title=meta.title, purpose_one_sentence=meta.purpose, inputs_summary=inputs,
+        tool_calls=calls, actions=[CodeVsLlmAction(actor=a, action_summary=s) for a, s in actions],
+        decision_made=decision, decision_rationale=rationale, failure_modes_and_guards=guards,
+    )
+
+
+class Timer:
+    def __init__(self) -> None:
+        self.t0 = time.perf_counter()
+
+    @property
+    def ms(self) -> int:
+        return int((time.perf_counter() - self.t0) * 1000)
+
+
+def emit_result(ctx: RunContext, stage: StageId, result: StageResult, elapsed_ms: Optional[int] = None) -> StageEvent:
+    """The terminal StageEvent for one stage run, with a JSON-safe state_patch."""
+    return ctx.emitter.emit(stage, result.status, result.log_line, elapsed_ms=elapsed_ms, explain_panel=result.panel,
+                            state_patch=to_json(result.patch))

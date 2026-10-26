@@ -60,6 +60,10 @@ class FetchTrace:
         return self
 
 
+def sha256_bytes(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
 def host_of(url: str) -> str:
     return (urlparse(url).hostname or "").lower()
 
