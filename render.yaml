@@ -1,0 +1,15 @@
+# Render Blueprint: the replay demo as one Docker web service on the free plan.
+# Live mode stays off until GEMINI_API_KEY is set in the Render dashboard.
+services:
+  - type: web
+    name: atlas-research
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/v1/health
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: "8080"
+      - key: GEMINI_API_KEY
+        sync: false
